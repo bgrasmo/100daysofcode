@@ -292,7 +292,7 @@ Cascading style sheets: Multiple rules can be applied to the same element<br>
 Specificity: The most specific rule wins, meaning style for li is applied, even if style for ul is defined afterwards, because li is more specific.<br>
 Did not at all understand this presenters explanation, so not sure what container is. Don't think it was actually explained, other than in segment title. Guess ```body``` can be seen as a parent container with ```ul``` being a child container.
 
-See branch ```day-006``` for the finished code in the code-playground folder.
+See branch ```day-006``` for the finished code in the code-playground folder. (Though I had started day 7 already when the branch was created and messed up a little so padding and margin which shouldn't be there at this point is present.)
 
 ### Going through course content for day 7:
 <b>CSS box model</b><br>
@@ -315,6 +315,11 @@ Margin, for space outside the border of the content:
 ```CSS
 margin: 8px 6px; /* Top and bottom: 8px, left and right: 6px - see different guide for explaining this */
 ```
+```auto``` can be used to have the browser automatically add the identical space to the left and right for instance. This helps, or is necessary if you want to center an element.
+```CSS
+margin: 36px auto 0 auto;
+```
+Also look at padding if it doesn't look centered, as that comes in to play as well. It might need to be set to 0. That's why the box model is so important in getting elements aligned properly.
 
 <b>Adding structure to a webpage</b><br>
 Basics: Header - main content - footer.
