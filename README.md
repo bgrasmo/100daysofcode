@@ -294,6 +294,7 @@ Did not at all understand this presenters explanation, so not sure what containe
 
 See branch ```day-006``` for the finished code in the code-playground folder. (Though I had started day 7 already when the branch was created and messed up a little so padding and margin which shouldn't be there at this point is present.)
 
+## Day 5 - 2022-04-14
 ### Going through course content for day 7:
 <b>CSS box model</b><br>
 
