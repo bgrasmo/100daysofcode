@@ -398,3 +398,54 @@ Some elements, like h1 occupy a line. Meaning if you have two h1 in a document, 
 Common inline elements: a, button, img, span (non-semantic inline container to mark-up text). See MDN documentation on [inline elements](https://developer.mozilla.org/en-US/docs/Web/HTML/Inline_elements) for more.
 
 See branch ```day-007``` for the updated changes to the pages in code-playground.
+
+## Day 6 - 2022-04-15
+### Going through course content for day 8:
+
+<b>Styling differences between block and inline elements</b><br>
+Special rule on margin or padding, top or bottom for inline elements: It doesn't have an impact. It is applied as can be seen in browser devtools, and it is shown in the "box-model" view, but it doesn't do anything. Left and right space however works as expected. So I guess it kinda makes sense since inline elements can be placed next to eachother.<br>
+Struggeling to really get this and how it works, but maybe a key insight from instructor is this: Top or bottom padding can be added to inline elements, but this does not move other elements up or down.
+
+New property: Display. This can be added to inline elements and allows us to define how our elements are displayed.
+```CSS
+display: inline; /* Display this element as an inline element */
+```
+Doesn't have much effect on inline elements like the anchor tag.
+```CSS
+display: block; /* Display as block element, occupying all space left and right */
+```
+Define width on the element above to not make it take up all space from left to right on the page.
+```CSS
+display: inline-block;
+```
+This combines both worlds, as it behaves like an inline element but we can apply top and bottom margins and padding which affects our distance to other elements.
+
+<b>Understanding margin collapsing</b><br>
+Margin collapsing only occurs for vertical margins and only for block elements (since inline elements can't have vertical margins). This is not an issue for inline-block elements either. Margin collapsing means the bigger margin wins and the smaller is ignored. If you have two elements above eachother with a margin of 32 on both, you probably want 3 pixels between them and not 64, this is why this is happening. The list element in the main section shows this.
+
+Need to construct an example showing this more clearly here.
+
+<b>The shadow box property</b><br>
+This adds a shadow around the border of the element, with 4 different properties: Offset X, offset Y, blur radius, color
+```CSS
+box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2);
+```
+RGBA takes in a fourth option: Opacity. Setting this to 1 makes the color hard, a smaller number softens the color. (Though it seems that blur radius in box-shadow does a little bit of the same.)
+
+<b>Challenge time!</b><br>
+Create the page displayed on your own with what you have learned.
+
+My attempt is on branch ```day-008.my-attempt``` while the solution is on branch ```day-008.solution```
+
+Notes from teacher going through the solution: We can't apply vertical margins to inline elements but there is an exception as there are two different types of inline elements: Replaced and non-replaced inline elements. The anchor tag is an example of a non-replaced inline element, while img is example of replaced. The reasoning being that the img tag is replaced by the image. It links somewhere else and retrieves the content from there. For such elements, vertical margins can be applied.
+
+So then, to center the image on the border, see that the image is 210 pixels height (200 pixels in size plus 5px border top and bottom). Divided by two that is 105px for the image. Now add 24px for the main padding and another 5px for the main border = -134px.
+
+<b>New CSS selectors not explained yet</b><br>
+Attribute selector: ```[src] { ... }``` would select ```<img src="...">``` for instance
+
+Universal selector: ```* { ... }``` would select all HTML elements directly as if you had targetted them each individually
+
+Grouping selector / selector list: ```p, .some-class { ... }``` would select this for instance: ```<p>...</p>``` and ```<h2 class="some-class">...</h2>``` as it selects all elements that match the individual selectors in the list
+
+Combined selector: ```p.some-class { ... }``` selects all elements that meet both condition, so both p and class like this: ```<p class="some-class">...</p>```

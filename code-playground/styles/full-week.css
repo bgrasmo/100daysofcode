@@ -4,11 +4,11 @@ header {
 h1 {
   font-size: 48px;
   color: rgb(71, 62, 62);
-  margin: 12px 0;
+  margin: 0;
 }
 /* Either use an id to select the paragraph in the header */
 #description {
-  margin-bottom: 36px;
+  margin-bottom: 12px 0;
 }
 /* Or use a combinator since header only has one paragraph
 header p {
@@ -21,6 +21,8 @@ a {
   border: 1px solid rgb(167, 1, 78);
   border-radius: 4px;
   font-size: 24px;
+  display: inline-block;
+  margin: 0;
 }
 a:hover {
   background-color: rgb(180, 12, 90);
@@ -37,6 +39,7 @@ li {
   margin: 32px;
   background-color: rgb(223, 136, 124);
   border-radius: 6px;
+  box-shadow: 2px 2px 4px rgb(0,0,0,0.2);
 }
 h2 {
   color: rgb(78, 13, 5);
