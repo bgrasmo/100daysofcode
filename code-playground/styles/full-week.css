@@ -1,8 +1,19 @@
+header {
+  margin-bottom: 64px;
+}
 h1 {
   font-size: 48px;
   color: rgb(71, 62, 62);
   margin: 12px 0;
 }
+/* Either use an id to select the paragraph in the header */
+#description {
+  margin-bottom: 36px;
+}
+/* Or use a combinator since header only has one paragraph
+header p {
+  margin-bottom: 36px;
+} */
 a {
   padding: 12px 48px;
   background-color: rgb(167, 1, 78);
@@ -26,5 +37,15 @@ li {
   margin: 32px;
   background-color: rgb(223, 136, 124);
   border-radius: 6px;
-  font-family: 'Fira Sans', sans-serif;
+}
+h2 {
+  color: rgb(78, 13, 5);
+  font-family: 'Oswald', sans-serif;
+}
+main p {
+  margin: 12px;
+  color: rgb(71, 29, 22);
+}
+.highlight-goal {
+  background-color: rgb(226, 115, 101); 
 }

@@ -353,3 +353,46 @@ Combinators:<br>
 Descendant: li p - Selects all p with li as ancestor.<br>
 Child: h2 > p - Only p which are direct children of h2
 
+If all of type, combinator and a class targets the same element, specificity comes into play, and class wins. Type will be last because it is a general selector.
+```HTML
+<main>
+  <ol>
+    <li>
+      <h2>Today</h2>
+      <p class="daily-goal">Not quite sure what to put here for a goal</p>
+    </li>
+    <li>
+      <h2>Tomorrow</h2>
+      <p class="daily-goal">I'm following a course so path is set by instructor</p>
+    </li>
+    <li>
+      <h2>The day after tomorrow</h2>
+      <p class="daily-goal">I have not looked ahead to see what comes next</p>
+    </li>
+    <li>
+      <h2>Two days after tomorrow</h2>
+      <p class="daily-goal">But I've created an ordered list as exercise</p>
+    </li>
+  </ol>
+</main>
+```
+```CSS
+p {
+  margin: 8px;
+  color: rgb(91, 29, 22);
+}
+main p {
+  margin: 10px;
+  color: rgb(81, 29, 22);
+} */
+
+.daily-goal {
+  margin: 12px;
+  color: rgb(71, 29, 22); 
+}
+```
+
+<b>Block vs inline elements</b><br>
+Some elements, like h1 occupy a line. Meaning if you have two h1 in a document, they will each be on their own line. The anchor or img tag however does not, you can have multiple of those on the same line. Or in other words, block elements like h1 occupy the full width of the page regardless (unless styling says otherwise I guess, but will have to test that) while inline elements just occupy the space the content needs in width and height.
+
+Common inline elements: a, button, img, span (non-semantic inline container to mark-up text). See MDN documentation on [inline elements](https://developer.mozilla.org/en-US/docs/Web/HTML/Inline_elements) for more.
