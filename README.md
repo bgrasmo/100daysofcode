@@ -1281,7 +1281,9 @@ Challenge time, finished page shown, can you recreate it?
 Basically a copy of the form teacher had already walked through, so a walk in the park, just minor variations though time-consuming.
 
 <b>Introduction to JavaScript</b><br>
-What is JavaScript? A programming language that can be executed by browser. It is in fact the only programming language browsers can execute.
+I'm familiar with some basics already, so these notes will probably not be very thorough and will probably skip over pieces I feel I know very well.
+
+What is JavaScript? A programming language that can be executed by browser. It is in fact the only programming language browsers can execute. That being said, it is also a programming language you only need a browser to use, and who doesn't have that these days?
 
 What we have so far:<br>
 HTML - Define structure and semantics<br>
@@ -1310,4 +1312,961 @@ When we work with values, we typically do that in the context of variables, anot
 
 ## Day 14 - 2022-04-23
 ### Going through course content for day 30:
-<b>Adding the ```<script>``` element.
+<b>Adding the ```<script></script>``` element.</b><br>
+
+Can be added both to head and body. Like the style element it does not render anything on the screen. Can take in JavaScript directly between the tags, or load it from a file with the src="" attribute.
+
+```HTML
+<script>
+  alert('Warning! This is an alert!');
+</script>
+```
+
+Use camelCase for naming variables and functions in JavaScript. First letter lowercase, each word after that should be capitalized. No spaces.
+
+```JS
+let warningMessage = 'Warning! This is an alert!';
+alert(warningMessage);
+```
+
+<b>"Outsourcing" JavaScript to external files</b><br>
+HTML files should be for HTML, and should not be "bloated" with loads of JavaScript, so we'll move that into it's own file, and load it like this:
+```HTML
+<script src="script.js"></script>
+```
+
+<b>Introducing arrays</b><br>
+
+```JS
+let hobbies = ['Photography', 'Reading', 'Rowing'];
+alert(hobbies);
+alert(hobbies[0]);
+alert(hobbies[2]);
+```
+
+<b>Introducing objects</b><br>
+
+```JS
+let job = {
+  title: 'support',
+  place: 'abroad',
+  years: 5
+};
+```
+### Going through course content for day 31:
+<b>Splitting code accross multiple lines</b><br>
+See above for object example. Strings can't be split like that, unless backticks are used around the string instead of single or double-quotes.
+
+<b>Accessing object properties</b><br>
+
+```JS
+alert(job.title);
+alert(job.years);
+alert(job.place);
+```
+
+<b>Performing operations</b><br>
+
+```JS
+let age = 32;
+let yearsAsAdult = age - 18;
+let multiply = age * 2;
+let divide = multiply / 4;
+age++;
+age += 1;
+++age;
+age--;
+age -= ;
+--age;
+```
+
+<b>Onwards to custom commands</b><br>
+Don't Repeat Yourself, basically. Showing how we're doing the same calculations twice, and if you want to change it, you have to change it both places. Instead of doing that, we should define our own commands which we can use in multiple places. We do that with functions.
+
+<b>Introducing functions</b><br>
+Function names should not describe what's in them, but what they do.
+
+```JS
+let age = 32;
+let yearsAsAdult;
+function calculateYearsAsAdult() {
+  yearsAsAdult = age - 18;
+}
+
+calculateYearsAsAdult();
+alert(adultYears);
+
+age = 45;
+calculateYearsAsAdult();
+alert(adultYears);
+```
+
+<b>Functions and variables</b><br>
+Variable shadowing - can override variables from outside functions inside them. Also variables have to be defined before the function is defined for the function to access it.
+
+<b>Returning values</b><br>
+
+```JS
+let age = 32;
+function calculateYearsAsAdult () {
+  return age - 18;
+}
+
+let yearsAsAdult = calculateYearsAsAdult();
+```
+
+<b>Passing data into functions with parameters</b><br>
+
+```JS
+function calculateYearsAsAdult(input) {
+  return input - 18;
+}
+let yearsAsAdult = calculateYearsAsAdult(32);
+```
+
+<b>Functions - a summary</b><br>
+No notes, just repeating what was said about functions already.
+
+### Going through course content for day 32:
+<b>Time to practice</b><br>
+See exercise.js file for task and solution.
+
+<b>Introducing methods</b><br>
+A method is a function in an object. It is then called a method, not a function. Just as a variable in an object is called a property.
+
+```JS
+let person = {
+  name: 'Joe',
+  greet() {
+    alert('Hello ' + name);
+  }
+}
+```
+ To access the method:
+ ```JS
+ person.greet();
+ ```
+
+ <b>Make our developer life easier</b><br>
+ Use ```console.log(toBeOutPut)``` from now on instead of alert, so we don't have to click away those boxes each time. Find the output in the console of devtools.
+
+ <b>Math operations and different types of numbers</b><br>
+ Integers: Whole numbers without decimals.<br>
+ Floats: (Floating point) - Numbers with decimals.
+
+ <b>The modulus operator</b><br>
+ Returns the remainder of the division: 10 % 4 = 2 and not 2.5 because 2*4=8 and 10-8=2, the remainder.
+
+ <b>Math operations and math rules</b><br>
+ Multiplication and division has a higher priority than using plus or minus.
+ 
+ ```JS
+ console.log(10 + 3 - 5 * 10); // -37 because 5*10 is calculated first, then 10+13 = 13-50=-37
+ ```
+
+ Can add parenthesis around the expression you want to be calculated first
+ console.log((10 + 3 - 5) * 10); // Now it's 10+3+5=18 and then * 10 = 180
+```
+ result = 10*4; // 40
+ result = result +1; // 41
+ result += 1; // 42
+ result++; // 43
+```
+See my musings on this in my other repository from the first time I tried learning JavaScript.
+
+<b>Performing string (text) operations</b><br>
+Concatenate, add two strings to eachother: ```console.log('Hello' + ' World!');``` or ```let string = 'Hello' + ' World!';```
+
+<b>String operations and methods</b><br>
+Built in functions accessible by adding a . to the string: ```let stringLength = string.length;``` VS Code will show alternatives for what is available after having type the . after a string.
+
+### Going through course content for day 33:
+<b>Basic array operations</b><br>
+Same as for strings, add a . after the array to get a list of available methods. Notice that array.length gives you the number of elements in the array.
+
+<b>Splitting javascript accross multiple files</b><br>
+Can add multiple ```<script></script>``` tags in the header of the HTML document like with stylesheets. They will be loaded in the order they are in.
+
+<b>The global window and document objects</b><br>
+Two global variables are always available, as they are built in: ```window``` and ```document```
+
+```window``` holds information and functionality related to the active browser window / tab. ```alert``` which we have been using is also part of window, and can be called directly as we've done, or with ```window.alert``` so you can see it resides there.
+
+```document``` is also part of window, but like alert can be accessed directly. Document holds information and functionality related to the loaded website content. Here we find utility functions to access HTML elements.
+
+<b>What is the DOM?</b><br>
+Short for Document Object Model, describes the data representation (internal representation) of the parsed HTML code in object form. Or in other words, the browser parses the HTML code we have written and turns it into a bunch of JavaScript objects. Every element we wrote is turned into an object, and these objects are nested inside eachother, to represent our HTML structure. (Technically it is a bit more advanced than that though, but that will do for now.)
+
+Our JavaScript code is able to interact with the DOM, these objects, and extract data from it or manipulate its contents. For instance we can read som value the user entered and / or manipulate it. We can add new elements, change existing elements, change the content or the styling. Or to cite cable guy: "There's no end to the possibilities!"
+
+<b>Exploring the DOM</b><br>
+
+```JS
+console.log(window.document);
+console.log(document);
+```
+This gives the same output, our entire HTML document, as the document variable is made available globally and we don't have to prefix it with window. Now to see the actual object behind this we can use console.dir instead:
+
+```JS
+console.dir(document);
+```
+Here you can find head and body, with children, and see all we added in the HTML document.
+
+<b>Drilling into the DOM to select and change elements</b><br>
+Given this page:
+
+```HTML
+<body>
+  <h1>Hi there!</h1>
+  <p>
+    This is a
+    <a href="#">link</a>
+  </p>
+</body>
+```
+
+Getting the href in the link the hard way with JavaScript looks like this:
+```JS
+document.body.children[1].children[0].href = 'https://google.com/';
+```
+This is the same you do when expanding the document object and locating the href on the a. Notice how 'children' objects are arrays. (But why do we set it with = and not : since it's an object?)
+
+
+<b>Loading our script correctly</b><br>
+The defer keyword is required on the script tag loading the script for the above to work, otherwise the script will fail as it loads and executes too early. In other words, it executes before the HTML object has been parsed. Defer means the browser should wait with script execution until the entire document has been parsed.
+
+Another way would be to put our script at the bottom of the body, to make sure the HTML document has been parsed before our script loads and executes. But we normally don't do that.
+
+<b>The DOM tree and DOM traversal</b><br>
+```
+Document -> head
+          ↳ body -> h1
+                  ↳ p -> a       
+```
+So document holds head and body. Body holds h1 and p. p holds a.
+
+Two ways to select elements in the DOM:<br>
+1. Drill into the DOM, drill into elements using the dot notation described above<br>
+document.body.childre[0].firstChild<br>
+With this methid you have to know the DOM structure and if it changes, your code needs to change as well. (You have to know what you want the firstChild of another child, because that will be the link you want to change.)
+2. Using a utility function provided to you by the browser, to query for specific elements.<br>
+document.getElementById('some-id); or document.querySelector('.some-class);<br>
+Selecting elements this way works like in CSS and hence no exact DOM structure knowledge is required.
+
+### Going through course content for day 34:
+<b>Drilling into the DOM and exploring text nodes</b><br>
+JavaScript can be written directly in the browser console, and unlike VS Code, that actually gives us auto completion for the elements of the document. That's because the browser has parsed the document, VS Code has not.<br>
+Simply typing in `document.body.children[0];` and pressing enter will output the contents of what we have selected. The preview helped us see that children[0] was the h1 element.
+
+`document.body.firstChild` gives us a #text object. `document.body.firstElementChild` gives us the content of the first child element. That means if you know that you want to access the first child element of another element, you can use either `.children[0]` or .firstElementChild
+
+The reson for the #text object is because not it's not only the elements that are saved, but the text we have as well. This can maybe be seen more clearly with `document.body.childNodes`. A node is basically either text or an HTML element, and your entire content, your HTML document, is translated to these nodes. In other words, these objects with information about your content.
+
+Up to this point we've only looked at HTML elements and their objects, and these are the most important nodes, but all the text content is also saved as such nodes. With childnode or firstchild which acually accesses the first child node, not the first element child, you get access to both, with children you just get access to the HTML elements.
+
+Why is firstChild text, and not the h1 element? That's because the HTML document contains whitespace, which is also stored here! So the text is actually the whitespace from the end of `<body>` to the beginning of `<h1>`.
+
+<b>DOM drilling limitations</b><br>
+If you change the HTML document, you have to change your code. If you add a new paragraph for instance, where before there was only one, code has to change to pick up the right element, even if you don't want to do anything special with the new paragraph.
+
+<b>Searching the DOM for elements</b><br>
+`document.getElementById();` searches for an element, by id. This function wants an input, namelit the id to search for.
+
+To find the element with id external-link and then do something with it using dot notation: `document.getElementById('external-link).href = https://google.com/;` We can use .href since we know this is a link, and we want to change it. This can also be done in two steps, to avoid very long code lines:<br>
+```JS
+let anchorElement = document.getElementById('external-link');
+anchorElement.href = 'https://google.com/';
+```
+This might be easier to read. This would also be the way to do it if we want to use anchorElement again at some later point, otherwise we would have to fetch it again.
+
+<b>Querying elements</b><br>
+Querying by id is not the only way to get access to an element. The querySelector method is another alternative built into the browser, and unlike the previous methid this does not want an id as input, but a CSS selector: `document.querySelector('<selector>');` This can be an id like CSS: `#external-link`
+
+Which alternative to use then? Well it depends. If you add id to your elements, getElementsById obviously works. If not, querySelector it is. The latter is more flexible, given it can take any CSS selector as input. For instance, simply selecting the anchor tag with `a` as you could in CSS: `document.querySelector('a');`. Notice that this selects the first, and this is important, the first anchor tag it finds on your page.
+
+To find <b>all</b> matching elements, you will have to use querySelectorAll. This will not return a single element, but an array with all matching elements.
+
+<b>Common query methods</b><br>
+In addition to the ones mentioned above, there are these:<br>
+`document.getElementsByClassName('some-css-class');` - selects a given class<br>
+`document.getElementsByTagName('tag');` - selects all HTML elements of the given tag.
+
+<b>Inserting new HTML elements via JavaScript</b><br>
+To add an element:<br>
+1. Create the new element
+2. Get access to the parene element that should hold the new element
+3. Insert the new element into the parent element content.
+
+To create the new element: `let newAnchorElement = document.createElement('a');`
+Get access to the parent: `let firstParagraph = document.querySelector('p');`
+To insert the new element: `firstParagraph.append(newAnchorElement);`
+Can also use `insert` for the last one.
+
+To make the link actually usable:
+```JS
+newAnchorElement.href = 'https://google.com/';
+newAnchorElement.textContent = 'This leads to Google';
+```
+Before inserting it
+
+### Going through course content for day 35:
+<b>Deleting DOM element</b><br>
+To remove an element:<br>
+1. Select the element you want to remove
+2. Remove it
+
+We already know how to select elements, so look at how to delete them after they've been selected: `elementToDelete.remove();`
+
+An alternative is to select its parent, the body for instance: `elementToDelete.parentElement.removeChild(elementToDelete');` This is supposedly only needed for older browsers, like old versions of Internet Explorer, so should probably never be used anymore.
+
+<b>Moving existing elements around</b><br>
+To move the first paragraph to after the second paragraph, effectively switch position first select it:<br>
+`let firstParagraph = document.querySelector('p');`<br>
+Then select its parent element, which is the body and append it, as that adds it at the bottom of the document:<br>
+`firstParagraph.parentElement.append(firstParagraph);`<br>
+Since we're working on an existing item, we don't have to delete the old occurance of it, the browser will do that for us.
+
+We can also use `.insertBefore` to insert it before some specific element.
+
+<b>Working with innerHTML</b><br>
+On all elements you select, you have an innerHTML property, which is a bit like `.textContent`. The latter gives you access to text content, so all the text nodes that are inside this element including texts that might be in nested elements.
+What does innterHTML do? It gives you access to all the HTML content store in an element. That could be just text, but it could also include other HTML elements.
+
+Let's access the first paragraph: `let firstParagraph = document.querySelector('p');` then console.log it to see its contents: `console.log(firstParagraph);` The console actually shows a mixture of text (I'm new!), and HTML, the anchor tag leading to Google with the text description that it does. `.textContent` on the same would just return "I'm new!This leads to Google!"
+
+This is maybe most useful when changing new content. `.innerHTML` accepts a string, which can also contain HTML code, not just text. If we use .textContent, it gets saved as text, and any html element we might input, will be shown as text on the page.
+
+<b>Introducing events</b><br>
+Events to which we might want to react - to then execute JavaScript code:
+User clicks on some element (a button)<br>
+User types some text into an input field</br>
+User scrolls to a certain part of the page<br>
+How? `someElement.addEventListener('<event>');`
+
+<b>Adding a first "click event" listener</b><br>
+`.addEventListener` wants two parameters, what should it listen for? And then, when the thing it listens for occurs, what should it do? For the "what should it do part" we can't actually add complex code there, but we can call a function, so that's what we'll do.
+
+Define the function to be called first:
+```JS
+function changeParagraphText() {
+  paragraphElement.textContent = 'Clicked!';
+}
+```
+
+Then set up the event listener:
+```JS
+paragraphElement.addEventListener('click', changeParagraphText);
+```
+This is also called a callback function, a function that is passed as a parameter value to another function or method to be executed in the future. Notice the lack of parenthesis in the callback function. If we add them, then the function will be executed as soon as this line of code is parsed and executed by the browser.
+
+<b>Listening to user input events</b><br>
+`.addEventListener('keyup');` could work in this situation, as it is triggered when a key is released, which means something has been typed in the input field. A better listener though is `input` as it also listens for things that are dragged into the field or pasted there.
+
+To get what the user input we can use `.value` like this: `let enteredText = inputElement.value;`
+
+<b>The event object</b><br>
+When dealing with events, the browser automatically sends an event object to the callback function. This object describes the event that occured. We pick it up by adding a parameter on the receiving function:
+
+```JS
+let inputElement = document.querySelector('input');
+function retrieveUserInput(event) {
+  let enteredText = inputElement.value;
+  console.log(enteredText);
+  console.log(event);
+}
+```
+
+The typed input will be found in the `data` property in the object. An important property is `target` which holds the HTML element object on which this event occured. It is the same object we stored in the `inputElement` variable, which was selected with a querySelector.
+
+This means we have an alternative to get access to the enterred text here by using the event object, and getting the value from target: `let enteredText = event.target.value;`
+
+One important thing to note is that `event.data` only contains the last character that was input, which `.value` holds the entire string so far. The data property will also be null if something is pasted into the input field instead of typed. (And inputType changes from 'insertText' to 'insertFromPaste')
+
+Also by using the event object we don't have to use an external (to the function) variable to get the value needed inside the function, and that might be a good thing.
+
+The information in the event object depends on the event we're listening for. For the code above, it is an 'InputEvent', while if we look at the 'click' event object, it will say 'MouseEvent' and will holds lots of different information compared to input.
+
+## Day 15 - 2022-04-24
+### Going through course content for day 36:
+<b>A more realistic demo and example</b><br>
+See code in code-playground.
+
+In brief, get elements by id, set up an event listener with a callback function, in the callback function get how many characters have been input, subtract from max, and set this in remainingCharacters.
+
+<b>Introducing constant variables - const</b><br>
+Instead of using `let` to define a variable, we can use const:
+
+```JS
+const myVariable = 'Some string';
+```
+A const is immutable, meaning it can't be changed after it has been defined. Trying to change it by assigning a new value to it will result in an error.
+
+Looking at the demo project just created, you can see that all the variables created are "fixed", and never updated. In other words, they could have been created with const instead. By using const instead of let, we make it clear that these values will never change.
+
+The variables in the update function is recreated and thrown away for every execution, meaning on every key input in this example. Or in other words, in this code, we always get a new "snapshot" of the situation in the function, and therefore it doesn't actually change.
+
+The `remainingCharsElement.textContent` we update is an object, and data in objects can be updated. We just can't change the object to some other type at a later point. So the data-container itself can't be changed for objects, but the data can.
+
+We also change productNameInputElement as we add an eventlistener to it, but again this is an object so we're allowed to do this.
+
+Or yet another way to try to understand this, values in an object is exactly that, values in an object, and not values stored directly in a constant.
+
+<b>Changing element styles with JavaScript</b><br>
+As we've seen, we can get .textContent for an element in JavaScript. In a similar way, we can also get the style to change that, with `.style`. Here we get a nestet object with more properties, so we can add another dot to dive deeper into these properties. An example is `.style.textAlign`, but notice how it's spelled differently! In CSS we type it as `text-align: ...;` (Remember the reason? Dash is not allowed in variable or property names.) Setting it works the same, so we can copy the properties we set from the CSS file.
+
+<b>Managing CSS classes with JavaScript</b><br>
+New CSS selector tip as well it seems: `input.warning { ... }` selects all input fields with the warning class applied. Had there been a space between, it would have been descendant selector where we select all warning classes nested inside input. The same applies to id, meaning it selects what has both id remaining-chars and class warning: `#remaining-chars.warning { ... }`
+
+The trick here then, is to select an element by id, and then set a class on that element when it meets certain criteria. Setting a class in JavaScript is done with `.className` as 'class' is a reserved keyword. (For creating classes, in OOP I guess?)
+
+Note that setting a class with `.className`, you have to set all the classes should be on the element. Or in other words, if there were classes on the element, and you set a new class, the old classes will be removed.
+
+A better way then is to use `.classList` which has some utility functions helping us in this matter: This `.classList.add('warning');` would add the warning class, without removing any of the other classes. Given .add, we also have .remove to remove the class specified.
+
+### Going through course content for day 37:
+<b>Time to practice</b><br>
+See the task in the exercise.js file in code-playground.
+
+Still a little curios why the defer keyword is required. Why is it a problem that JavaScript executes before the HTML file is fully loaded? Given the code should trigger on a button click, which we can only do when the page has fully loaded. Will have to investigate.
+
+<b>Getting started with control structures</b><br>
+What are control structures? Special programming language syntax / features that allow you to control:
+* Under which conditions code is executed<br>
+If-statements
+* How often some code is executed<br>
+Loops
+
+<b>Introducing boolean values and comparison operators</b><br>
+If statements needs boolean values, which is a special type of value that is either true or false. It executes if the statement evaluates to true.
+
+The if-statement:
+```JS
+if (expression) {
+  // run this code if true;
+}
+```
+
+What expression though? Introducing comparison and logical operators:
+
+<b>Comparison operators (derive boolean values)</b>
+
+Compare equality (value and/or type):<br>
+==, ===
+
+Examples:<br>
+2 == 2     // true<br>
+'2' === 2  // false<br>
+3 === 3    // true<br>
+3 === 5    // false<br>
+'h' == 's' // false<br>
+
+
+Greater than, lesser than, greater or equal, lesser or equal:<br>
+>, <, >= <=
+
+Examples:<br>
+5 > 3     // true<br>
+5 < 3     //false<br>
+'a' < 'b' // true<br>
+4 <= 4    // true<br>
+
+
+Negation/inverse (something is not true)<br>
+!, !=, !===
+
+Examples:<br>
+!(4 < 4)  // true<br>
+5 !== 2   // true<br>
+8 != 8    // false<br>
+'4' !== 4 // true<br>
+'4' != 4  //false<br>
+
+<b>Logical operators (combine boolean values)</b>
+
+AND - yields true if both combined values are true<br>
+&&
+
+Examples:<br>
+5 == 5 && 3 < 4 // true<br>
+5 == 5 && 3 > 4 // false<br>
+
+
+OR - yields true if one or both values are true<br>
+||
+
+Examples:<br>
+5 == 5 || 3 < 4 // true<br>
+5 == 5 || 3 > 4 // true<br>
+
+
+<b>Boolean and comparison operator in action</b><br>
+Truthy and falsy in JavaScript: The double-equal sign doesn't check for type, so the number 2 evaluates to true when compared to the string '2'. To check for strict equality, meaning that both the value and the type have to be equal, use the tripple-equal sign: 2 === '2'
+
+Expressions are evaluated left to right:<br>
+2 === 2 || 2 === 3 && 5 === 6<br>
+This returns true because the first part of the expression is true, and that is enough for the OR operator. To change what is compared and evaluated together, add parenthesis:<br>
+(2 === 2 || 2 === 3) && 5 === 6<br>
+This returns false.
+
+
+<b>Uning booleans in if-statements (conditional code execution)</b><br>
+Only execute the console.log if const myName is set to Joe:
+```JS
+const myName = 'Joe';
+if (myName === 'Joe') {
+  console.log('Hello!');
+}
+```
+
+### Going through course content for day 38:
+<b>A real example</b><br>
+See demo.js in code-playground.
+
+```JS
+  if (remainingCharacters <= 10) {
+    remaningCharsElement.classList.add('warning');
+    productNameInputElement.classList.add('warning');
+  }
+```
+<b>Alternatives with else and else if</b><br>
+We now get the warning in the browser if there are less than 10 characters left. But what if the user removes some characters so there are more than 10 left? The warning doesn't go away as we only have an add statement and no remove.
+
+We need alter our logic a little and add an else statement. If first expression is not true, execute what's in the else part instead:
+
+```JS
+  if (remainingCharacters <= 10) {
+    remaningCharsElement.classList.add('warning');
+    productNameInputElement.classList.add('warning');
+  } else {
+    remaningCharsElement.classList.remove('warning');
+    productNameInputElement.classList.remove('warning');
+  }
+```
+If remove is run on a class that doesn't exist, it does nothing. It doesn't give an error.
+
+To extend our logic we can use `else if`. Add an error class to the CSS that should be applied if characters left is 0.
+
+```JS
+  if (remainingCharacters === 0) {
+    remaningCharsElement.classList.add('error');
+    productNameInputElement.classList.add('error');
+  } else if (remainingCharacters <= 10) {
+    remaningCharsElement.classList.add('warning');
+    productNameInputElement.classList.add('warning');
+    remaningCharsElement.classList.remove('error');
+    productNameInputElement.classList.remove('error');
+  } else {
+    remaningCharsElement.classList.remove('error', 'warning');
+    productNameInputElement.classList.remove('error', 'warning');
+  }
+```
+
+<b>More on boolean values</b><br>
+```JS
+let isLoggedIn = true;
+```
+
+Given the variable isLoggedIn is a boolean already, we don't have to compare the value of the variable to true, we can just check it like this:
+
+```JS
+if (isLoggedIn) {
+  console.log('User is logged in!');
+}
+```
+
+In case we want to check the oposite, that the user is not logged in, we can check `if (!isLoggedIn) { ... }`
+
+<b>Truthy and falsy values</b><br>
+If we want to know if something was input (and therefore stored in a variable) we can of course check that the length of the value in the variable is more than 0. But we don't have to do that, we can just check the variable itself like this:
+
+```JS
+if (enteredUserName) {
+
+}
+```
+
+Why does this work? Because of the truthy and falsy values in JavaScript. When we provide a non-boolean value where JavaScript wants a boolean, like in the if-statement, it will try to convert the provided value to a boolean according to certain rules.
+
+An empty string or the number 0 will be treated as false. A string with just 0 inside it ('0') would not be treated as false, since it's not an empty string. So falsy values can be said to be treated like false by JavaScript in places where a boolean is wanted.
+
+A string containing the word 'false' will be treated as true, because it's not empty. Again a blank character would also make it not be false. All that matters is the variable empty or not.
+
+<b>Introducing loops</b><br>
+For loops:<br>
+Loop n number of times
+
+For .. of loops:<br>
+Loop through all elements of an array
+
+For .. in loops:<br>
+Loop through all properties in an object
+
+While loop:<br>
+Loop as long as a certain condition is met
+
+<b>The for loop</b><br>
+
+```JS
+for (let i = 0; i < 10; i++) {
+  console.log(i);
+}
+```
+
+<b>The for ... of loop</b><br>
+
+```JS
+const users = ['Max', 'Anna', 'Joe'];
+
+for (const user of users) {
+  console.log(user);
+}
+```
+Before JavaScript got the for ... of loop to use on arrays, a regular for loop could be used like this:
+
+```JS
+for (let i = 0; i < ourArray.length; i++) {
+  console.log(ourArray[i]);
+}
+```
+
+<b>The for ... in loop</b><br>
+
+```JS
+const loggedInUser = {
+  name: 'Joe',
+  age: 32,
+  isAdmin: true
+}
+
+for (const propertyName in loggedInUser) {
+  console.log(propertyName);
+  console.log(loggedInUser[propertyName]);
+}
+```
+Though 'key' is more commonly used than 'propertyName'
+
+<b>The while loop</b><br>
+
+```JS
+let isFinished = false;
+
+while (!isFinished) {
+  isFinished = confirm('Do you want to quit?');
+}
+```
+### Going through course content for day 39:
+<b>Practice time - using the loops on an example page</b><br>
+See code in loops-in-action.js in code-playground.
+
+Trick, to quickly convert a number from a string to a number in Javascript, add a + sign in front of it:
+
+```JS
+const enteredNumber = +targetNumberInputElement.value;
+```
+
+Remember also you might not have to check if something is true or false, and then set it to a variable, you can just have the comparison on the variable and true or false will be set.
+
+## Day 16 - 2022-04-25
+### Going through course content for day 40:
+<b>A new milestone project: Tic-tac-toe</b><br>
+New concepts that will be introduced:
+1. Handling form submission with JavaScript and creating objects with the 'new' keyword.
+2. Managing data with JavaScript, HTML and the 'data-' attributes
+
+<b>The proejct plan</b><br>
+* Configure player names<br>
+Form with input field in modal overlay, also validate input and show validation feedback
+* (Re-) start game<br>
+"Start game" button should clear current game board or "game over" message
+* Turn-based gameplay<br>
+Turns should switch automatically between the two players, every player has his/her own symbol.
+* Select fields and check for winner<br>
+Game fields are clickable and the players symbol is displayed. Check for winner (regular tic-tac-toe rules) after every turn
+* Show a "game over" window<br>
+Present "game over" message which highlights winner (or draw) once game ends
+
+<b>Creating the HTML structure</b><br>
+Setting the type of a button inside a form to button, should make it a button that cancels the input/clears the form. Not quite sure I got that right, will have to test it
+
+<b>Adding base page styles</b><br>
+For buttons, create two classes, where the second class is designed to override some of the style from the first class, to make some buttons look almost the same, but slightly different. Making a button "flat" can be done with setting transparent on background-color and border-color.
+
+### Going through course content for day 41:
+<b>Adding styling to game configuration area</b><br>
+The "aside" will be an overlay, we'll start with that. This is typically called a modal. Even though we only have one modal and only one aside in the document, we'll use class to select it, so it is possible to reuse the styling later should we need it.
+
+We're setting position to fixed so that it is always on top of the content and above everything else. Also if we scroll, it stays where we positioned it and we can't scroll away from it.
+
+When position is fixed we should set distance from top and to the left. The values selected here are typically for mobile devices, so we'll add a media query to override it for bigger screens.
+
+Introducing the 'calc' function in CSS, used to perform calculations!
+
+```CSS
+left: calc(50% - 20rem);
+```
+
+We use the middle of the screen as our starting point, then subtract 20 rem. Given we've set the width of the modal to 40 rem, this will position it in the middle of the screen.
+
+Also we're setting display to none, since it shouldn't be visible by default, it should only appear when needed.
+
+We will also add a 'backdrop', just a div with id of backdrop that we'll use to hide the rest of the page so we can't interact with it when the modal is open. It won't have any content, it's just there for styling purposes.
+```HTML
+<body>
+  <div id="backdrop"></div>
+  <header id="main-header">
+    <h1>Play tic, tac, toe</h1>
+    ...
+```
+
+```CSS
+#backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+```
+Using rgba here, we can darken the rest of the page. Though I'm not sure I understand why it doesn't also darken the modal, given it covers the entire page. Maybe because it'f defined early on the page, the modal later, and the modal therefore sits on top of everything else?
+
+Adding a third css file for this project called `configuration.css`. This will hold the styling for everything we can configure, and isn't limited to the modal.
+
+We target the label in the form and set display to block, to force a linebreak. Remember to inherit font for input fields, as they have custom fonts set by the browser. The modal is a little big compared to what it holds, so we could shrink it, or we could center its contents to not get so much space on the right side.
+
+For game-configuration, we set width to 90%, but limit it to a maximum of 40rem, to sort of make it responsive, but without having to use media query. `margin: 3rem auto;` gives some margin top and bottom, and also centers this on the page.
+
+Setting up the ordered list to remove margins, paddings and the list item numbers, as well as display: flex since the default for flex is do diplay on the same line and we want the player configuration next to eachother, not one above the other.
+
+<b>Styling the game field</b><br>
+Adding a new css file for this called `game.css`. The game area should not be shown before the game starts, so we'll again set display: none. (Though commented out now so we can see it while we work in it).
+
+For the actual game board, we get to use CSS grid, as it's two dimensional, 3 rows with 3 columns.
+
+Two ways of doing that. What we've learned already:
+```CSS
+grid-template-columns: 6rem 6rem 6rem;
+```
+
+But another way is to use a CSS function called 'repeat':
+```CSS
+grid-template-columns: repeat(3, 6rem);
+```
+This tells CSS to add 3 columns, that are each 6 rem wide. We'll configure the rows the same way, as the board should have square boxes.
+
+Remember that you can add the :hover pseudo-selector to any HTML element, and you can also make any element clickable with JavaScript. We'll add a hover select to the game board, but only to elements that haven't been selected already. We'll make sure through JavaScript later that you can't click a particular game cell more than once, to override the piece that was put there. We will be doing that with class="disabled" added dynamically. When an cell has a game piece, it will retain the hover color. This is something I might want to look into changing. Can we disable to hover effect on just these cells as well? Or perhaps not, it looks quite good as is actually, but maybe experiment with it. How about alternating colors, or color per player?
+
+<b>Adding JavaScript, script files and first event listeners</b><br>
+We load config and game script files first, so that everything is set up with we load app.js, which will be used to start everything.
+
+A new thing here is how the logic is split up. While we select the button and add the eventListener in app.js, the callback function is added in config.js. This works fine in the browser, it's just important that the files are loaded in the correct order.
+
+<b>Showing and hiding the configuration modal</b><br>
+We'll need to change display: none on modal and backdrop to 'block' so that it's shown.
+
+Now we added a new selector in app.js, the file that loads last, that we need in config.js, the file that loads first. Will that work? Yes, as long as the order of execution is correct. And the button can't be clicked before everything has loaded, and thus selectors from app.js is available. (The event listener is later in app.js than the config-overlay and backdrop selector are.)
+
+We'll allow "click outside" to close the modal, and that's done by adding an event listener to the backdrop, that calls the same close overlay function as the cancel button does.
+
+### Going through course content for day 42:
+<b>Handling form submission with JavaScript</b><br>
+When clicking the confirm button, we wan't to prevent the default action which is to send the form to some server, but instead we want to handle that submission with JavaScript.
+
+We use querySelector now, to practice using the various ways of selecting elements. There is only one form on our page, so it is easy to select by type. Then we add an event listener not to listen for clicks, but the submit event that happens when you click the button.
+```JS
+formElement.addEventListener('submit', savePlayerConfig);
+```
+This means the savePlayerConfig function will be executed when the form is submitted. We'll take in the event object that is sent for events, as that has a build in method that will help us prevent the default submit action from the browser:
+```JS
+function savePlayerConfig(event) {
+  event.preventDefault();
+}
+```
+This is important, because when the browser makes this request (possibly because it's to the same page we're on) the page reloads, our JavaScript code is executed again, and everything is reset.
+
+Introducing the 'new' keyword. To create an object in JavaScript, we can do so with the curly braces: `const formData = {}` but that's not what we'll do here:
+```JS
+function savePlayerConfig(event) {
+  event.preventDefault();
+  const formData = new FormData();
+}
+```
+
+Doing it this way is called instantiating an object, based on an object blueprint. FormData is basically a function that knows how to generate an object with a certain shape. We can use these functions by executing them with the 'new' keyword in front of them. We'll learn how to write our own blueprints later in the course, but now we'll use this built in blueprint, which makes working with form data in JavaScript easy. It takes a form and automatically extracts values entered into input for us.
+
+We'll want the event.target data, as that'll make JavaScript look for inputs with a name attribute:
+```JS
+const formData = new FormData(event.target);
+```
+And then finally extract the entered player name from the form, by using a built in method that gets data from specific fields for us:
+```JS
+const enteredPlayerName = formData.get('playername');
+```
+
+Documentation for these blueprints can of course be found on MDN. They have a list of web APIs that can be used in JavaScript in the browser.<br>
+* [FormData documentation](https://developer.mozilla.org/en-US/docs/Web/API/FormData)<br>
+* [Web APIs documentation](https://developer.mozilla.org/en-US/docs/Web/API)
+
+<b>Validating user input with JavaScript</b><br>
+`.trim` is available for all strings in JavaScript, and it removes whitespace in front of, or after the input. If user only entered whitespace, after .trim we will now have an empty string, so we can show an error for instance.
+
+We show an error message and add error styling to the modal if user just enters blanks. When clicking the cancel button, we want to remove this error message and the styling. The error message and styling is removed with JavaScript, and we reset the form by changing from type=button to type=reset on the cancel button in index.html. A little contrary to some thing I didn't understand previously.
+
+<b>Storing and managing submitted data</b><br>
+How to identify what player we clicked the edit button on? By adding extra data to your HTML elements, that are not shown on the page but we can use and read in our JavaScript code, to then add extra information to certain elements.
+
+```HTML
+<button class="btn btn-alt" id="edit-player-1-btn" data-playerid="1">Edit</button>
+<button class="btn btn-alt" id="edit-player-2-btn" data-playerid="2">Edit</button>
+```
+This attribute always starts with data- and can be multiword. What comes after data- is up to you.
+
+We then find it in JavaScript like this:
+```JS
+const selectedPlayerId = event.target.dataset.playerid;
+```
+Dataset exists on every HTML element which you interact with JavaScript, and it's an object that will be populated with all the data attributes you add to your elements. You can have multiple data- attributes on the same element. The data- will be removed, so in our example, just playerid will exist as a property. If you defined it as player-id, you'll have to use bracket notation: `event.target.dataset['player-id']` Dash is not allowed with dot notation, that's why it has to be done that way.
+
+With HTML set up like this:
+```HTML
+<article id="player-1-data">...</article>
+<article id="player-2-data">...</article>
+```
+
+We can generate the element to update dynamically like this:
+```JS
+editedPlayer = +event.target.dataset.playerid; // Want number, not string here
+const updatedPlayerDataElement = document.getElementById('player-' + editedPlayer + '-data');
+```
+
+We can also update our players array dynamically like this:
+```JS
+const players = [
+  {
+    name: '',
+    symbol: 'X'
+  },
+  {
+    name: '',
+    symbol: 'O'
+  },
+];
+
+players[editedPlayer - 1].name = enteredPlayerName;
+```
+
+### Going through course content for day 43:
+<b>Adding logic for starting a game</b><br>
+We only want to be able to start a new game, if we've input player names first. That's a simple if statement at the beginning of the callback function called when start button is clicked:
+
+```JS
+if (players[0].name === '' || players[1].name === '') {
+  alert('Please set custom player names for both players!');
+  return;
+}
+```
+
+<b>Managing game rounds</b><br>
+We'll start with selecting all list items, even though we could have done the same for the ol element. We'll still be able to avoid repeating a lot of code.
+
+Use querySelectorAll which gives us an array as a result, and loop through that array to add an eventlistener to each element in the array:
+```JS
+const gameFieldElements = document.querySelectorAll('#game-board li');
+for (const gameFieldElement of gameFieldElements) {
+  gameAreaElement.addEventListener('click', selectGameField);
+}
+```
+
+An alternative would be to do this instead:
+```JS
+const gameBoardElement = document.getElementById('game-board');
+gameBoardElement.addEventListener('click', selectGameField);
+```
+Though now we have to make sure that the user clicked inside a game cell, and not the space between, otherwise the entire ordered list would be replaced by whatever player symbol did that:
+```JS
+function selectGameField(event) {
+  if (event.target.tagName !== 'LI') {
+    return;
+  }
+}
+```
+
+<b>Tracking selected fields on the game board</b><br>
+We'll need a two-dimensional array for this, which is an array with arrays in it:
+
+```JS
+const gameData = [
+  [0, 0, 0],
+  [0, 0, 0],
+  [0, 0, 0]
+];
+
+gameData[selectedColumn][selectedRow] = activePlayer + 1;
+```
+
+Now then, the final thing is the make sure that one player can't click a cell the other player has already clicked. So far we've only signalled that it can't be clicked with styling it
+
+```JS
+if (gameData[selectedColumn][selectedRow] > 0) {
+  alert('Please select an empty field!');
+  return;
+}
+```
+
+### Going through course content for day 44:
+<b>Checking for a winner or draw</b><br>
+See code in game.js as it's a little too much to repeat here. In brief, we check the top left cell for player id > 0 (board is initialized at 0), then compare that id for the rest of the row and if they are equal, that player won. We return the player id. Do the same for all rows. This is done through a for loop. The logic is the same for columns.
+
+For the diagonals we had to type it in like this:
+```JS
+  // Check top left to bottom right for a winner
+  if(gameData[0][0] > 0 &&
+     gameData[0][0] === gameData[1][1] &&
+     gameData[1][1] === gameData[2][2]
+  ) {
+    return gameData[0][0];
+  }
+
+  // Check bottom left to top right for a winner
+  if(gameData[2][0] > 0 &&
+     gameData[2][0] === gameData[1][1] &&
+     gameData[1][1] === gameData[0][2]
+  ) {
+    return gameData[2][0];
+ }
+  if (currentRound === 9) {
+   return -1;
+ }
+
+ return 0;
+}
+```
+
+We return 0 as long as we don't have a winner, otherwise the player id. In case legal moves have been exhausted (9 moves) without a winner, we return -1.
+
+<b>Ending the game and adding restart logic</b><br>
+We have to reset everything except the player names, since the same two players might want to play another game. We'll create a functions that does just that, and calls this function every time we click the "start new game" button:
+
+```JS
+function resetGameStatus() {
+  activePlayer = 0;
+  currentRound = 1;
+  gameOverElement.firstElementChild.innerHTML = 
+  'You won, <span id="winner">PLAYER NAME</span>!';
+  gameOverElement.style.display = 'none';
+
+  let gameBoardIndex = 0;
+  for (let i = 0; i < 3; i++) {
+    for (let j = 0; j < 3; j++) {
+      gameData[i][j] = 0;
+      const gameBoardItemElement = gameBoardElement.children[gameBoardIndex++];
+      gameBoardItemElement.textContent = '';
+      gameBoardItemElement.classList.remove('disabled');
+    }
+  }
+}
+```
+
+We also have to disallow clicks if the game is over, which will be done with adding a 'gameIsOver' boolean, and check for its status where we check for clicks outside the list and simply returns.
+
+One thing to maybe fix, is that you can currently change your name while playing.
