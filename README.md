@@ -2270,3 +2270,224 @@ function resetGameStatus() {
 We also have to disallow clicks if the game is over, which will be done with adding a 'gameIsOver' boolean, and check for its status where we check for clicks outside the list and simply returns.
 
 One thing to maybe fix, is that you can currently change your name while playing.
+
+## Day 17 - 2022-04-26
+### Going through course content for day 45:
+
+For many projects you will probably solve the same problems and have the same features you add over and over again. Maybe exactly the same or with only minor adjustments. Copy pasting from project to project can of course work, but might not be so easy to maintain. Given that others also experience this, there is a solution: Third-party packages which are solutions for common problems and features many experience, that is distributed online for everyone to use. This allows you to focus on the main parts of your specific website, the logic that is specific to your site and layout, as you can utilize pre-built features and styles built by others.
+
+<b>What and why?</b><br>
+What are third-party packages? Packages created by others that provide ready to use code which you can add into your projects.
+
+Why should we use them? Because they can save you time and possibly avoid problems given you don't have to create everything from scratch every time, and can avoid copy paste mistakes and similar.
+
+<b>Some examples of popular CSS pages and their use-case:</b><br>
+<b>Bootstrap:</b> A very popular CSS framework (package) that provides dozens of pre-built component styles, for instante for buttons, alerts and so on.
+
+<b>Materil UI:</b> A popular CSS framework similar to bootstrap in providing pre-built component styles, but it follows the Material design specification by Google.
+
+<b>Tailwind CSS:</b> a popular CSS framework that also provides dozens of pre-built utility styles, which you can use to style your HTML code without writing a lot of CSS code.
+
+<b>Popular JavaScript and their use-case</b><br>
+Unlike for CSS, it's less about choosing one package for everything, but more about getting small pieces that solves the various small problems. Some examples:
+
+Image carousel: Animated image gallery where images can be cycled through via page controls.
+
+Scrollspy: An indicator, for instance in an outline, that shows the user where on the page he/she is.
+
+Parallax effect: A visual scrolling effect where different elements are animated at different speeds or with different effects.
+
+<b>Third party vs custom code (your own code)</b><br>
+Third party:
+* Less code to write, can see results quickly
+* But less control, more "default" behavior.
+
+Custom code:
+* More code to write, more work to do, possibly more error-prone
+* Full control over the result and you can maybe make it stand out more
+
+There is no right or wrong here, but typically you will use both approaches, so use third-party packages to solve some problems, while writing your own code to solve others.
+
+<b>Introducing bootstrap</b><br>
+https://getbootstrap.com/
+
+See documentation, select components and maybe buttons to see what button look you can get, and what you would add to your HTML document to get that look.
+
+<b>Adding bootstrap</b><br>
+Go to getboostrap.com, click "get started" and then copy the link under CSS to load these styles in your HTML document. This will load the necessary styles, just like we've loaded google fonts so far. The same can also be done for JavaScript.
+
+Go to documentation again, go to components and Navbar and copy all that code you see into the body part of your index.html. You might want to wrap in in a 'header' element.
+
+<b>Adding a JavaScript package</b><br>
+As you can see, the drop-down menu doesn't work. For this we also need some JavaScript code, even though Bootstrap is mainly for CSS. They have provided this for us as well, it is found under 'Bundle' where you found the CSS link. Their instructions state that the link should be added last in the HTML file, but we'll add it in the head section, and add property 'defer' to it. Now the drop-down menu works!
+
+<b>Adding an image carousel</b><br>
+Again under components, select carousel, and copy the code under 'with indicators'. Add it in the 'main' section in body. You can fine-tune this code of course, and we'll make a small change by changing the first div to section. Don't forget the closing element!
+
+<b>Combining third-party packages with custom code</b><br>
+Create a styles.css in your folder, and load it after the Bootstrap CSS in index.html.
+
+Still in index.html we can change the id in the first div, provided we also change it everywhere else it is referenced. As can be seen, there are some data- attributes using it, so they will have to be changed as well.
+
+Now we can add some of our own styling to this id we changed. For instance, to center, make the images smaller and the same size:
+
+```CSS
+#carousel-example {
+  width: 100%;
+  max-width: 50rem;
+  height: 30rem;
+  margin: 2rem auto;
+}
+
+#carousel-example img {
+  height: 30rem;
+  object-fit: cover;
+}
+```
+
+<b>More bootstrap examples</b><br>
+Adding a form, and this time we don't want to write it all ourselves. Styling buttons and checkboxes can be a pain, but a third-party package like bootstrap can help make that easy for us. Just copy the first example shown under Forms/Overview for now. We'll create a dummy newsletter signup form, so we can remove the div containing password.
+
+<b>Make the navbar fixed</b><br>
+We want the navbar to stay fixed at the top of the screen even if you scroll down on the page. We find documentation on how to do that in navbar under elements on the bootstrap pages, and again from 'placement' in the right-hand menu:
+
+```HTML
+<nav class="navbar fixed-top navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Fixed top</a>
+  </div>
+</nav>
+```
+
+We actually only need the 'fixed-top' class.
+
+
+<b>Another example: Preparing a parallax page</b><br>
+Just setting up a basic page with an image and some text to make the page scrollable, see parallax.html
+
+### Going through course content for day 46:
+<b>Adding a parallax effect package</b><br>
+Search for parallax.js and you will see there are many parallax packages to select from. We'll use the one called simpleparallax.
+
+Add the link from jsDelivr.com:
+```HTML
+<script src="https://cdn.jsdelivr.net/npm/simple-parallax-js@5.5.1/dist/simpleParallax.min.js"></script>
+```
+
+We will need to write a little bit of code ourselves to get this activated, so create a new file called parallax.js and link it after simple-parallax.
+
+The we simply need to get the image we want the parallax effect on, and activate the parallax effect like this:
+
+```JS
+const imageElement = document.getElementById('main-image');
+new simpleParallax(imageElement);
+```
+
+The effect can be configured, for instance we can change the inner scroll of the image to another direction. We'll try to speed it up a little, by sending an object as the second argument to the function, like this:
+```JS
+new simpleParallax(imageElement, {
+  scale: 1.6,
+  delay: 0.1,
+});
+```
+
+<b>Viewing third-party packages source code</b><br>
+These packages are typically open source, which means we can see the source that runs them. They are also typically hosted on github. If you search for 'github simpleparallax' you should be able to find it, and get an idea about the code behind it.
+
+<b>Onwards to backend development</b><br>
+What we've learned so far:<br>
+<b>HTML</b> is there for content and structure of the displayed page.<br>
+<b>CSS</b> adds styling to the displayed page and its content and is optional.<br>
+<b>JavaScript</b> brings interactivity that might be needed, and is also optional.<br>
+
+So far we've stayed in the browser, written content that is displayed by the browser and changed how the loaded website behaves in the browser. This is called the front-end because the browser is a tool installed on the computer of your end users. The browser displayes the front-end of your website, what the user sees.
+
+For some websites that is enough. But other websites need server-side capabilities as well.
+
+Examples of things taking place on the server would be store data in a database, store uploaded images so others can see them, load data, send back different HTML content based on the user, or data loaded from a database, and so on. It could also save and share game state for the tic-tac-toe game we created so you wouldn't need to share a computer to play, but each player could use their own device and be in different places.
+
+Brief recap of how the web works with client and server and the communication between them I skip writing notes for again. The new part is showing how the server, the backend, might have some code being executed for the requests they receive, which affects what the client sees.
+
+<b>Dynamic vs static</b><br>
+Static websites are sites that only consist of HTML, CSS and JavaScript.
+
+Dynamic websites are sites that in addition rely on some code running on the server, which might mean the HTML code sent is not always the same, and probably not the same for different users.
+
+<b>Frontend vs backend vs fullstack development</b><br>
+Browser instructions, option a: we can write all of it ourselves and then send all of it to the browser. Or option b, we could write some code on the server the generates some of these instructions for us based on various criteria, and then send them to the browser.
+
+So again:<br>
+The frontend - executes in the browser, on the visitors machine. Code that controls what the users sees and interacts with, divided between HTML, CSS and JavaScript. Static and finished code.
+
+The backend - executes on the server, a remote machine. The code that controls what is being served and executes behind the scenes. May parse and store incoming data, fetch data, store files and so on.
+
+So then, as a web developer you can work on either the frontend, or the backend. Or you can work on both, and then you are a fullstack developer.
+
+<b>Choosing a backend programming language</b><br>
+So then, how do we write backend code? We need a programming language that can be executed on the server. Given that a server is very similar to a normal computer, you can basically use any programming language on the server.
+
+Of the various languages listed, python, php, Java, C#, NodeJS (Javascript) one obviously stands out: NodeJS.
+
+NodeJS is JavaScript, but outside the browser as they took the JavaScript engine browsers (specifically the Chrome V8 engine) use, and made it run without a browser. In doing that they enhanced it with more features, like read and write to and from files, parse incoming requests, send responses and so on. And thus we have NodeJS which can be seen as JavaScript for the server side.
+
+### Going through course content for day 47:
+<b>Installing NodeJS</b><br>
+What is NodeJS? A JavaScript runtime, a tool for executing JavaScript outside of the browser. Can be installed on any computer and hence to be used to write and execute server side JavaScript code.
+
+Download from https://nodejs.org/ though I used Node Version Manager. Have noted on that in my other repo.
+
+<b>Executing NodeJS code</b><br>
+A thing to note is that most code will be the same as we've already learned, but since this is server-side, there is no DOM to interact with, so no buttons or other HTML elements to get.
+
+```JS
+const userName = 'Joe';
+console.log(userName);
+```
+
+The above code could have been written in the browser, but now we can write it for NodeJS and run it from the commandline:
+
+```zsh
+$ node app.js
+Joe
+$ 
+```
+
+<b>Creating a custome NodeJS server</b><br>
+We'll start by building a webserver with NodeJS, by using the HTTP package. This allows us to listen for and deal with incoming requests, and then send a response back. Then we can send a request to that app from the browser.
+
+We'll start with `const http = require('http')` and that will return an object full of utility methods and properties provided by NodeJS.
+
+We then call a method returned to us in the http object we created above called createServer. This again returns an object that has the server functionality we need built in.
+
+Then we call a method to have the server listen on the desired port. In full:
+
+```JS
+const http = require('http');
+const server = http.createServer();
+server.listen(3000)
+```
+
+Now we have a server listening on a port, but it has no instructions for what to do with the incoming requests.
+
+<b>Handling requests and creating custom responses</b><br>
+To tell the server what to do with incoming requests, we can add a callback function when we create the server. The callback function needs to take two parameters, one for request and one for response, as it will be passed two objects. The request object will contain info about the incoming request, while the response object is for sending a respons back.
+
+We don't care about the request yet, we will focus on sending a response for now. To do that, we start by setting statusCode in the response object to 200, to indicate that the request was received and handled successfully. Then we can use the 'end' method to set the response and send the response.
+
+```JS
+function handleRequest(request, response) {
+  response.statusCode = 200;
+  response.end('<h1>Hello, world!</h1>');
+};
+```
+
+<b>Doing more server-side work</b><br>
+Our server currently isn't doing much. Now we want to add a path '/currenttime' that will show a timestamp if accessed. If you access / the same hello world message should be shown.
+
+We do that by checking request.url, which doesn't actuall contain the full url, just the path. And this is exactly what we need here:
+```JS
+if (request.url === '/currenttime') {
+  response.statusCode = 200;
+  response.end('<h1>' + new Date().toISOString() + '</h1>');
+}
+```
