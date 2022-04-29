@@ -2491,3 +2491,420 @@ if (request.url === '/currenttime') {
   response.end('<h1>' + new Date().toISOString() + '</h1>');
 }
 ```
+
+## Day 18 - 2022-04-27
+### Going through course content for day 48:
+<b>Easier NodeJS development with ExpressJS</b><br>
+To start we will install Express with npm. But before we can do that, we have to set up the directory with npm init:
+
+```zsh
+$ npm init
+```
+
+Answer all the questions. An alternative would be to simply call `npm init -y` which creates the needed package.json file with only the basics, as the rest can be added later anyway.
+
+Now we can install Express:
+
+```zsh
+$ npm install express
+```
+
+<b>Creating a server with express and handling requests+responses</b><br>
+To use express instead of http, change the require in app.js to this instead:<br>
+
+```JS
+const express = require('express');
+```
+While the http package returned an object, express returns a function and can be executed. That function call returns an object, a so-called app object.
+
+```JS
+const app = express();
+```
+
+Then on the app object, we can call listen:
+```JS
+app.listen(3000);
+```
+
+Now we still want to let express know what should happen for different requests, so before the listen, we call the get method. This will allow us to define a request handler for incoming requests. This get method takes two parameters, the path it should handle, and the function that should be called for a request to that path.
+
+Now then, instead of creating a new named function for this, we can create an anonymous function. Basically, just define the function in place, where we have put the function name previously. Then that anonymous function, like the named one we used for the http package, gets two parameters sent in from express: the request and the response object. (And a third one actually, a function we call next, that we can execute inside this anonymous function, but we'll get back to that later.)
+
+Instead of response.end, since express is a third-party library that function a little different than the http package, we now call response.send instead. We've abbreviated request and response to just req and res:
+
+```JS
+app.get('/currenttime', function(req, res) {
+  res.send('<h1>' + new Date().toISOString() + '</h1>');
+});
+
+app.get('/', function(req,res) {
+  res.send('<h1>Hello, world!</h1>');
+});
+```
+
+This combination of a path and a req+res handler function is called a route, or route-handler.
+
+We don't have to send the status code as express defaults to 200. We can override it if we wan't, but we won't do that right now.
+
+Functions can either be written as `function(req, res) { ... }` or a new shorthand format: `(req, res) => { ... }` or just `() => { ... }` if it doesn't take any parameters. Found on express documentation where they set up listen like this, to console.log the port it listens on:
+```JS
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`)
+});
+```
+
+<b>Parsing user data with express</b><br>
+Let's send a form back for / instead of the 'Hello, world' message, so that the user can send something back to us that we can parse.
+
+```JS
+
+app.get('/', (req, res) => {
+  res.send('<form action="/store-user" method="POST"><label>Your name</label><input type="text" name="username"><button>Submit</button></form>');
+});
+```
+Just adding a button means the form will be submitted when clicked. (As long as we have a name on the input field as well, without a name it won't be submitted.) Action defines where it will be submitted to, and method, well, the method. The next step now, and something we couldn't do with JavaScript in the browser, will be to set up our express server to listen on that path and with that method.
+
+We then use `app.post` instead of get, and on the request object, we can get the body object, and in that the username that was sent, with dot notation:
+```JS
+app.post('/store-user', (req, res) => {
+  const userName = req.body.username;
+  console.log(userName);
+  res.send('<h1>Username stored!</h1>');
+});
+```
+
+And when we try that it crashes: `TypeError: Cannot read properties of undefined (reading 'username')`
+
+Why? Because express is a library that mostly deals with routing incoming requests, so it allows us to define which request to which path with which method should be handled by which function. It also gives us easy access to the request body, but there is one very important thing it does not do out of the box, and that is parse that body. In other words, it doesn't translate the data received to a JavaScript object automatically.
+
+In devtools, in the network tab we can see the request that was sent, the POST to /store-user. Clicking on the network request that failed, and scroll down to the bottom (or go to payload in Brave) and you can see the body, which is form data. And that is not JavaScript code, not an object, just some raw text. And we are not parsing that data before we try to use it in our JavaScript code.
+
+To tell express it should parse the body, in our code after executing the express function, we call the 'use' function. This allows us to handle incoming requests, with the difference that it does not care about what kind of request it is. So although we can, we don't have to define a path here. We can use this to add an extra handler that should be executed on all incoming requests. A general handler like this that apply to more than one type of reuqest is typically called middleware. That's because it sort of sits in the middle between express seeing the request and our code handling the request.
+
+So what we need here is a function that looks at the request and checks if it has any kind of data attached, and if so, extracts it. We can actually use the express function for that, as it has a urlencoded method which does exactly that. We need to send an object as argument to this function, and set extended: false, which is needed to avoid getting warnings. (No further explanation given)
+
+```JS
+app.use(express.urlencoded({extended: false}));
+```
+
+Now it worked!
+
+<b>Storing data server-side</b><br>
+Create a new folder called data and create a blank file called 'users.json' in that folder, and add an ampty array to it: '[]'. No variable names or anything, this isn't JavaScript code.
+
+Then we need to 'require' a core NodeJS package called 'fs' which stands for file system and lets us read from and write to files. Core NodeJS functionality should be added before third-party packages, or so the convention says. This fs package returns an object. 
+
+We also need the path package in order to construct a path to our file that works on all operating systems.
+
+In order to update the contents of the file, we need to read in existing content first, add the new input that was POSTed, then write it back. The code:
+
+```JS
+const fs = require('fs');
+const path = require('path');
+
+(...)
+
+app.post('/store-user', (req, res) => {
+  const userName = req.body.username;
+
+  const filePath = path.join(__dirname, 'data', 'users.json');
+  
+  const fileData = fs.readFileSync(filePath);
+  const existingUsers = JSON.parse(fileData);
+  
+  existingUsers.push(userName);
+
+  fs.writeFileSync(filePath, JSON.stringify(existingUsers));
+
+  res.send('<h1>Username stored!</h1>');
+});
+```
+We use 'path.join' to add path fragments together. The '__dirname' variable contains our current directory, and to that we need to add 'data' as that's the new folder we created to hold data, and then the filename at the end.
+
+Then we read the data from the file with readFileSync (and sync is important to make to read happen right away) and store it inn fileData. Note that the output from readFile is raw data, and if you concole.log it, it looks like a buffer. That's why we use a globally available method on the JSON object called parse to parse it into a JavaScript object.
+
+Now we can push the input username to this array. (The push method is available on all JavaScript arrays)
+
+Then we can finally write the data back, but we need to convert it from a JavaScript object to a JSON string. For this we again use the globally available JSON object, and the second method on that called stringify.
+
+### Going through course content for day 49:
+<b>Reading in a file and returning dynamic responses</b><br>
+We'll add a new path that will read in the data we have stored and display them on a page so users can see them.
+
+We can send the data read from file back directly like this as Express will translate it into some raw text that looks exactly like our file:
+```JS
+const fileData = fs.readFileSync(filePath);
+const existingUsers = JSON.parse(fileData);
+
+res.send(existingUsers);
+```
+
+```
+["Joe","Jane","Doe"]
+```
+
+Instead of sending back the text as-is, we can make it into an HTML element, a list for instance, like this:
+```JS
+let responseData = '<ul>';
+
+for (const user of existingUsers) {
+  responseData += '<li>' + user + '</li>';
+}
+responseData += '</ul>'
+
+res.send(responseData);
+```
+
+And that is some dynamically generated HTML!
+
+<b>Enhancing developer workflow with nodemon</b><br>
+To avoid having to stop and restart our server all the time, we can use a package called nodemon. This watches for file changes, and restarts the server when files are changed. That is also valuable to avoid the case where you don't understand why something you've changed isn't working, and it's because you forgot to restart the server.
+
+Nodemon will be installed as a development dependency, as it doesn't offer functionality to the server we are developing, it's only something we use to help during development.
+
+```zsh
+$ npm install nodemon --save-dev
+```
+
+Nodemon has now been installed as a package in our project, not as a globally available tool on our machine. So to run it, we have to modify our package.json file:
+```json
+"scripts": {
+  "start": "nodemon app.js"
+},
+```
+
+Now we've defined that it can be started with npm. If another name than start was selected, it has to be started with `npm run <selected-name>`. Start however is a reserved script name, so we can simply start it with `npm start`
+
+Whenever the code is changed now and the file is changed, nodemon will restart it for us!
+
+```
+[nodemon] 2.0.15
+[nodemon] to restart at any time, enter `rs`
+[nodemon] watching path(s): *.*
+[nodemon] watching extensions: js,mjs,json
+[nodemon] starting `node app.js`
+Example app listening on port 3000
+[nodemon] restarting due to changes...
+[nodemon] starting `node app.js`
+Example app listening on port 3000
+```
+
+<b>More express: static and dynamic content with templates (ejs)</b><br>
+Demo site shared in the course used as a starting point for us to develop the backend features.
+
+<b>Setting up a basic express app</b><br>
+Basically just require express, execute the express function and store the result in the 'app' constant. Now call 'app.get' to define a route and finally 'app.listen' to listen for incoming requests
+
+<b>Serve HTML files with express</b><br>
+Instead of serving our frontend-site html files from the html files directly, we'll serve them from express, so we'll need to set up paths for them. '/' will be used for index.html. 'restaurants' will serve 'restaurants.html'. But first weæll restructure our files a little bit, by adding a folder called 'views' where the files served from express will be. So all html files from frontend-site should be moved to the views folder.
+
+To send a file back as a response, we don't actually have to read it in, possibly parse it, and then send it "ourselves" by using the res.send method. Express has a method called sendFile which does all of that for us! This function also looks at the file to determine if it contains html content, and if it does, sends it back correctly so the browser understand it received html and treats it as that. We will still have to construct the path to the file though, so we need the 'path' package as well.
+
+```JS
+app.get('/restaurants', (req, res) => {
+  const htmlFilePath = path.join(__dirname, 'views', 'restaurants.html')
+  res.sendFile(htmlFilePath);
+});
+```
+Now we need to fix the html pages, since they link to eachother with full filename, like 'about.html' or 'restaurants.html' but our routes don't have the '.html' part. Dynamic websites normally don't use filenames, as they probably have paths or handling like this. It is now important to add the slash before for instance 'restaurants' as that will create an absolute path, and append it directly after the domain. Also move the styles folder to the views folder so the links to the styles are correct. Yet they are not working. We'll look at that next.
+
+## Day 19 - 2022-04-28
+### Going through course content for day 50:
+
+<b>Serving static files, CSS and JavaScript files</b><br>
+Because we have a custom server, we have to explicitly define which files we want to allow and handle. Since we have not set anything up for the CSS files, they won't be served.
+
+Fortunately express has a built in feature for general, static files we want to serve, so we don't have to define a route for each and every css file and image. To do that we add a middleware, like we did for parsing request body:
+```JS
+app.use(express.static('public'));
+```
+Public is a common name to use for this folder, since files in it will be public, available to all. We will need to create this directory in our project as well. Then we need to move the styles folder to it, as well as the scripts folder.
+
+For incoming requests now, express checks if it's for a file it finds in the public folder, and then returns that. If not, it checks it it's for one of the route handlers, and then serve that. If neither matches, it returns an error.
+
+Also just to be very clear, anything in the public folder can be access by just typing in the url and the filename, so we don't want to store user data there for instance.
+
+<b>Parsing form data and redirecting requests</b><br>
+For parsing we have to add another middleware, the urlencoded so now we have two:
+
+```JS
+app.use(express.static('public'));
+app.use(express.urlencoded({extended: false}));
+```
+
+To extract the various fields then, we could do like we did previously by extracting from body like this:
+```JS
+const restaurantName = req.body.name;
+```
+
+Or we could just store the entire body, since we want all the elements in an object anyway, so there's no need to pick them out one by one and then add them to an object.
+```JS
+consrt restaurant = req.body;
+```
+To store the data we'll create a data folder as we did before and create a restaurants.json file which will contain an empty array. Again we will need to use the global JSON object with method parse to parse the text into a JavaScript array.
+
+After the data has been saved, we want to show a confirmation. To do that we send a redirect to route our users to the confirmation page. That means if they try to reload the page, they won't get the "do you want to post again?" warning.
+```JS
+res.redirect('/confirm');
+```
+
+Our form was not complete configured, so we'll finish that now by adding the action and the method to it, to say where and how data should be submitted.
+
+<b>Adding the EJS template engine</b><br>
+This is used by many, and is officially supported by express. There are however many template engines that can be used, because templates are really only HTML files with some placeholders and some special syntax. The different engines simply use different syntax or language that they define themselves. These placesholders and so on is what will be replaced by the actual content by the engine.
+
+On available for express that is popular is called EJS which we'll install into the project:
+
+```zsh
+$ npm install ejs
+```
+
+Now we need to tell express that we want to use a template engine, and this is typically added as the first thing after creating the app object:
+```JS
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
+```
+
+We need to set that we want to use a 'view engine' and what the name of that engine is. Then we need to set the 'views' setting, telling express where to find these files and we'll be using the views folder for that.
+
+Then we'll need to rename all the existing HTML files and turn them into templates. For ejs, the file ending should simply be changed from .html to .ejs.
+
+We now have to change the route handler from sending the file directly, to calling the render function. That takes the file to be rendered as input:
+
+```JS
+app.get('/', (req, res) => {
+  res.render('index');
+});
+```
+
+<b>Rendering dynamic content with templates</b><br>
+Add a new paragraph to the restaurants.ejs file, that EJS will change for us. This is the syntax used for variables to be replaced:
+```HTML
+<p>We found <%= numberOfRestaurants %> restaurants.</p>
+```
+
+Then we need to send what it should be replaced with, from app.js. That means extending what we send to toe renderer with an object:
+```JS
+app.get('/restaurants', (req, res) => {
+  res.render('restaurants', { numberOfRestaurants: 9});
+});
+```
+Here we've just hardcoded the value to 9, getting the actual value is easy. We'll just re-use code from the POST to /recommend to read in the data, and then look at the length of the array:
+```JS
+app.get('/restaurants', (req, res) => {
+  const filePath = path.join(__dirname, 'data', 'restaurants.json');
+  
+  const fileData = fs.readFileSync(filePath);
+  const storedRestaurants = JSON.parse(fileData);
+  res.render('restaurants', { numberOfRestaurants: storedRestaurants.length });
+});
+```
+
+<b>Outputting repeated content with EJS and loops</b><br>
+Now on to actually displaying the restaurants that was shared. To do that, we want to repeat the restaurant list for every restaurant we've stored in restaurants.json.
+
+We can actually write JavaScript inside the EJS tags. Inside the unordered list, add a new line right after the start of it and add:
+```JS
+<% for (const restaurant of restaurants) { %>
+```
+Then we need to close the opening curly braces as well, so add a new line before the ul closes:
+```JS
+<% } %>
+```
+
+Now we can use the restaurant variable inside our block, just like we would in regular JavaScript code, just as long as we wrap it in the EJS tags:
+From:
+```HTML
+<h2>Restaurant Title</h2>
+```
+
+To:
+```HTML
+<h2><%= restaurant.name %></h2>
+```
+
+We're using the equal sign in the tag when we want to output a single value.
+
+Now we just need to send an array called restaurants to the renderer:
+```JS
+res.render('restaurants', {
+  numberOfRestaurants: storedRestaurants.length,
+  restaurants: storedRestaurants,
+});
+```
+
+<b>Rendering conditional content</b><br>
+In case we don't have any recommended restaurants to show yet, we'd like to remove the text "Find your next favorite restaurants..." and that can be done with an if statement
+```JS
+<% if (numberOfRestaurants === 0) { %>
+<% } else { %>
+<% } %>
+```
+Then we put the relevant HTML inside those blocks.
+
+## Day 20 - 2022-04-29
+### Going through course content for day 51:
+<b>Including partial content</b><br>
+In our html files (now called ejs files) we have the same header and navbar in all the files. When we changed from static html to serving them from express, we had to go through each and every single file and make the same changes, remove the .html and add a / in front. If we use these files for other projects, we might have to do the same again, and that is certainly something to avoid. EJS has a feature to help us with exactly that: Include.
+
+An include is an EJS file, that contains a part of a page which can be used on many other pages by being included there. This means we can split large files into smaller, more managable pieces.
+
+We'll add a new sub-folder to the views folder and call it 'includes'. In that folder we'll create a header.ejs file, and move the header from one of the existing files into that. In place of the header in the file we removed it from, we can add the following: `<%- %>`. The dash is saying we want to render some HTML content. If we had used the equal sign we've used before, it would output that literally, meaning HTML as text. This is a security mechanism, as the equal sign 'escapes' the value it outputs so that users can't inject HTML pieces into your page. Instead by escaping, it comes out as raw text that is not being rendered/executed. That is useful for user generated content, but not when we want to include our own content.
+
+To include then, we need to use the include function. We can pass a second argument to this, being an object with extra configuration sent in to that file like we did for the restaurants file, but we don't need that now.
+```JS
+<%- include('includes/header') %>
+```
+
+The actual HTML head can be moved as well since that is the same in all files, except for some page specific styles. We can leave the page specific styles there, but include the rest. That way we have common code included, but can still have page specific styles. The same was done for the navbar.
+
+Then to make the restaurants file a little more managable, we'll move the restaurant-item to an include. Not to avoid duplication, but to make it easier to find and also more mangable. The restaurant-item uses dynamic data, so it needs the key 'restaurant' passed to it, as well as the value for that restaurant. We'll do that like this:
+```JS
+<% for (const restaurant of restaurants) { %>
+  <%- include('includes/restaurants/restaurant-item', {restaurant: restaurant}) %>
+<% } %>
+```
+
+<b>How to get IDE support for EJS</b><br>
+Install an extension for it, to help VS Code understand the EJS syntax, so it can help us with it. Search for 'ejs' in 'extensions' in vs code and install the one called 'EJS language support' by DigitalBrainstem.
+
+We can see that in our restaurants.ejs file that we've gotten syntax highlighting, and that `<%= ... %>` isn't red anymore. Also when we start typing EJS tags, we get auto-completion now, and we can see which tags we can use.
+
+Unfortunately auto-formatting doesn't work too well, because prettier doesn't understand EJS syntax yet.
+
+<b>Handling dynamic routes, errors and managing bigger express projects</b><br>
+Instead of having a page with all the restaurants and a link to their page, we want to set up individual pages for each restaurant, so sharing exactly the one you mean is easier.
+
+We copied restaurants.ejs to restaurant-detail.ejs and simplified with to just contain information about one restaurant.
+
+Now then, how to serve that detail page? We need dynamic routes for that, since we have an "unknown" number of restaurants when we write the code, as they can dynamically be added by users. So we should have an ID per restaurant, but then we can't pre-generate one route per number, as we don't know how many there will be, and it doesn't make sense to have thousands of routes generated, if we only needed 50 for instance.
+
+Express has a way to handle that with one route, that has a dynamic segment in the path. We set it up like this, with colon and then the dynamic element:
+```JS
+app.get('/restaurants/:id', (req, res) => {
+  const restaurantId = req.params.id;
+  res.render('restaurant-detail', { rid: restaurantId });
+});
+```
+What we set after the colon will be available in req.params with the same name.
+
+Because we've only had one level of folders before, the styles having relative paths loaded fine. Now that we have two levels, the /restaurants/id the styles doesn't load, as the server tries to load them from /restaurants/styles, and that doesn't exist. the solution is easy, switch to absolute paths in the head.ejs file in the 'includes' folder. We also have to do that on the restaurant-detail.ejs file.
+
+<b>Managing data with unique IDs</b><br>
+Install a third-party package called UUID so we don't have to generate IDs ourselves:
+```zsh
+$ npm install uuid
+```
+We have to add this package to our apps.js file with a require the normal way. The documentation shows some more advanced require we can use, but we'll get to that later. Doing it the way we've done so far still works.
+
+To use this whenever we store a new restaurant, we'll have to modify our post handler. There we have the request.body that was created by the user, and we want to add an ID to that. With JavaScript that is easy, as we can just access the property we want, and if it doesn't exist, it will be created for us. Then we set that property to the new and guaranteed to be unique id like this:
+
+```JS
+const restaurant = req.body;
+restaurant.id = uuid.v4();
+```
+
+Now we need to add the restaurant id to the link in restaurant-item.ejs to link to the correct one.
+
+## Day 21 - 2022-04-30
+### Going through course content for day 52:

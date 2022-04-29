@@ -1,0 +1,17 @@
+{
+  "name": "web-development-complete-guide",
+  "version": "1.0.0",
+  "description": "Getting started with Node and Express",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "author": "Børge Grasmo",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
