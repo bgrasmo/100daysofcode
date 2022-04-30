@@ -2998,3 +2998,18 @@ const filePath = path.join(__dirname, '..', 'data', 'restaurants.json');
 ```
 
 Start in current folder, but then go up one level, and then into data.
+
+<b>Using the express router to split the route configuration</b><br>
+The express router allows us to group and split routes, which can help making bigger projects easier to maintain. We'll make a new folder called routes and add two files, detault.js and restaurants.js there. The default.js file will be for routes that are not directly related to restaurants, like the index and about page.
+
+As we learned before, when moving code to its own file, and that code depend on something external, we have to import it in that file as well. Now we don't want to create the app object again since that should only be done once. Instead we'll call the Router method, which also has the same routes app has to register route handlers.
+
+We will need to export our configured router so that they can be used in app.js. Since router already is an object, it will be a simple `module.exports = router;`
+
+Then in app.js we need to import these routes and then register them with middleware. With app.get and .post we registered exact matches, however app.use works a little differently. Registering '/' means start with a slash, which every path does, since the URL is domain/path. In other words, app.use with a path only check for the beginning of the incoming path that matches. This will in other words become active for all incoming requests. If one of them matches, that route handler will be executed and checking stops. If no match is found there, then it will continue with other routes we have in app.js.
+
+Now we'll move all other routes related to restaurants to its own file, export that router object, import it in app.js and use it with middleware.
+
+If we had set app.use filter for /restaurants, then the 'router.get' specific routes would only match if the path was /restaurants/restaurants, so we don't want to do that.
+
+We also have to move the resData const from app.js since it isn't used there anymore, but rather in the restaurants.js file. We'll again have to fix the path by going up on level first. (Which begs the question, why can we hardcode paths when we import, but not for files we want to read?). Uuid also have to be moved. The fs package can be removed from apps.js because it isn't used there anymore.
