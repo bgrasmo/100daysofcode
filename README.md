@@ -2970,3 +2970,31 @@ Create a new folder called util, short for utility. In there we'll create a file
 
 ### Going through course content for day 53:
 <b>Importing and exporting code in NodeJS</b><br>
+Our code is now actually a little broken, since we've moved some functions to a separate file without telling Node. The new code in restaurant-data.js also doesn't work since it depends on the fs and path packages, and it isn't imported (the require keyword) in that file. We'll fix all this now.
+
+First we need to require the fs and path packages in restaurant-data.js, then we need to require restaurant-data.js in app.js:
+
+```JS
+const resData = require('./util/restaurant-data');
+```
+
+Then there is one more thing to do, since our file doesn't actually 'expose' anything, it just contains two functions that are just there. We'll have to explicitly mark what should be made available to other files with `module.exports = { .. }`. As can be seen, the module.exports is set equal to an object, so that's what we'll be returning to other files:
+
+```JS
+module.exports = {
+  getStoredRestaurants: getStoredRestaurants,
+  storeRestaurants: storeRestaurants
+}
+```
+
+The first property is the key, and that decides what it will be called in other files. The second property is the name of the function in that same file, and it must be the same.
+
+Since what we've imported is an object, we will have to add 'resData.' in front of what used to be a function, but is now a method in the resData object.
+
+We also have one more issue, since we've moved the file handling functions to a new folder, the path to the data file isn't the same. We'll change that like this:
+
+```JS
+const filePath = path.join(__dirname, '..', 'data', 'restaurants.json');
+```
+
+Start in current folder, but then go up one level, and then into data.

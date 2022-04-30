@@ -4,6 +4,7 @@ const path = require('path');
 const express = require('express');
 const uuid = require('uuid');
 
+const resData = require('./util/restaurant-data');
 const port = process.env.PORT || 3000;
 
 const app = express();
@@ -34,17 +35,17 @@ app.post('/recommend', (req, res) => {
   const restaurant = req.body;
   restaurant.id = uuid.v4();
 
-  const restaurants = getStoredRestaurants();
+  const restaurants = resData.getStoredRestaurants();
 
   restaurants.push(restaurant);
 
-  storeRestaurants(restaurants);
+  resData.storeRestaurants(restaurants);
 
   res.redirect('/confirm');
 });
 
 app.get('/restaurants', (req, res) => {
-  const storedRestaurants = getStoredRestaurants();
+  const storedRestaurants = resData.getStoredRestaurants();
 
   res.render('restaurants', {
     numberOfRestaurants: storedRestaurants.length,
@@ -54,7 +55,7 @@ app.get('/restaurants', (req, res) => {
 
 app.get('/restaurants/:id', (req, res) => {
   const restaurantId = req.params.id;
-  const storedRestaurants = getStoredRestaurants();
+  const storedRestaurants = resData.getStoredRestaurants();
 
   for (const restaurant of storedRestaurants) {
     if (restaurant.id === restaurantId) {
