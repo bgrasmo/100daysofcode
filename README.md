@@ -2908,3 +2908,60 @@ Now we need to add the restaurant id to the link in restaurant-item.ejs to link 
 
 ## Day 21 - 2022-04-30
 ### Going through course content for day 52:
+<b>Loading and displaying detail data</b><br>
+We will need to read in the detail data and look for the id we're supposed to show. When we find the ID we're looking for we can stop searching. Instead of first calling reder and then return to finish the search, we can actually do that on one line:
+
+```JS
+for (const restaurant of storedRestaurants) {
+  if (restaurant.id === restaurantId) {
+    return res.render('restaurant-detail', { restaurant: restaurant });
+  }
+}
+```
+
+<b>Showing a 404 page</b><br>
+If we send an unknown restaurant id, the page will not do anything and eventually time out, because we're not returning anything for that case. So if we end up outside the for loop above it means we didn't find the ID in our dataset, and we should return an error message.
+
+We'll create a new page called 404.ejs, copy the page skeleton from about.ejs and modify the content to say that page was not found. Then return that page when we're outside the for loop.
+
+<b>More 404 page use (route not found)</b><br>
+We should also have a 404 page in case the user enters an invalid page, by misspelling restaurant for instance. A way to handle that, to set up this fall-back page in case none of our routes were met, would be to use our own custom middleware. That is done by simply creating an 'app.use' where we only send in a function as argument. We're not filtering on any routes. This will have to be added last, so just before the 'app.listen' otherwise it would be executed before our existing pages.
+
+```JS
+app.use((req, res) => {
+  res.render('404');
+});
+
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`);
+});
+```
+
+<b>Handling server-side errors (500 status code)</b><br>
+Our website is simple so not many sources for problems, but one thing that could possibly fail is the read and write from and to our restaurants.json file. We can simulate this by renaming this file so it's not found. That will show an error message in the browser that doesn't look very good, and isn't very understandable to the user.
+
+We'll create a new generic page, 500.ejs, instead of having one page for each error code (501, 503 and so on) and change the content based on the error code. This is a pretty typical scenario, so express has build in support for this, for if something goes wrong with one of our routes.
+
+We again use a middleware for this, but a special one this time that only executes if an error happens on your server. This needs to receive four paramaters, because that signals to express that this is the special default error handler middleware function. The four parameters in order are: error, req, res, next. The last one, next, could have been added to all other routes as well, but we haven't had a need for it yet. If we call next inside of a middleware it allows the request to move on to the next middleware or route handler, and so we can have multiple middlewares working together.
+
+```JS
+app.use((error, req, res, next) => {
+  res.render('500');
+});
+```
+
+<b>Working with error codes</b><br>
+A list of all the [HTTP status codes](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes) on Wikipedia.
+
+While we are returning specific pages in cases of 404 or 500 errors, we're not actually returning that as status codes. That is something we should do to help browsers, search engines and so on help understand what is going on.
+
+To set the status code we call the res.status() method before you call render. These can be chanined together, or in other words, call one method after having called another method. So the second method is called on the result of the first one, and status simply returns an updated response object with the status code set.
+
+``` JS
+app.use((req, res) => {
+  res.status(404).render('404');
+});
+```
+
+<b>Code refactoring and adding more functions</b><br>
+
