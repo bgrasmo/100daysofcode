@@ -2964,4 +2964,9 @@ app.use((req, res) => {
 ```
 
 <b>Code refactoring and adding more functions</b><br>
+We have some code that is duplicated, meaning used multiple places, so we'll want to create a function for that and call that when needed. Then we'll also want to split our code into multiple files, so it will be easier to manage. Our project, which is fairly simple, has grown quite a bit and it might get harder to have a good overview of it.
 
+Create a new folder called util, short for utility. In there we'll create a file called 'restaurant-data.js' which will hold the code for working with the restaurants.json file. Then we'll simply call the read and write functions in there, from the app.js file when we need to.
+
+### Going through course content for day 53:
+<b>Importing and exporting code in NodeJS</b><br>
