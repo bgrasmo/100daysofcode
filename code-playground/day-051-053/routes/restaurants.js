@@ -27,11 +27,32 @@ router.post('/recommend', (req, res) => {
 });
 
 router.get('/restaurants', (req, res) => {
+  let order = req.query.order;
+  let nextOrder = 'desc';
+
+  if (order !== 'asc' && order !== 'desc') {
+    order = 'asc';
+  }
+  if (order === 'desc') {
+    nextOrder = 'asc';
+  }
+
   const storedRestaurants = resData.getStoredRestaurants();
+
+  storedRestaurants.sort((resA, resB) => {
+    if (
+      (order === 'asc' && resA.name > resB.name) ||
+      (order === 'desc' && resB.name > resA.name)
+    ) {
+      return 1; // Should flip order
+    }
+    return -1; // Should not flip order
+  });
 
   res.render('restaurants', {
     numberOfRestaurants: storedRestaurants.length,
     restaurants: storedRestaurants,
+    sortOrder: nextOrder,
   });
 });
 

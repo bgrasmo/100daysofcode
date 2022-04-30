@@ -3013,3 +3013,61 @@ Now we'll move all other routes related to restaurants to its own file, export t
 If we had set app.use filter for /restaurants, then the 'router.get' specific routes would only match if the path was /restaurants/restaurants, so we don't want to do that.
 
 We also have to move the resData const from app.js since it isn't used there anymore, but rather in the restaurants.js file. We'll again have to fix the path by going up on level first. (Which begs the question, why can we hardcode paths when we import, but not for files we want to read?). Uuid also have to be moved. The fs package can be removed from apps.js because it isn't used there anymore.
+
+<b>Introducing query parameters and hidden form fields</b><br>
+We want the option the sort the list of recommended restaurants by title, both in ascending and descending order, and we want a button to do that.
+
+But first get sort working. JavaScript has a built in method that can be called on arrays called 'sort' which we'll use. This will try to sort automatically, and that can work for numbers, but for more complex data like our list of restaurants we'll have to send in a function that will be executed for every restaurant. This will return -1 or 1, depending on whether the elements should change their order or not.
+
+The sort function will always receive two parameters, so a pair of restaurants in this case, and it will be run for every pair. We then write our own logic for how the sort should be done. Returning 1 means the order of the two restaurants should be changed, returning -1 means the order should stay the same.
+
+```JS
+storedRestaurants.sort((resA, resB) => {
+  if (resA.name > resB.name) {
+    return 1; // Should flip order
+  }
+  return -1; // Should not flip order
+});
+```
+
+Now add a form, a hidden input field with a value we set, and a button:
+```HTML
+<form action="/restaurants" method="GET">
+  <input type="hidden" value="asc" name="order">
+  <button class="btn">Change order</button>
+</form>
+```
+
+The idea with the hidden input field is for the button to actually having something to submit, but it's not something we want the user to input. That's why we've set a predefined value. We use GET because there's not actually any data we want to store anywhere, we just want to change the sort order of the restaurants on the page by reloading it.
+
+Clicking the button now takes you to the same page, but with a query parameter: `?order=asc`. This query parameter is ignored when going through which route should be loaded. So we'll still get the /restaurants page, even though it has the query parameter at the end. In the server-side code we can now access this query parameter and then change the sort order based on its value.
+
+To find the query parameter, we first look at the request object, which in turn contains a query object, and that again can contain our order key. We check if it is either asc or desc and then do nothing, if not, we set it to asc.
+
+```JS
+let order = req.query.order;
+if (order !== 'asc' && order !== 'desc') {
+  order = 'asc';
+}
+```
+
+The sort function now looks like this:
+```JS
+storedRestaurants.sort((resA, resB) => {
+  if (
+    (order === 'asc' && resA.name > resB.name) ||
+    (order === 'desc' && resB.name > resA.name)
+  ) {
+    return 1; // Should flip order
+  }
+  return -1; // Should not flip order
+});
+```
+
+To make the button work we add logic in restaurants.js to determine what current value is, and set nextOrder to the other one (either asc or desc). Then we pass in that value to the render function, and then finally in restaurants.ejs we pick it up by using an EJS value instead of hardcoding value="asc".
+
+Remember that query parameters are optional, so we should write code that treats it as optional, meaning it should handle that it isn't present.
+
+<b>Query parameters vs route parameters</b><br>
+It's important to note that a query parameter is optional, and doesn't have to be there. A route parameter however, in the case of /restaurant/:id is an integral part of the route. Without the id, that route handler would not be executed. But it can be executed no matter if there is a query parameter on it or not.
+
