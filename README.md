@@ -3071,3 +3071,126 @@ Remember that query parameters are optional, so we should write code that treats
 <b>Query parameters vs route parameters</b><br>
 It's important to note that a query parameter is optional, and doesn't have to be there. A route parameter however, in the case of /restaurant/:id is an integral part of the route. Without the id, that route handler would not be executed. But it can be executed no matter if there is a query parameter on it or not.
 
+### Going through course content for day 54:
+<b>Functions and default parameters</b><br>
+We can set default values for parameters to functions, and thereby make them optional. In other words, we want to be able to call a function both with a parameter, and without and it shouldn't fail.
+
+Calling this function without an argument:
+```JS
+function greetUser(userName) {
+  console.log('Hi there ' + userName + '!');
+}
+```
+
+Would make it output `Hi there undefined!`. So not working as intended.
+
+To set a default value, we set it in the function definitom like this: `function greetUser(userName = 'user')`. Now calling it without any parameters it would output `Hi there user!`. If we send in a parameter, that would override the default.
+
+If the function takes multiple parameters as input, the ones with a default value has to be at the end. The reason for that is that they become optional. We cam send a value for them, but we don't have to. If the first value was optional, JavaScript wouldn't know what to do, if the argument passed should be in the first place or the second for instance.
+
+<b>Rest operator and the spread operator</b><br>
+We want to make a function that takes in a list of numbers and sums them up. We could expect an array as argument, and then loop through that array with for ... of adding each number found and return that, but JavaScript has a shorthand for doing this where you don't have to change your list of number into an array just to call this function. This feature is called 'rest parameters'. In your function definition, you can add three dots in front of the paramter name:
+
+```JS
+function sumUp(...numbers) {
+  let result = 0;
+  for (const number of numbers) {
+    result += number;
+  }
+  return result;
+}
+```
+This states that this function accepts any amount of parameters, and that they will be merged into an array behind the scenes. So `sumUp(1,2);` will work just as well as `sumUp(1,2,3,4,5,6,7);`
+
+Now then, we if we have a list of numbers in an array, and pass that array to our sumUp function, what will happen? Unexpected result!
+```JS
+const inputNumbers = [1, 5, 10, 11, 20, 31];
+console.log(sumUp(inputNumbers));
+```
+Results in `01,5,10,11,20,31` being output. The sumUp function is written such that it wants a list of values, but it gets a single value which holds an array and JavaScript does not check that.
+
+To fix this, if you have an array, but the function wants a list of values, we will have to convert the array into that list of values. That can again be done with the three dots, but now in the function call:
+
+```JS
+console.log(sumUp(...inputNumbers));
+```
+And this now returns the correct result of 78. In this case, the three dots is known as the spread operatior, as it spreads an array into multiple individual values.
+
+<b>Summary:</b><br>
+Rest parameters:<br>
+* Combine any mount of received parameters into an array
+* Used in funtion parameter list (when defining a function)
+
+Spread operator:<br>
+* Split array or object values into a comma-separated list of values
+* Used in anu place where an array or object should be split up
+
+<b>Functions are objects</b>
+Internally in JavaScript and behind the scenes, functions are objects. This is best seen in the browser console. Add a function like this: `function add(num1, num2) { return num1 + num2}` and then console.log or even better, console.dir it. If you expand the result, you'll see key value pairs like we've seen in our objects before. And these are indeed key value pairs of our function object that our function is.
+
+This means we can add properties to function, though it isn't something we typically do. But an example of where it is useful is in express, which can be executed as a function, and then be used like an object when we access properties.
+
+<b>Working with template literals</b><br>
+We can use backticks instead of concatenating multiple elements together. That also allows us to have multiline strings, which single-quotes doesn't allow. But perhaps more importantly we can add dynamic values inside the string, without concatenating:
+
+```JS
+console.log(`A string with a value after it: ${number} and again a string`);
+```
+
+<b>Primitive vs reference values</b><br>
+Why does this code work?
+
+``` JS
+const storedRestaurants = JSON.parse(fileData);
+storedRestaurants.push(restaurant);
+```
+
+We've declared a constant and you shouldn't be able to change the value stored in the constant, and yet we're able to push new values to it. Because this is an array, and arrays are actually objects under the hood, and objects are stored in a special kind of memory by JavaScript. Strings, numbers, booleans and so on are stored in a different kind of memory because they are primitive values. Objects on the other hand are reference values.
+
+Primitives are simple, it's a single number or a single string for instance. Reference values like objects for instance are more complex since they can contain multiple values, multiple key/value pairs and maybe even some methods.
+
+So primitives are stored in a more basic kind of memory, while reference values are stored in more advanced memory.
+
+Because objects can be more complex, they are stored in such a way that unnecessary copies are avoided. Primitives which are simple doesn't take up a lot of space an memory, but a complex object can. Because of that we want to avoid copying objects around.
+
+I think pointer information from the C language would help here. I'm not really able to follow what the teacher is saying, but guess what he means is this: For primitive values, you have the actual value stored. For reference values (objects/arrays/functions) you have a pointer to their place in memory. In other words, when you do things to an array you defined previously, you are actually working on the original array, you don't have your own copy of it. You actually only have a reference (pointer) to the original array, and are changing that.
+
+That should explain why, if you've defined a constant that is an array, you can't set that constant to be a new array. Because the new array would occupy a difference space in memory.
+
+But quite honestly it's easy enough. Arrays, objects and functions can be updated even if they're defined as constants, because the constant is just a reference to their place in memory, primitive values can not be updated because they point to their actual value, and we've said we don't want to be able to update those.
+
+Now then, to increase the complexity, take the following example where we've defined a person object like this:
+
+```JS
+const person = { age: 32 };
+```
+
+Then we create a function to calculate years as adult, like this:
+```JS
+function getAgultYears(p) {
+  p.age -= 18;
+  return p.age
+}
+```
+
+Then we call the function with the person object (but how does this function pick out the age from that?):
+```JS
+console.log(getAdultYears(person));
+```
+
+And this somehow returns 14 as is expected from 32 - 14. But now look what happens when we console.log the person object:
+
+```JS
+console.log(person);
+```
+
+We get the object as expected output, but with age value changed from 32 to 14...
+
+
+The reason is that we sent in an object, JavaScript looks up the address for that object, and then changed the value for that object and not only the person object in the function, but the original object as well since it's the same object.
+
+As oposoed to "there is no spoon", there is only one object, because we're working with the address to it. Again, since objects can be very complex, new objects are not passed around but rather the address to the original object.
+
+What's worth noting here is that this operation can have an unintended side-effect, as we ended up changing the original person object. How can we avoid this? By not updating the person (p) object, and instead just returning p - 18.
+
+If we have a function that needs to manipulate the object itself, we can work around this problem by passing in a copy of the object. That can be done by passing in an object with all the properties like this: `getAdultYears({ age: person.age });`. Or we can just use the spread operator: `getAdultYears({ ...person });` as that would spread our person object into a new object in this function.
