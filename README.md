@@ -6,6 +6,7 @@ These are my notes as I go along the course and is currently the first draft. In
 
 The code I write during the course will be in the code-playground folder, but they will be for the last day in this document as I will update it as I go along. The plan is to create branches to easily be able to go back and look at code for a given lecture.
 
+## Section 1: Introduction
 ## Day 1 - 2022-04-10
 ### Going through course content for day 1:
 
@@ -18,6 +19,7 @@ The code I write during the course will be in the code-playground folder, but th
  - Don't need a server but can use computer as local development server
  - Creating our first HTML page
 
+## Section 2: Building a first website, HTML and CSS basics
 ### Going through course content for day 2:
 
  - Setting up a development environment
@@ -245,6 +247,7 @@ For CSS it is good practice to call them the same as the file they style or belo
 <b>Shared CSS file</b><br>
 Styling used on many pages can be moved to a shared file that multiple HTML pages load. If there are page specific styles, that can be added to its own file and override the shared styles. Load the shared styles first, then the page-specific styles.
 
+## Section 3: Diving deeper into HTML and CSS
 ## Day 4 - 2022-04-13
 ### Going through course content for day 6:
 
@@ -450,6 +453,7 @@ Grouping selector / selector list: ```p, .some-class { ... }``` would select thi
 
 Combined selector: ```p.some-class { ... }``` selects all elements that meet both condition, so both p and class like this: ```<p class="some-class">...</p>```
 
+## Section 4: HTML and CSS, practice and summary
 ## Day 7 - 2022-04-16
 ### Going through course content for day 9 and 10:
 <b>A practice project</b><br>
@@ -470,6 +474,7 @@ For accessibility, the "don't" word that was highlighted by the span element (wh
 
 We can use the ```section``` element to wrap our code in and more easily see the different sections. Without it we don't easily see that the HTML section ends after the paragraph and the CSS part starts after it.
 
+## Section 5: Serving a website, hosting and deplyment
 ## Day 8 - 2022-04-17
 ### Going through course content for day 11:
 Hosting and deployment explained. Then shown drag and drop to app.netlify.com/drop. I've looked into Github pages myself. Favicon explained:
@@ -478,6 +483,7 @@ Hosting and deployment explained. Then shown drag and drop to app.netlify.com/dr
 ```
 Also explained was relative vs absolute paths.
 
+## Section 6: Introducing version control with git and github
 Introduction to Git and Github: Git is version control, Github is where you can store your code so multiple people can work on it. Version control is about being able to track changes over time.
 
 Git is a local tool installed on your computer for managing your code, orgaized in repositories.
@@ -551,6 +557,7 @@ Git pull to get the latest from origin. (Or ```git fetch``` and then ```git merg
 <b>Forks and pull requests</b><br>
 If you're not a direct contributer and can't change code in a repository directly, can you still contribute? Yes, by forking the repository you get a copy on your own account. This you can make changes to, add collaborators to and so on as if it was your own project. If you've made improvements you think the original project should have, you can open a pull request to the original repository. It is up to the original repository collaborators if they want to accept the pull request or not.
 
+## Section 7: Understanding HTML and CSS layouts and positioning
 ## Day 10 - 2022-04-19
 ### Going through course content for day 15:
 <b>Understanding HTML & CSS layouts and positioning</b><br>
@@ -818,6 +825,7 @@ See [Arrows (Unicode block)](https://en.wikipedia.org/wiki/Arrows_(Unicode_block
 ```
 Then to add the arrow found at the top row in the column named 2, see the first number on the line which is 219x. Replace the 2 for the x and you get 2192. To add this symbol then, add ```&#x2192``` where you want the arrow to show.
 
+## Section 8: Understanding responsive web design
 ## Day 12 - 2022-04-21
 ### Going through course content for day 21:
 <b>What is responsive design?</b><br>
@@ -1006,6 +1014,7 @@ The default is set to auto, which is equivalent to 0. Positioned elements with a
 
 Code example in 1.z-axis folder. Notice that when element 2 was moved on top of element 1, adding z-index: 1; to element 1 was not enough to bring it to top. It also had to have position: relative; added.
 
+## Section 9: Creating beautiful websites
 <b>Creating beautiful websites</b><br>
 This section is not so much about coding, but examining what makes a site look good.
 
@@ -1125,6 +1134,7 @@ Added in an svg element in html.
 </div>
 ```
 
+## Section 10: Adding forms to websites
 ### Going through course content for day 26:
 <b>Adding forms to websites</b><br>
 What are web forms? A way for the user to enter input, as most websites are not just about presenting/showing content. For example a contact form, checkout forms for address and so on, login form, comment form.
@@ -1280,6 +1290,7 @@ Challenge time, finished page shown, can you recreate it?
 
 Basically a copy of the form teacher had already walked through, so a walk in the park, just minor variations though time-consuming.
 
+## Section 11: Understanding the JavaScript basics
 <b>Introduction to JavaScript</b><br>
 I'm familiar with some basics already, so these notes will probably not be very thorough and will probably skip over pieces I feel I know very well.
 
@@ -1487,6 +1498,7 @@ Same as for strings, add a . after the array to get a list of available methods.
 <b>Splitting javascript accross multiple files</b><br>
 Can add multiple ```<script></script>``` tags in the header of the HTML document like with stylesheets. They will be loaded in the order they are in.
 
+## Section 12: Advanced JavaScript, working with the DOM
 <b>The global window and document objects</b><br>
 Two global variables are always available, as they are built in: ```window``` and ```document```
 
@@ -1729,6 +1741,7 @@ See the task in the exercise.js file in code-playground.
 
 Still a little curios why the defer keyword is required. Why is it a problem that JavaScript executes before the HTML file is fully loaded? Given the code should trigger on a button click, which we can only do when the page has fully loaded. Will have to investigate.
 
+## Section 13: Advanced JavaScript control structures
 <b>Getting started with control structures</b><br>
 What are control structures? Special programming language syntax / features that allow you to control:
 * Under which conditions code is executed<br>
@@ -1966,6 +1979,7 @@ const enteredNumber = +targetNumberInputElement.value;
 
 Remember also you might not have to check if something is true or false, and then set it to a variable, you can just have the comparison on the variable and true or false will be set.
 
+## Section 14: Milestone project, building a Tic-Tac-Toe game
 ## Day 16 - 2022-04-25
 ### Going through course content for day 40:
 <b>A new milestone project: Tic-tac-toe</b><br>
@@ -2271,6 +2285,7 @@ We also have to disallow clicks if the game is over, which will be done with add
 
 One thing to maybe fix, is that you can currently change your name while playing.
 
+## Section 15: Working with third party packages
 ## Day 17 - 2022-04-26
 ### Going through course content for day 45:
 
@@ -2394,6 +2409,7 @@ new simpleParallax(imageElement, {
 <b>Viewing third-party packages source code</b><br>
 These packages are typically open source, which means we can see the source that runs them. They are also typically hosted on github. If you search for 'github simpleparallax' you should be able to find it, and get an idea about the code behind it.
 
+## Section 16: Onwards to backend development
 <b>Onwards to backend development</b><br>
 What we've learned so far:<br>
 <b>HTML</b> is there for content and structure of the displayed page.<br>
@@ -2430,6 +2446,7 @@ Of the various languages listed, python, php, Java, C#, NodeJS (Javascript) one 
 
 NodeJS is JavaScript, but outside the browser as they took the JavaScript engine browsers (specifically the Chrome V8 engine) use, and made it run without a browser. In doing that they enhanced it with more features, like read and write to and from files, parse incoming requests, send responses and so on. And thus we have NodeJS which can be seen as JavaScript for the server side.
 
+## Section 17: NodeJS introduction, getting started with backend development
 ### Going through course content for day 47:
 <b>Installing NodeJS</b><br>
 What is NodeJS? A JavaScript runtime, a tool for executing JavaScript outside of the browser. Can be installed on any computer and hence to be used to write and execute server side JavaScript code.
@@ -2492,6 +2509,7 @@ if (request.url === '/currenttime') {
 }
 ```
 
+## Section 18: Enhancing NodeJS with ExpressJS
 ## Day 18 - 2022-04-27
 ### Going through course content for day 48:
 <b>Easier NodeJS development with ExpressJS</b><br>
@@ -2689,6 +2707,7 @@ Example app listening on port 3000
 Example app listening on port 3000
 ```
 
+## Section 19: More express, static and dynamic content with templates (EJS)
 <b>More express: static and dynamic content with templates (ejs)</b><br>
 Demo site shared in the course used as a starting point for us to develop the backend features.
 
@@ -2872,6 +2891,7 @@ We can see that in our restaurants.ejs file that we've gotten syntax highlightin
 
 Unfortunately auto-formatting doesn't work too well, because prettier doesn't understand EJS syntax yet.
 
+## Section 20: Handling dynamic routes, errors and managing bigger express projects
 <b>Handling dynamic routes, errors and managing bigger express projects</b><br>
 Instead of having a page with all the restaurants and a link to their page, we want to set up individual pages for each restaurant, so sharing exactly the one you mean is easier.
 
@@ -3071,6 +3091,7 @@ Remember that query parameters are optional, so we should write code that treats
 <b>Query parameters vs route parameters</b><br>
 It's important to note that a query parameter is optional, and doesn't have to be there. A route parameter however, in the case of /restaurant/:id is an integral part of the route. Without the id, that route handler would not be executed. But it can be executed no matter if there is a query parameter on it or not.
 
+## Section 21: Exploring more advanced JavaScript concepts
 ### Going through course content for day 54:
 <b>Functions and default parameters</b><br>
 We can set default values for parameters to functions, and thereby make them optional. In other words, we want to be able to call a function both with a parameter, and without and it shouldn't fail.
@@ -3568,6 +3589,7 @@ I'm not sure I get why putting code inside '.then' is a problem, given we've tur
 
 I guess I'll find out when I get some experience with it myself.
 
+## Section 22: Onwards towards databases
 <b>Onwards towards databases</b><br>
 Why databases? And what are databases in the first place? We've so far only stored data in files, and then read it back from that file. Since we've had very limited amount of data to work with, that has worked fine.
 
@@ -3589,3 +3611,381 @@ People think SQL is short for Structured Query Language, but it might not be, th
 2. Non-relational database management systems (NoSQL databases)<br>
 NoSQL does not use SQL for querying for data, but different query languages.
 
+## Day 23 - 2022-05-02
+### Going through course content for day 57:
+<b>A quick introduction to SQL databases</b><br>
+SQL - stores normalized data accross multiple tables
+
+(I just learnt about tables in markdown for this)
+
+Airports table:
+| ID  | City      | Country |
+|-----|-----------|---------|
+| MUC | Munich    | Germany |
+| JFK | New York  | USA     |
+| BCN | Barcelona | Spain   |
+
+Flights table:
+| ID    | Start | Dest |
+|-------|-------|------|
+| FL123 | MUC   | JFK  |
+| FL331 | BCN   | MUC  |
+| FL591 | JFK   | BCN  |
+
+This is said to be normalized since we don't have any nested data in any table. Every column in both tables only hold one value per row. It is also split accross multiple tables. The database management system will store these tables in files for you.
+
+Tables have clearly defined schemas and data types, and this is set up before you start interacting with the database. For instance the ID in both tables should be some unique string, the other fields should just be strings, but we can have other types like integer as well. Without an unique ID you can not have clear relations between the tables. If 'MUC' in airports was listed twice, for two different cities, you wouldn't know which was the correct when looking it up. And the same flight can't go to two cities at the same time.
+
+Data and relations can be queried, which is the entire point. Just storing them in a database and never looking them up doesn't provide much value. You could search for all flights that start in 'MUC' for instance, and you would only get back the first row. Or in case you don't know the airport code for Munich, you could instead search for airports where City = Munich, and id of airports is equal to start of flights. Or you could enrich the results when searching for flights that start in 'MUC' to also give info about what city and country that is by joining flights start on airports id.
+
+SQL databases can consist of _a lot_ of tables, and typically do, but it does of course depend on the project.
+
+<b>A quick introduction to NoSQL databases</b><br>
+NoSQL is different in that instead of possibly a lot of tables, you will normally work with only a few tables. Instead of the separation between airports and flights seen in the SQL example, we could instead have a flights table that contains all the data you want to store:
+
+<div style="display: flex; margin: 0 0.5rem;">
+
+```json
+{
+  "FlightCode": 123,
+  "Start": {
+    "APCode": "MUC",
+    "APCity": "Munich",
+    "APCountry": "Germany"
+  },
+  "Dest": {
+    "APCode": "JFK",
+    "APCity": "New York",
+    "APCountry": "USA"
+  },
+}
+```
+
+```json
+{
+  "FlightCode": 331,
+  "Start": {
+    "APCode": "BCN",
+    "APCity": "Barcelona",
+    "APCountry": "Spain"
+  },
+  "Dest": {
+    "APCode": "MUC",
+    "APCity": "Munich",
+    "APCountry": "Germany"
+  },
+}
+```
+
+```json
+{
+  "FlightCode": 591,
+  "Start": {
+    "APCode": "JFK",
+    "APCity": "New York",
+    "APCountry": "USA"
+  },
+  "Dest": {
+    "APCode": "BCN",
+    "APCity": "Barcelona",
+    "APCountry": "Spain"
+  },
+}
+```
+
+</div>
+
+It seems Github strips out styling in markdown as those documents should have been shown next to each other, as they are when previewing this file in VS Code.
+
+Here we have some data duplication, since the same airport information exists in multiple documents. That might not be a problem though, as long as the duplicated data doesn't change a lot. And an airport will typically have the same information for a long time.
+
+The advantage with this is what we can store more information in fewer tables, and therefore get more information with fewer (and simpler) queries. This can perhaps also improve database performance since less complex queries have to be executed.
+
+The size of the stored data might be bigger than for SQL, but that is probably not a problem. The performance bottleneck is usually the querying of data.
+
+The way of thinking is also a little different. Instead of rows and columns, you have objects or documents stored in a table. You also don't have a clearly set schema since you can have different structures in different documents in the same table.
+
+<b>SQL vs NoSQL databases</b><br>
+Which one should we use? It depends.
+
+If you get to decide which to use, think about the queries you'll be running and the data you need to store.
+
+SQL databases provide more structures and rules, while NoSQL can be more flexible and reduce amount of queries needed.
+
+## Section 23: SQL databases, introduction and core concepts
+<b>What and why</b><br>
+As has been mentioned SQL is considered to stand for Structured Query Language and is used to send queries to relational database management systems (RDBMS). These have a strict schema with data structured accross multiple tables and table entries can be connected via identifiers or keys. We can send queries to perform so called CRUD operations, Create, Read, Update and Delete. The RDBMS then handles storing this data for us.
+
+<b>RDBMS options</b><br>
+SQL is actually just a language, a structured query language. We need to have an RDBMS to use this language to talk with a database.
+
+There are plenty of options! Some examples are MySQL, PostgreSQL, Microsoft SQL, SQLite and of those MySQL might be the most popular (but SQLite is the most used, it's on your phone!).
+
+MySQL, PostgreSQL and SQLite are open source and free, while Microsoft SQL (and Oracle and others) are commercial and needs a license to use.
+
+<b>Installing MySQL and setup</b><br>
+Instructions for installing MySQL on MacOS and Windows. For Linux:
+
+```zsh
+$ sudo apt install mysql-server
+```
+
+Then to secure it:
+
+```zsh
+$ sudo mysql_secure_installation
+```
+
+To restart it:
+
+```zsh
+$ sudo service mysql restart
+```
+
+Log in with the command line client:
+
+```zsh
+$ mysql -u <username> -p
+```
+
+<b>Database servers vs databases vs tables</b><br>
+What we've just installed is a database server. This will be the server for our databases. In a database on the server we have tables, which consists of rows and columns of data.
+
+To show databases on our server, and switch to a database and show the tables it contains:
+
+```zsh
+mysql> SHOW databases;
+mysql> USE mysql;
+mysql> SHOW tables;
+mysql> SELECT * FROM user;
+```
+
+<b>Writing our first SQL code and creating a database</b><br>
+After connecting to the database server, a database can be created like this:
+
+```zsh
+mysql> CREATE SCHEMA restaurant_finder;
+```
+
+We can replace schema with database, both work.
+
+See MySQL documentation for this [here](https://dev.mysql.com/doc/refman/5.7/en/create-database.html).
+
+### Going through course content for day 58:
+<b>Creating a table and table structures</b><br>
+See MySQL documentation for [create table](https://dev.mysql.com/doc/refman/5.7/en/create-table.html) here. We can have various datatypes for our columns, some common ones are int, varchar and date. See documentation for more and their use-cases-
+
+```zsh
+mysql> CREATE TABLE restaurants (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(255) NOT NULL,
+  `type` VARCHAR(255) NOT NULL,
+  PRIMARY KEY (`id`));
+```
+
+The backticks can be removed if there are not special characters in the columns.
+
+To see the definition of a table:
+
+```zsh
+mysql> DESCRIBE restaurants;
+```
+
+<b>Inserting data into a table</b><br>
+
+```sql
+mysql> INSERT INTO restaurants (name, type) VALUE ('At the end of the universe', 'French');
+```
+
+<b>Reading data from a table</b><br>
+
+```sql
+mysql> SELECT * FROM restaurants;
+```
+
+Insert a couple of new restaurant of your choosing, then select just the second one (which will have an id of 2) like this:
+
+```sql
+mysql> SELECT * FROM restaurants where id=2;
+```
+
+Or only if they are italian:
+
+```sql
+mysql> SELECT * FROM restaurants where type = 'Italian';
+```
+
+To just select some columns:
+
+```sql
+mysql> SELECT name, type FROM restaurants where id = 2;
+```
+
+To use aggregation functions:
+
+```sql
+mysql> SELECT count(1) FROM restaurants where type = 'French';
+```
+
+You need to tell MySQL what to count, but you can also just use '1' to return number of rows fetched. You can also use '*' or a column name.
+
+<b>Updating and deleting data</b><br>
+
+```sql
+mysql> UPDATE restaurants SET name = 'Paris' where id = 4;
+```
+
+```sql
+mysql> DELETE from restaurants where id = 4;
+```
+
+Pro-tip, try the delete command with SELECT (*) instead first, that will show you what data you will delete so you can make sure your query is correct.
+
+<b>Designing a more complex database</b><br>
+Imagine if you will these 4 tables: Addresses, restaurants, types, reviews.
+
+reviews.RestaurantId links to restaurants.restaurantId. Restaurants contain addressId which links to addresses.addressId as well as a typeId that links to types.id
+
+Addresses: id, street, street number, city, postal code, country
+Restaurants: id, name, addressId, typeId
+Types: id, name
+Reviews: id, reviewer name, rating, text, date, restaurantId
+
+Create the address table:
+
+```sql
+CREATE TABLE addresses (
+  id INT NOT NULL AUTO_INCREMENT,
+  street VARCHAR(255) NOT NULL,
+  street_number VARCHAR(15) NOT NULL,
+  city VARCHAR(255) NOT NULL,
+  postal_code INT NOT NULL,
+  country VARCHAR(255) NOT NULL,
+  PRIMARY KEY(id));
+```
+
+### Going through course content for day 59:
+<b>Implementing a more complex design with relations</b><br>
+
+Creating the types table:
+
+```sql
+CREATE TABLE types (
+  id INT NOT NULL AUTO_INCREMENT,
+  name VARCHAR(100) NOT NULL,
+  PRIMARY KEY(id));
+```
+
+We need to change the restaurants table. We can either using alter table, or dropping it and recreating it. Since we don't have any meaningful data in it, ww'll do the latter:
+
+```sql
+CREATE TABLE restaurants (
+  id INT NOT NULL AUTO_INCREMENT,
+  name VARCHAR(255) NOT NULL,
+  address_id INT NOT NULL,
+  type_id INT NOT NULL,
+  PRIMARY KEY(id));
+```
+
+Finally, create the reviews table:
+
+```sql
+CREATE TABLE reviews (
+  id INT NOT NULL AUTO_INCREMENT,
+  reviewer_name VARCHAR(255) NOT NULL,
+  rating INT NOT NULL,
+  text TEXT,
+  date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  restaurant_id INT NOT NULL,
+  PRIMARY KEY(id));
+```
+
+<b>Inserting related data</b><br>
+
+```sql
+insert into types (name) values ('Italian');
+insert into types (name) values ('Mexican');
+insert into types (name) values ('French');
+insert into addresses (street, street_number, city, postal_code, country) values ('Teststreet', '45 B', 'Paris', 79680, 'France');
+insert into addresses (street, street_number, city, postal_code, country) values ('Main street', '83 A', 'Berlin', 11073, 'Germany');
+insert into restaurants (name, address_id, type_id) values ('At the end of the universe', 1, 3);
+insert into restaurants (name, address_id, type_id) values ('Maximum Max Power', 2, 2);
+```
+
+Then we can select restaurants and show their type name instead of just the type id like this:
+
+```sql
+select * from restaurants r, types t where r.type_id = t.id;
+```
+
+<b>Inserting more related data</b><br>
+
+```sql
+insert into reviews (reviewer_name, rating, text, restaurant_id) values (
+  'Joe Schmoe',
+  5,
+  'Very strong food indeed!',
+  2
+);
+insert into reviews (reviewer_name, rating, text, restaurant_id) values (
+  'Jane Doe',
+  4,
+  'Awesome strong food!',
+  2
+);
+insert into reviews (reviewer_name, rating, text, restaurant_id) values (
+  'Anne with an E',
+  5,
+  'I will return for sure!',
+  1
+);
+```
+
+<b>Querying and joining related data</b><br>
+
+```sql
+select * from restaurants r, types t where r.type_id = t.id;
+```
+
+Or we canspecify what fields we want from the tables like this, so we don't need the id _and_ their description:
+
+```sql
+select r.name, t.name as 'cuisine' from restaurants r, types t where r.type_id = t.id;
+```
+
+Or with the use of the join keyword:
+
+```sql
+select r.name, street, street_number, city, postal_code, country from restaurants r inner join addresses a on r.address_id = a.id;
+```
+
+Inner join with more tables limiting to restaurants in Paris:
+
+```sql
+select r.name, street, street_number, city, postal_code, country, t.name as cuisine
+from restaurants r
+inner join addresses a on r.address_id = a.id
+inner join types t on r.type_id = t.id
+where a.city = 'Paris';
+```
+
+<b>Practice: More joins</b><br>
+
+```sql
+select reviews.*, restaurants.name as restaurant_name,
+addresses.*, types.name as 'cuisine'
+from reviews
+inner join restaurants on reviews.restaurant_id = restaurants.id
+inner join addresses on restaurants.address_id = addresses.id
+inner join types on restaurants.type_id = types.id
+where rating > 3;
+```
+
+<b>Understanding relationships</b><br>
+One-to-one: One record in table A is related to exactly one other record in table B. A restaurant has one address, and that address has one restaurant.
+
+One-to-many: One record in table A is related to many records in table B, but each record in table B is only related to one record in table A. A restaurant has many reviews, but each review is for that one restaurant.
+
+Many-to-many: One record in table A is related to many records in table B, and each record in table B is related to many records in table A. A restaurant has many customers and customers visits many restaurants.
+
+## Section 24: Using MySQL in Node and Express websites
