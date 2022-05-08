@@ -238,6 +238,7 @@ router.post('/posts/:id/delete', async (req, res) => {
 
 Isn't there a DELETE method we could use, when we actually are deleting posts?
 
+### Going through course content for day 67:
 <b>Express and handling asynchronous code errors</b><br>
 There is apparently a limitation and an issue when working with node, express and mongodb. When we have asynchronous routes (or middlewares I think he said) for getting a specific post by ID, when an error is thrown inside this function the default express error handling middleware will not activate.
 
