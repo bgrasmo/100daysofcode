@@ -1,11 +1,17 @@
 ## Section 32: Milestone project: A complete online shop fra A to Z
+
 ## Day 33 - 2022-05-12
+
 ### Going through course content for day 78:
-<b>Module introduction</b><br>
+
+#### <b>Module introduction</b>
+
 This will be a big one! A complete online shop built from scratch where users can signup and log in, browse goods, add them to their cart, update them in their cart, view their orders and so on. The shop will also have an administration interface where an administrator with special access can manage products and orders. The admin can add new products, change existing ones, their price, description and so on. The admin can also change the status of orders, to shipped for instance, so users can see their goods are on their way.
 
-<b>Planning the project</b><br>
+#### <b>Planning the project</b>
+
 We'll build a demo online shop. What do we need for it?
+
 1. A frontend with HTML, CSS and JavaScript
 2. A backend, and we'll use Node, Express and MongoDB for that.
 
@@ -13,15 +19,15 @@ We will have two websites in one as we'll have the website our customers are usi
 
 Key pages or views, as we will be using the MVC pattern:
 
-|Customer|Administrator|
-|--------|-------------|
-|Signup  | Signup      |
-|Login   | Login       |
-|View all products            |First page dashboard |
-|See product details          |View all products |
-|Add products to shopping cart|Add new products |
-|View their own orders        |Update products |
-|                             |View all orders|
+| Customer                      | Administrator        |
+| ----------------------------- | -------------------- |
+| Signup                        | Signup               |
+| Login                         | Login                |
+| View all products             | First page dashboard |
+| See product details           | View all products    |
+| Add products to shopping cart | Add new products     |
+| View their own orders         | Update products      |
+|                               | View all orders      |
 
 We also need some data entities, or models in the MVC pattern. Which data are we going to store?
 
@@ -30,17 +36,20 @@ Product: Name, summary, price, image, description (available inventory?)
 Cart: Items, total price, number of items
 Order: User data, products / cart data, date, status
 
-<b>Your challenge</b><br>
+#### <b>Your challenge</b>
+
 You've been given all the information you need to build this, you've learned all you need to do through this course. Can you now build this on your own?
 
 Sounds fun, but I think it would take me weeks to complete fully on my own at this point. I will probably try a little on my own first and then see how the instructor solved it.
 
-<b>Course project setup</b><br>
+#### <b>Course project setup</b>
+
 Where do we start? Perhaps start with authentication first and when that is complete, we can implement the admin pages.
 
 Set up a new directory for the project, run `npm init -y` and then add express. Then add node-mon with '--save-dev' as it'll only be used during development. Now we can add a start script to start nodemon on our app.js. Then add the app.js file and in it add the basic lines to start a basic express server.
 
-<b>Creating directories, files and a first set of routes</b><br>
+#### <b>Creating directories, files and a first set of routes</b>
+
 Given the Model View Controller pattern, it makes sense to make directories called exactly that, models, views, controllers. The demo shop will contain a lot of views, so to structure our code a little better than previously we add an 'auth' and an 'admin' directory under views, which will holds views related to that functionality. We can also add 'cart' and 'products' directories.
 
 Outside of the mvc directories we add one for our routes, and start with an 'auth-routes.js' file since that's what we'll be building first. Add the basic lines for setting up express router in it, and add a first route.
@@ -49,6 +58,45 @@ Now we can add the middleware function from auth-controller in the route handler
 
 Add the auth-routes to app.js as well, and register them as middleware with app.use.
 
-## Day 33 - 2022-05-13
+## Day 34 - 2022-05-13
+
 ### Going through course content for day 79:
-<b>Adding EJS and first views</b><br>
+
+#### <b>Adding EJS and first views</b>
+
+Install EJS in this project: `npm install ejs` then add view engine and views directory to express. To construct the path to this properly, we'll also want the built in Node package 'path'.
+
+```JS
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
+```
+
+Now add 'login' and 'signup' in auth directory under views. Since we experienced before that some content like header and navbar perhaps will be used by multiple files, we'll also want a directory where we can store them. Let's create a directory called customer for all views relating to the customer part of the website. We already have a directory called admin for the admin part.
+
+Then it makes sense to move directories auth, cart and products into customer as well, as we have two main parts to our website and we now only have two folders in views.
+
+Now create the head.ejs and header.ejs files. Head should contain the beginning of the html document, but not the body elements, and header should contain what goes into the header of the page, so within the body elements but not containing them.
+
+Next up is the signup page where we'll add the signup form. We'll first have to include the head.ejs file though. Then we'll close the head tag as we don't want to add any more to that part of the document, and start the body tag. Since we'll always want to close the body and html tag at the bottom, we'll create a new file called footer which contains those, and then we can include it wherever we need it.
+
+#### <b>Populating and rendering the first view</b>
+
+We'll need to add the form input elements needed for signing up. So we need email address, verify email address, password, users name and address.
+
+In vs code, hit ctrl-space to get autocompletion in the type of an input field, to see what options are available.
+
+#### <b>Adding base CSS files and stacif file serving</b>
+
+Add font Montserrat regular 400 and bold 700. Then we start provocatly by selecting all our elements and setting that they should have a box-sizing of border-box:
+
+```CSS
+* {
+  box-sizing: border-box;
+}
+```
+
+This is to ensure that the width of all the elements is the size we set it to, wheter it has a border or not. We also have to do it this way because this is not an inheritable property.
+
+#### <b>Adding CSS variables and a website theme</b>
+Inheritance in CSS is supposedly more efficient performance wise compared to the star selector, because with inheritance the style is applied once and then inherited. With the star selector it has to be applied to every single element.
+
