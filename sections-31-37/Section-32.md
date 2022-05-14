@@ -165,3 +165,10 @@ We need to perform a database lookup to see if the user with the entered email e
 Create util directory and an authentication.js file in it for adding authentication information to the session.
 
 #### <b>Finishing authentication and user login</b>
+
+So far we have no check to see if a user is actually authenticated, so let's add that. Add 'check-auth.js' file in middlewares directory.
+
+We can now check if 'locals.isAuth' is set in our header, and then show a logout button as a temporary visual confirmation that the we're logged in.
+
+#### <b>Add logout functionality</b>
+
