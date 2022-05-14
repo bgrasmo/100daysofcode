@@ -122,3 +122,17 @@ When checking if we have a connection, we'll throw a new error with the message 
 
 db.connectToDatabase returns a promise since it's an async function, and this time we will use .then().catch() to execute if connection succeeded or failed.
 
+### Going through course content for day 81:
+
+#### <b>Adding user signup</b>
+
+Start by adding a user-model.js file in the models directory, that follows the naming convention we're using now. Here we'll add a class for user data.
+
+We can create objects with object literals, meaning creating on the fly by adding some data inside curley braces or we can create them using the class blueprint approach. We can add methods to objects that weren't created from a blueprint, but if we take the blueprint approach, every object that is based on the class will inherit those methods.
+
+We now also have to add the bcryptjs package to store passwords safely and add the urlencoded middleware from express to extract the data posted to the route.
+
+Copy the signup.ejs to login.ejs and modify it to take email and password input only.
+
+#### <b>Adding CSRF protection</b>
+
