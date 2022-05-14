@@ -155,3 +155,13 @@ Install extra packages for this with `npm install express-session connect-mongod
 Add a config directory and then create a session.js file in it to keep app.js minimal and have all session configuration in one file.
 
 If we don't set a maxAge on the session, the cookie will be removed and the session will be removed when the user closes the browser.
+
+### Going through course content for day 82:
+
+#### <b>Add authentication and user login</b>
+
+We need to perform a database lookup to see if the user with the entered email exists. This can be done with a method in the user object that performs this lookup on the email address there. I'll want a password "check" there as well to get the same 'hiccup' as if user was found and actual passwords compared. Also add method for comparing the entered password with the one stored in the database.
+
+Create util directory and an authentication.js file in it for adding authentication information to the session.
+
+#### <b>Finishing authentication and user login</b>

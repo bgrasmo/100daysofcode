@@ -14,6 +14,10 @@ class User {
     };
   }
 
+  getUserWithSameEmail() {
+    return db.getDb().collection('users').findOne({ email: this.email });
+  }
+
   async signup() {
     const passwordHash = await bcrypt.hash(this.password, 12);
     await db.getDb().collection('users').insertOne({
@@ -22,6 +26,10 @@ class User {
       name: this.name,
       address: this.address
     });
+  }
+
+  verifyPassword(passwordHash) {
+    return bcrypt.compare(this.password, passwordHash);
   }
 }
 
