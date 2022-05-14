@@ -136,3 +136,11 @@ Copy the signup.ejs to login.ejs and modify it to take email and password input 
 
 #### <b>Adding CSRF protection</b>
 
+Install the csurf package: `npm install csurf` and add it to app.js as a middleware. This package will not scan all incoming requests that are not GET requests, and scan for csrf tokens. The requests will be denied if they don't have a token. To ensure that the relevant pages have this token, we will add it by using a custome middleware with res.locals.
+
+Add middlewares directory and add a csrf-token.js file to it. Use our middleware in app.js, then add the hidden input fields to the signup page.
+
+This will now fail since csurf also require sessions and that hasn't been added yet.
+
+#### <b>Implementing proper error handling with the error handling middleware</b>
+
