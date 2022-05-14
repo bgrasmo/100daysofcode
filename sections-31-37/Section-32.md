@@ -184,3 +184,13 @@ We can't trust the users or their input, so we need to perform validation in the
 
 But question! Why create the user object first, based on user input, and then afterwards check if the user input is valid? We first pass `req.body.<name>` to create object, and then check if `req.body.<name>` is valid. Since we're not using the user object for checking this, I would do this the other way around. (Yes, instructor saw the light and moved creating the user object below the validation checks.)
 
+### Going through course content for day 83:
+
+#### <b>Flashing errors and input data onto sessions</b>
+
+Currently we're not giving any feedback to the user what went wrong. We just redirect.
+
+Add code to 'flash' messages on the session.
+
+#### <b>Displaying error message and saving user input</b>
+

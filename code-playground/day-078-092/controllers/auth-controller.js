@@ -1,12 +1,22 @@
 const User = require('../models/user-model');
 const authUtil = require('../util/authentication');
 const validation = require('../util/validation');
+const sessionFlash = require('../util/session-flash');
 
 const getSignup = (req, res) => {
   res.render('customer/auth/signup');
 };
 
 const signup = async (req, res, next) => {
+  const enteredData = {
+    email: req.body.email,
+    password: req.body.password,
+    fullname: req.body.fullname,
+    street: req.body.street,
+    postalcode: req.body.postalcode,
+    city: req.body.city,
+  };
+
   if (
     !validation.userDetailsAreValid(
       req.body.email,
@@ -18,7 +28,15 @@ const signup = async (req, res, next) => {
     ) ||
     !validation.emailIsConfirmed(req.body.email, req.body['confirm-email'])
   ) {
-    return res.redirect('/signup');
+    sessionFlash.flashDataToSession(
+      req,
+      {
+        errorMessage: 'Please check your input and try again.',
+        ...enteredData,
+      },
+      () => res.redirect('/signup')
+    );
+    return;
   }
 
   const user = new User(
@@ -32,9 +50,17 @@ const signup = async (req, res, next) => {
 
   try {
     const existsAlready = await user.existsAlready();
-    
+
     if (existsAlready) {
-      return res.redirect('/signup');
+      sessionFlash.flashDataToSession(
+        req,
+        {
+          errorMessage: 'Invalid data, please correct it and try again!',
+          ...enteredData,
+        },
+        () => res.redirect('/signup')
+      );
+      return;
     }
     await user.signup();
   } catch (e) {
@@ -57,14 +83,26 @@ const login = async (req, res, next) => {
     return next(e);
   }
 
+  const SessionErrorData = {
+    errorMessage: 'Invalid username or password',
+    email: user.email,
+    password: user.password,
+  };
+
   if (!existingUser) {
-    return res.redirect('/login');
+    sessionFlash.flashDataToSession(req, SessionErrorData, () => {
+      res.redirect('/login');
+    });
+    return;
   }
 
   const gotCorrectPassword = await user.verifyPassword(existingUser.password);
 
   if (!gotCorrectPassword) {
-    return res.redirect('/login');
+    sessionFlash.flashDataToSession(req, SessionErrorData, () => {
+      res.redirect('/login');
+    });
+    return;
   }
 
   authUtil.createUserSession(req, existingUser, () => {
