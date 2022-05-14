@@ -174,4 +174,9 @@ We can now check if 'locals.isAuth' is set in our header, and then show a logout
 
 Add a form around the logout button, with method POST since we plan on "changing something on the server". (Delete the authentication status of the user in the session.) add the route and function for it.
 
-#### <b>Handle errors in asynchronous code</b>
+#### <b>Handling errors in asynchronous code</b>
+
+Express doesn't catch errors that happen inside asynchronous operations, so we have to handle them ourselves with try / catch. The solution is to use the 'next' function that is available in all middlewares, and call that function with the error we catch. That will trigger the default error handling in express, and it will render the 500 error page.
+
+#### <b>Adding user input validation</b>
+
