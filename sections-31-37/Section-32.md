@@ -172,3 +172,6 @@ We can now check if 'locals.isAuth' is set in our header, and then show a logout
 
 #### <b>Add logout functionality</b>
 
+Add a form around the logout button, with method POST since we plan on "changing something on the server". (Delete the authentication status of the user in the session.) add the route and function for it.
+
+#### <b>Handle errors in asynchronous code</b>
