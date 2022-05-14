@@ -198,3 +198,7 @@ Having 'flashed' info to the session, we need to modify our HTML templates to sh
 
 #### <b>Admin authorization and protected navigation</b>
 
+Manually set flag 'isAdmin: true' on a user in the database. Then save that in util/authentication.js. Then we can extract it in check-auth.
+
+Then we can work on navigation and unlock more features for the admins than for the regular users.
+
