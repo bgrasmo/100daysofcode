@@ -180,3 +180,7 @@ Express doesn't catch errors that happen inside asynchronous operations, so we h
 
 #### <b>Adding user input validation</b>
 
+We can't trust the users or their input, so we need to perform validation in the backend.
+
+But question! Why create the user object first, based on user input, and then afterwards check if the user input is valid? We first pass `req.body.<name>` to create object, and then check if `req.body.<name>` is valid. Since we're not using the user object for checking this, I would do this the other way around. (Yes, instructor saw the light and moved creating the user object below the validation checks.)
+
