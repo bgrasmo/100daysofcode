@@ -2,6 +2,8 @@ const path = require('path');
 
 const express = require('express');
 
+const db = require('./data/database');
+
 const authRoutes = require('./routes/auth-routes');
 
 const app = express();
@@ -15,6 +17,13 @@ app.use(authRoutes);
 
 const port = process.env.PORT || 3000;
 
-app.listen(port, () => {
-  console.log(`Oneline webshop listening on port ${port}`);
-});
+db.connectToDatabase()
+  .then(() => {
+    app.listen(port, () => {
+      console.log(`Online webshop listening on port ${port}`);
+    });
+  })
+  .catch((e) => {
+    console.log('Failed to connect to the database');
+    console.log(e);
+  });

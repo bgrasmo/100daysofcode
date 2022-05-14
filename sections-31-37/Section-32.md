@@ -100,3 +100,25 @@ This is to ensure that the width of all the elements is the size we set it to, w
 #### <b>Adding CSS variables and a website theme</b>
 Inheritance in CSS is supposedly more efficient performance wise compared to the star selector, because with inheritance the style is applied once and then inherited. With the star selector it has to be applied to every single element.
 
+## Day 35 - 2022-05-14
+
+### Going through course content for day 80:
+
+#### <b>More base CSS styles for the website</b>
+
+When setting a color with a variable, or I guess using any variable in CSS, the var function takes a second argument which is a fallback value if the variable isn't found. In our case though where we first define the variables then later in the same file use them, we know the variables will be found so we don't need the fallback value.
+
+Remember that width and height in % refers to available size of the parent element. Again we set width to 90% of parent elements width which is fine on smaller screens, but to not make it too wide on large screens we set a max-width as well. Then to make the content centered we add margin auto.
+
+#### <b>Styling the first form element</b>
+
+Setting display: block; on the label element forces a line break, so the element takes up the entire width. That means information about expected input will be above the input field. Not changing it to a block element would mean expected input and the input field would be on the same line, and the input field would have a different width, depending on the explanatory text.
+
+#### <b>Adding a MongoDB database and connection</b>
+
+Install the Node MongoDB package for this project with `npm install mongodb`. (Though I've heard good things about mongoose so will want to check that out later.)
+
+When checking if we have a connection, we'll throw a new error with the message this time, rather than passing in an object with a message property to the throw function.
+
+db.connectToDatabase returns a promise since it's an async function, and this time we will use .then().catch() to execute if connection succeeded or failed.
+
