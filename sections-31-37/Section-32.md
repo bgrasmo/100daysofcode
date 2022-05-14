@@ -144,3 +144,4 @@ This will now fail since csurf also require sessions and that hasn't been added 
 
 #### <b>Implementing proper error handling with the error handling middleware</b>
 
+As header says, add new error-handler.js middleware in middlewares directory. Create 'shared' directory in views for files needed both by admin and user, and move the includes files in there. Then update the paths to all the includes in signup and login.
