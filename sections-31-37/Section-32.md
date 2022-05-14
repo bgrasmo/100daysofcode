@@ -85,7 +85,7 @@ We'll need to add the form input elements needed for signing up. So we need emai
 
 In vs code, hit ctrl-space to get autocompletion in the type of an input field, to see what options are available.
 
-#### <b>Adding base CSS files and stacif file serving</b>
+#### <b>Adding base CSS files and static file serving</b>
 
 Add font Montserrat regular 400 and bold 700. Then we start provocatly by selecting all our elements and setting that they should have a box-sizing of border-box:
 
@@ -193,4 +193,8 @@ Currently we're not giving any feedback to the user what went wrong. We just red
 Add code to 'flash' messages on the session.
 
 #### <b>Displaying error message and saving user input</b>
+
+Having 'flashed' info to the session, we need to modify our HTML templates to show said information.
+
+#### <b>Admin authorization and protected navigation</b>
 
