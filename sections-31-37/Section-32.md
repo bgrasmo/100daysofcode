@@ -145,3 +145,13 @@ This will now fail since csurf also require sessions and that hasn't been added 
 #### <b>Implementing proper error handling with the error handling middleware</b>
 
 As header says, add new error-handler.js middleware in middlewares directory. Create 'shared' directory in views for files needed both by admin and user, and move the includes files in there. Then update the paths to all the includes in signup and login.
+
+#### <b>Adding sessions and configuring them</b>
+
+A session is a piece of data stored on the server connected to the user with the help of cookies. If a user has a valid cookie with a valid session id (accepted on the server) and this session says this user is authenticated, that user can be granted access.
+
+Install extra packages for this with `npm install express-session connect-mongodb-session`.
+
+Add a config directory and then create a session.js file in it to keep app.js minimal and have all session configuration in one file.
+
+If we don't set a maxAge on the session, the cookie will be removed and the session will be removed when the user closes the browser.
