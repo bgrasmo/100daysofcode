@@ -202,3 +202,8 @@ Manually set flag 'isAdmin: true' on a user in the database. Then save that in u
 
 Then we can work on navigation and unlock more features for the admins than for the regular users.
 
+#### <b>Setting up base navigation styles</b>
+
+Add 'hamburger' menu in the header, which will mainly be shown on mobile devices. We'll also use the 'aside' element for 'side information, side content belonging to the main area we use it'. The nav element outside aside will only be visible outside mobile screens, the nav element inside aside will only be visible on mobile screens.
+
+To avoid code duplication, we'll move the nav from header.ejs to its own file nav-items.ejs, and include it where needed.
