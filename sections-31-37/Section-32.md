@@ -282,3 +282,7 @@ The minimum value here prevents the browser from creating 100 colums in the row,
 
 The administration area is not optimized for small screens. It should work for small screens, but will look better on bigger screens. That is likely also where we have product images and similar needed to create new products. Though we could improve this as an exercise.
 
+#### <b>Add product details page for a single product</b>
+
+As an administrator, the detail page for a product will be an 'update product' page. It will show the details of the products like when we add a new product, with the option to change any or all of the information. Given that would mean two almost identical pages, extract the form into the includes directory in product-form.ejs.
+
