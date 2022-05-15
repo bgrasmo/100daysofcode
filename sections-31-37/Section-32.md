@@ -222,3 +222,7 @@ The main part of navigation.css will be for small screens, then we override for 
 
 Add a scripts directory to public, as we need some JavaScript to run in the browser. New method, classList.toggle let's us toggle a class on or off without having to write the logic for it ourselves. To target it in CSS, select element with id mobile-menu and class open: `#mobile-menu.open`
 
+#### <b>Add product admin pages and forms</b>
+
+Add admin-routes, and use it with '/admin' prefix in app.js to avoid having /admin in front of all the admin routes. Then add controller actions for admin. Also add views for these pages
+
