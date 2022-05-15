@@ -237,3 +237,28 @@ Install multer: `npm install --save multer` and uuid: `npm install uuid`.
 #### <b>Add product model and store products in the database</b>
 
 Add product-model file. Numbers are stored as string by default, so add a + in front of the variable to make sure it's converted to number.
+
+#### <b>fetch and output product items</b>
+
+Returning product documents as they are fetched from the database is not optimal, so transform the result with map.
+
+See documentation for JavaScript [array methods](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array) on MDN for details.
+
+Map takes a function as an argument for each item in the list, and that function can transform what should actually be returned. Here the product is returned as a JavaScript object based on the Product blueprint, which has imagePath and imageUrl added, for instance:
+
+```JS
+const products = await db.getDb().collection('products').find().toArray();
+
+return products.map((productDocument) => {
+  return new Product(productDocument)
+});
+```
+
+To serve the product images statically take advantage of the express filtering funcionality by adding /products/assets first, like this:
+
+```JS
+app.use('/products/assets', express.static('product-data'));
+```
+
+Images exist in `product-data/images` and express will remove `/products/assets` from the incoming requests, so it will end up looking for `images` in `product-data`. Exactly what we want.
+
