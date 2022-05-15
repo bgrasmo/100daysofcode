@@ -238,7 +238,7 @@ Install multer: `npm install --save multer` and uuid: `npm install uuid`.
 
 Add product-model file. Numbers are stored as string by default, so add a + in front of the variable to make sure it's converted to number.
 
-#### <b>fetch and output product items</b>
+#### <b>Fetch and output product items</b>
 
 Returning product documents as they are fetched from the database is not optimal, so transform the result with map.
 
@@ -261,4 +261,24 @@ app.use('/products/assets', express.static('product-data'));
 ```
 
 Images exist in `product-data/images` and express will remove `/products/assets` from the incoming requests, so it will end up looking for `images` in `product-data`. Exactly what we want.
+
+### Going through course content for day 86:
+
+#### <b>Style product items</b>
+
+The CSS repeat function repeats the same setting for multiple columns. It can be set to sime fixed number, or tell the browser to determine number of columns based on available screen width:
+
+```CSS
+grid-template-columns: repeat(auto-fill);
+```
+
+The browser needs a little more information, and that is the width of the columns which we can set with the minmax function. This function takes two arguments, the minimum width and the maximum width. Set minimum to for instance 15 rem, and maaximum to 1fr(action). 1 fraction means that the browser may have as many columns as possible in the row for the current screen size, where all the columns have the same width. Phew! We're not in Kansas anymore!
+
+```CSS
+grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+```
+
+The minimum value here prevents the browser from creating 100 colums in the row, each with a width of 1 character for instance.
+
+The administration area is not optimized for small screens. It should work for small screens, but will look better on bigger screens. That is likely also where we have product images and similar needed to create new products. Though we could improve this as an exercise.
 
