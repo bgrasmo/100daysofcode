@@ -218,3 +218,7 @@ The main part of navigation.css will be for small screens, then we override for 
 
 100vh is viewport height, which is 100% of the height, and we can subtract 5rem from that to accomodate for the header height.
 
+#### <b>Add code to toggle mobile menu</b>
+
+Add a scripts directory to public, as we need some JavaScript to run in the browser. New method, classList.toggle let's us toggle a class on or off without having to write the logic for it ourselves. To target it in CSS, select element with id mobile-menu and class open: `#mobile-menu.open`
+
