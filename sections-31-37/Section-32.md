@@ -226,3 +226,10 @@ Add a scripts directory to public, as we need some JavaScript to run in the brow
 
 Add admin-routes, and use it with '/admin' prefix in app.js to avoid having /admin in front of all the admin routes. Then add controller actions for admin. Also add views for these pages
 
+### Going through course content for day 85:
+
+#### <b>Add image upload functionality</b>
+
+Add enctype=multipart/formdata to the form since it has image upload functionality. Then add CSRF token as query parameter as it won't work with hidden input fields on multipart forms.
+
+Install multer: `npm install --save multer` and uuid: `npm install uuid`.
