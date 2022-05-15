@@ -233,3 +233,7 @@ Add admin-routes, and use it with '/admin' prefix in app.js to avoid having /adm
 Add enctype=multipart/formdata to the form since it has image upload functionality. Then add CSRF token as query parameter as it won't work with hidden input fields on multipart forms.
 
 Install multer: `npm install --save multer` and uuid: `npm install uuid`.
+
+#### <b>Add product model and store products in the database</b>
+
+Add product-model file. Numbers are stored as string by default, so add a + in front of the variable to make sure it's converted to number.
