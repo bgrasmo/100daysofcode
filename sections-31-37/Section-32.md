@@ -207,3 +207,14 @@ Then we can work on navigation and unlock more features for the admins than for 
 Add 'hamburger' menu in the header, which will mainly be shown on mobile devices. We'll also use the 'aside' element for 'side information, side content belonging to the main area we use it'. The nav element outside aside will only be visible outside mobile screens, the nav element inside aside will only be visible on mobile screens.
 
 To avoid code duplication, we'll move the nav from header.ejs to its own file nav-items.ejs, and include it where needed.
+
+## Day 36 - 2022-05-15
+
+### Going through course content for day 84:
+
+#### <b>Building a responsive website</b>
+
+The main part of navigation.css will be for small screens, then we override for larger screens with a media query. Set it using min-width to select large screens, and hide the hamburger menu and navigation meant for small screens. The height of the header is 5 rem, plus 1 rem of extra spacing, that's why main is set to have a margin of 6 rem, to push content that otherwise would be hidden behind it down.
+
+100vh is viewport height, which is 100% of the height, and we can subtract 5rem from that to accomodate for the header height.
+
