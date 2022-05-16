@@ -286,6 +286,8 @@ The administration area is not optimized for small screens. It should work for s
 
 As an administrator, the detail page for a product will be an 'update product' page. It will show the details of the products like when we add a new product, with the option to change any or all of the information. Given that would mean two almost identical pages, extract the form into the includes directory in product-form.ejs.
 
+## Day 37 - 2022-05-16
+
 #### <b>Update products as administrator</b>
 
 To use all fields from req.body for instance, use the spread operator in the new object. The order they're sent in doesn't matter since we pick them out by name in the constructor method. This saves having to type `title: req.body.title`, `summary: req.body.summary` and so on. The ID has to be picked up from the query parameters. 
@@ -295,3 +297,11 @@ Image is only mandatory when creating a new product, not when updating. In case 
 To set query parameter correctly when updating, product needs to be returned as an instance of the class, and not directly as fetched from the database. (id vs _id) Did not completely follow this reasoning, will want to investigate.
 
 Since there might be an image, and formtype is set to multipart, add imageUpload middleware to this route.
+
+### Going through course content for day 87:
+
+#### <b>Add preview for image uploads</b>
+
+Add image preview element so we can target it and show something there when needed. Set display: flex to show file selector and the selected image next to each other, that's default positioning for flexbox.
+
+The 'files' returned to us will be an array, but only with one element since input type is just set to 'file'. For multiple files, the 'multiple' attribute should be set on the input.
