@@ -20,7 +20,7 @@ class Product {
     try {
       prodId = new mongodb.ObjectId(productId);
     } catch (error) {
-      erro.code = 404;
+      error.code = 404;
       throw error;
     }
     const product = await db

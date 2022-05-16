@@ -317,3 +317,13 @@ Add listeners to all delete buttons by selecting them with querySelectorAll and 
 Investigate better way than dom traversal to find the main element to delete.
 
 This currently fails because the ajax delete request doesn't support a redirect response by default. The idea is that we shouldn't redirect to a new page, we should just update current page on the fly. Change redirect in admin-controller to json with a message.
+
+### Going through course content for day 88:
+
+#### <b>Various fixes and route protection</b>
+
+There is not much validation in the admin part of the site. It it needed if you run the site for yourself? Maybe not. But error handling for 404 could be improved, in case a bookmark has been added for a product that no longer exists or has changed id, the generic "something went wrong" page will be displayed instead of 404. The reason is the hardcoded 500 error in the error-handler file.
+
+The bigger problem is that for instance /admin is available if you can guess the path, and that is not exactly hard.
+
+req.path contains the path, JavaScript contains 'startsWith' that can be used to check if path starts with /admin for instance
