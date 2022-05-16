@@ -348,3 +348,5 @@ Add a new model and controller for the shopping cart. The cart will be stored in
 
 Add cart.js middleware. This will look at incoming requests and find who has a cart already vs who doesn't. Also note that objects stored in a session don't contain their methods. It will have to be reinitialized based on our blueprint to get the methods.
 
+#### <b>Add cart items with ajax</b>
+
