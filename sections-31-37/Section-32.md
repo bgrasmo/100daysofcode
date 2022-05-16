@@ -327,3 +327,12 @@ There is not much validation in the admin part of the site. It it needed if you 
 The bigger problem is that for instance /admin is available if you can guess the path, and that is not exactly hard.
 
 req.path contains the path, JavaScript contains 'startsWith' that can be used to check if path starts with /admin for instance
+
+#### <b>Show products for customers</b>
+
+Visitors should be able to browse our catalogue of products without being logged in. Currently only admin can view (and then update and delete).
+
+Fixed! See code for the changes
+
+#### <b>Show product details page</b>
+
