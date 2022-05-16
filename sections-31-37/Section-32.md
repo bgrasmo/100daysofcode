@@ -342,3 +342,9 @@ Add new view and route for product details. Also add styling for the new element
 
 #### <b>Add a shopping cart model</b>
 
+Add a new model and controller for the shopping cart. The cart will be stored in the visitors session.
+
+[Reference vs primitive values](https://academind.com/tutorials/reference-vs-primitive-values) are suddenly repeated for some reason. This is part of the curriculum earlier on so should be known, don't understand why this was suddenly taught as if it was new now. I would much rather want to see an explanation of the cart logic, and how to determine if we should update or add.
+
+Add cart.js middleware. This will look at incoming requests and find who has a cart already vs who doesn't. Also note that objects stored in a session don't contain their methods. It will have to be reinitialized based on our blueprint to get the methods.
+
