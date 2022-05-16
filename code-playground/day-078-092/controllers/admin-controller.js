@@ -59,13 +59,13 @@ const updateProduct = async (req, res, next) => {
 const deleteProduct = async (req, res, next) => {
   let product;
   try {
-    product = Product.findById(req.params.id);
+    product = await Product.findById(req.params.id);
     await product.remove();
   } catch (e) {
     return next(e);
   }
 
-  res.redirect('/admin/products');
+  res.json({ message: 'Deleted product!' });
 };
 
 module.exports = {

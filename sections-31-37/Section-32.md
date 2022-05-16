@@ -310,3 +310,10 @@ The 'files' returned to us will be an array, but only with one element since inp
 
 Add a remove method in product-model, return the promise to handle the error in the controller function.
 
+#### <b>Add ajax requests and update the DOM</b>
+
+Add listeners to all delete buttons by selecting them with querySelectorAll and loop through the returned array. To identify which button, add 'data-productid=' to it with product id. CSRF token has to be added as query parameter for DELETE requests since they don't support sending a body with the request.
+
+Investigate better way than dom traversal to find the main element to delete.
+
+This currently fails because the ajax delete request doesn't support a redirect response by default. The idea is that we shouldn't redirect to a new page, we should just update current page on the fly. Change redirect in admin-controller to json with a message.
