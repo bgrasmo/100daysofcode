@@ -336,3 +336,9 @@ Fixed! See code for the changes
 
 #### <b>Show product details page</b>
 
+Add new view and route for product details. Also add styling for the new elements in products.css
+
+### Going through course content for day 89:
+
+#### <b>Add a shopping cart model</b>
+
