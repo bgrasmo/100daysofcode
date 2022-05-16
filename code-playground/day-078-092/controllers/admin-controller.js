@@ -56,10 +56,23 @@ const updateProduct = async (req, res, next) => {
   res.redirect('/admin/products');
 };
 
+const deleteProduct = async (req, res, next) => {
+  let product;
+  try {
+    product = Product.findById(req.params.id);
+    await product.remove();
+  } catch (e) {
+    return next(e);
+  }
+
+  res.redirect('/admin/products');
+};
+
 module.exports = {
   getProducts: getProducts,
   getNewProduct: getNewProduct,
   createNewProduct: createNewProduct,
   getUpdateProduct: getUpdateProduct,
   updateProduct: updateProduct,
+  deleteProduct: deleteProduct,
 };

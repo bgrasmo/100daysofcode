@@ -70,9 +70,15 @@ class Product {
     await db.getDb().collection('products').insertOne(productData);
     }
   }
+
   async replaceImage(newImage) {
     this.image = newImage;
     this.updateImageData();
+  }
+
+  remove() {
+    const productId = new mongodb.ObjectId(this.id);
+    return db.getDb().collection('products').deleteOne({ _id: productId });
   }
 }
 

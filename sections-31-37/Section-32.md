@@ -305,3 +305,8 @@ Since there might be an image, and formtype is set to multipart, add imageUpload
 Add image preview element so we can target it and show something there when needed. Set display: flex to show file selector and the selected image next to each other, that's default positioning for flexbox.
 
 The 'files' returned to us will be an array, but only with one element since input type is just set to 'file'. For multiple files, the 'multiple' attribute should be set on the input.
+
+#### <b>Make products deletable</b>
+
+Add a remove method in product-model, return the promise to handle the error in the controller function.
+
