@@ -350,3 +350,4 @@ Add cart.js middleware. This will look at incoming requests and find who has a c
 
 #### <b>Add cart items with ajax</b>
 
+See code for changes
