@@ -366,3 +366,13 @@ See cart.css for the styling added
 
 #### <b>Update cart items</b>
 
+Use splice to remove items at index i with count of 1, so remove one item:
+
+```JS
+this.items.splice(i, 1);
+```
+
+The update cart function should be called in response to an ajax request, so add a json response.
+
+#### <b>Update carts with ajax</b>
+
