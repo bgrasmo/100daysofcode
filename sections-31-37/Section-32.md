@@ -362,3 +362,7 @@ Add cart files. Split part of cart into cart-item. In JavaScript to fix long dec
 
 #### <b>Styling the cart page</b>
 
+See cart.css for the styling added
+
+#### <b>Update cart items</b>
+
