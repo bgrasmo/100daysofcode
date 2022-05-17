@@ -351,3 +351,14 @@ Add cart.js middleware. This will look at incoming requests and find who has a c
 #### <b>Add cart items with ajax</b>
 
 See code for changes
+
+## Day 38 - 2022-05-17
+
+### Going through course content for day 90:
+
+#### <b>Add a cart page</b>
+
+Add cart files. Split part of cart into cart-item. In JavaScript to fix long decimal numbers add toFixed(2) to limit to 2 decimals. That will always show 2 decimals even if there wasn't any before though.
+
+#### <b>Styling the cart page</b>
+
