@@ -413,3 +413,7 @@ The solution here is to select by two IDs in the last one: `#cart-total #cart-to
 
 Add a form around the button to buy products. The cart is already in the session, stored on the server, so there is no need to send any data with the form, they are already available.
 
+#### <b>Saving orders in the database</b>
+
+See code for changes.
+
