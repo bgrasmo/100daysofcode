@@ -374,5 +374,9 @@ this.items.splice(i, 1);
 
 The update cart function should be called in response to an ajax request, so add a json response.
 
-#### <b>Update carts with ajax</b>
+## Day 39 - 2022-05-18
+
+#### <b>Update carts with ajax patch requests</b>
+
+Add cart-item-management.js file in public/scripts which will perform updates when the update button is clicked on the cart page.
 
