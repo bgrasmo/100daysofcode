@@ -388,3 +388,28 @@ Using DOM traversal to find the span that was added. Having access to the form a
 
 Instead of selecting the first badge, querySelectorAll can be used to select all badges and loop through them. That will update badges both in mobile and desktop view. (Though who changes between them but us?)
 
+#### <b>Adding the order controller and a basic order model</b>
+
+Selecting by id in CSS can in some cases not be specific enough. For instace if something else selects the parent element, and then all paragraphs inside that parent element, that is aparently more specific than selecting the id in that parent element so this:
+
+```CSS
+#cart-total p {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--color-primary-500);
+}
+```
+
+Wins over this:
+
+```CSS
+#cart-total-fallback {
+  font-size: 1rem;
+  font-weight: normal;
+}
+```
+
+The solution here is to select by two IDs in the last one: `#cart-total #cart-total-fallback`
+
+Add a form around the button to buy products. The cart is already in the session, stored on the server, so there is no need to send any data with the form, they are already available.
+
