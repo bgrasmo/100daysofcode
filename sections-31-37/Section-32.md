@@ -380,3 +380,11 @@ The update cart function should be called in response to an ajax request, so add
 
 Add cart-item-management.js file in public/scripts which will perform updates when the update button is clicked on the cart page.
 
+### Going through course content for day 91:
+
+#### <b>Update the DOM after cart item updates</b>
+
+Using DOM traversal to find the span that was added. Having access to the form already, go to parentElement which is the article, and then search that for the class "cart-item-price". In other words, querySelector can be added to all elements, not just the document.
+
+Instead of selecting the first badge, querySelectorAll can be used to select all badges and loop through them. That will update badges both in mobile and desktop view. (Though who changes between them but us?)
+

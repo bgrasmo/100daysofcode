@@ -23,7 +23,7 @@ const addCartItem = async (req, res, next) => {
 
 const updateCartItem = (req, res) => {
   const cart = res.locals.cart;
-  const updatedItemData = cart.updateCartItem(
+  const updatedItemData = cart.updateItem(
     req.body.productId,
     req.body.quantity
   );

@@ -1,6 +1,8 @@
-const cartItemUpdateFormElement = document.querySelectorAll(
+const cartItemUpdateFormElements = document.querySelectorAll(
   '.cart-item-management'
 );
+const cartTotalPriceElement = document.getElementById('cart-total-price');
+const cartBadge = document.querySelector('.nav-items .badge');
 
 const updateCartItem = async (event) => {
   event.preventDefault();
@@ -17,7 +19,7 @@ const updateCartItem = async (event) => {
       method: 'PATCH',
       body: JSON.stringify({
         productId: productId,
-        quantify: quantity,
+        quantity: quantity,
         _csrf: csrfToken,
       }),
       headers: {
@@ -33,8 +35,25 @@ const updateCartItem = async (event) => {
   }
 
   const responseData = await response.json();
+
+  if (responseData.updatedCartData.updatedItemPrice === 0) {
+    form.parentElement.parentElement.remove();
+  } else {
+    // Update sum  price per product
+    const cartItemTotalPriceElement =
+      form.parentElement.querySelector('.cart-item-price');
+      cartItemTotalPriceElement.textContent =
+        responseData.updatedCartData.updatedItemPrice.toFixed(2);
+  }
+
+  // Update total price for the cart
+  cartTotalPriceElement.textContent =
+    responseData.updatedCartData.newTotalPrice.toFixed(2);
+
+  // Update cart badge
+  cartBadge.textContent = responseData.updatedCartData.newTotalQuantity;
 };
 
-for (const formElement of cartItemUpdateFormElement) {
+for (const formElement of cartItemUpdateFormElements) {
   formElement.addEventListener('submit', updateCartItem);
 }
