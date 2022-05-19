@@ -417,3 +417,85 @@ Add a form around the button to buy products. The cart is already in the session
 
 See code for changes.
 
+## Day 40 - 2022-05-19
+
+### Going through course content for day 92:
+
+#### <b>Displaying orders for both customer and administrator</b>
+
+Add new methods for finding orders: find all, find all for user and find by id. Map function used for the first time without really explaining how it works. An attempt by me to understand by explaining:
+
+Method findAll gets all orders as documents from the database then calls a transform method on the returned array. This method takes the input, adds .map to it and calls another transform method on that. This last method seems to get one order as input, and returns new instantiated objects based on the Order blueprint. So I guess map calls that one function for each element in the array? I also guess it returns once, so it returns an array as well?
+
+The code:
+
+```JS
+static transformOrderDocument(orderDoc) {
+  return new Order(
+    orderDoc.productData,
+    orderDoc.userData,
+    orderDoc.status,
+    orderDoc.date,
+    orderDoc._id
+  );
+}
+
+static transformOrderDocuments(orderDocs) {
+  return orderDocs.map(this.transformOrderDocument);
+}
+
+static async findAll() {
+  const orders = await db.getDb().collection('orders').find().toArray();
+
+  return this.transformOrderDocuments(orders);
+```
+
+To sort in descending order add `.sort({_id: -1})` to the db call to get the result sorted.
+
+Extend getOrders function to find all orders for the logged in user. Also add logic to show more information about user (address, email) for administrator than for regular user. Also give administrator the option to change status of the order, the only change admin can do for orders on this website.
+
+#### <b>Manage orders as an administrator</b>
+
+Add order-management.js to public/scripts to update status using ajax. All orders are listed on the same page. Pagination could be an interesting exercise here.
+
+Get values from form fields, hidden or not by creating a form object, and then using the get method on that form:
+
+```JS
+const updateOrder = async (event) => {
+  event.preventDefault();
+  const form = event.target;
+
+  const formData = new FormData(form);
+  const newStatus = formData.get('status');
+  const orderId = formData.get('orderid');
+  const csrfToken = formData.get('_csrf');
+}
+```
+
+#### <b>Keeping cart items updated</b>
+
+Ensure that quantity of cart items always are treated as a number by adding a + in front.
+
+Add new method updatePrices to the cart model to ensure that the price the user has in the shopping cart is a current price. Also remove the product from the cart if the product was deleted and so can't be bought anymore. Displaying these changes more visibly to the user could be an interesting exercise. Another idea for a similar exercise, add campaigns with hard and soft dates. Campaign with hard date must be ordered before the campaign expires, campaign with soft date can be ordered some time afterwards, as long as it stays in the cart.
+
+The $in operator can be used on the database call to find all products that are in the array provided.
+
+Will have to revisit the logic needed to find all products and prices and match with the cart contents.
+
+Products not found are pushed onto an array of items that will be deleted from the users cart.
+
+The 'continue' keyword cuts the loop short and starts next iteration without going through code below it.
+
+Introducing filter: Like map it takes a function as an argument and executed that function for every item in the array it was called on. That function should then return true if it wants to keep the item, or false if it should be removed from the result. A new array with the result is returned.
+
+Introducing indexOf: This allows you to search for a specific value in an array, returning the index, the position, of the first matching value found. -1 is returned if no matching value was found. This can then be used in a filter function to return true or not to say if the value should be deleted or not:
+
+```JS
+items = items.filter((item) => {
+  return deletableCartItems.indexOf(item.product.id) < 0;
+});
+```
+
+#### <b>Bugfixing and polishing</b>
+
+The badge in the mobile view is not updated, as it is not selected. There are two badges on the site since there is one for desktop and one for mobile, and only desktop is selected now.

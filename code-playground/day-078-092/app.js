@@ -11,8 +11,9 @@ const errorHandlerMiddleware = require('./middlewares/error-handler');
 const checkAuthStatusMiddleware = require('./middlewares/check-auth');
 const protectRoutesMiddleware = require('./middlewares/protect-routes');
 const cartMiddleware = require('./middlewares/cart');
+const updateCartPricesMiddleware = require('./middlewares/update-cart-prices');
 const authRoutes = require('./routes/auth-routes');
-const productRoutes = require('./routes/products-routes');
+const productsRoutes = require('./routes/products-routes');
 const baseRoutes = require('./routes/base-routes');
 const adminRoutes = require('./routes/admin-routes');
 const cartRoutes = require('./routes/cart-routes');
@@ -33,14 +34,14 @@ app.use(expressSession(sessionConfig));
 app.use(csrf());
 
 app.use(cartMiddleware);
+app.use(updateCartPricesMiddleware);
 
 app.use(addCSRFTokenMiddleware);
 app.use(checkAuthStatusMiddleware);
 
 app.use(baseRoutes);
 app.use(authRoutes);
-app.use(productRoutes);
-
+app.use(productsRoutes);
 app.use('/cart', cartRoutes);
 app.use(protectRoutesMiddleware);
 app.use('/orders', ordersRoutes);
