@@ -498,4 +498,6 @@ items = items.filter((item) => {
 
 #### <b>Bugfixing and polishing</b>
 
-The badge in the mobile view is not updated, as it is not selected. There are two badges on the site since there is one for desktop and one for mobile, and only desktop is selected now.
+The badge in the mobile view is not updated, as it is not selected. There are two badges on the site since there is one for desktop and one for mobile, and only desktop is selected now. Use queryselectorAll instead, and then a loop in places where the element is updated.
+
+Add new middleware before the error handler middleware, to handle all requests that hasn't matched to a route so far. The 'protect routes' middleware will now have to be added as a second parameter on '/orders' and '/admin' routes to avoid it triggering before our 404 can be reached.
