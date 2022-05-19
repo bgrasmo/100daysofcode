@@ -30,5 +30,6 @@ Install the Stripe package in the project: `npm install --save stripe`. This wil
 
 Add stripe example code in the orders controller, add success and failure views, routes for those views and some simple render code in orders-controller.
 
-#### <b>Configuring teh stripe request and handling payments</b>
+#### <b>Configuring the stripe request and handling payments</b>
 
+The line_items data added was not correct as it was hardcoded.
