@@ -73,3 +73,5 @@ I've moved my notes to seperate files, one for each section of the course, as th
 [Section 32: Milestone project: A complete online shop from A to Z](https://github.com/bgrasmo/100daysofcode/blob/main/sections-31-37/Section-32.md#section-32-milestone-project-a-complete-online-shop-from-a-to-z)
 
 [Section 33: Working with services and APIs](https://github.com/bgrasmo/100daysofcode/blob/main/sections-31-37/Section-33.md#section-33-working-with-services-and-apis)
+
+[Section 34: Deploying websites](https://github.com/bgrasmo/100daysofcode/blob/main/sections-31-37/Section-34.md#section-34-deploying-websites)
