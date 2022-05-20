@@ -1,4 +1,4 @@
-## Section 32: Milestone project: A complete online shop fra A to Z
+## Section 32: Milestone project: A complete online shop from A to Z
 
 ## Day 33 - 2022-05-12
 

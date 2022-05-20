@@ -70,5 +70,6 @@ I've moved my notes to seperate files, one for each section of the course, as th
 
 [Section 31: Writing good code, refactoring and the MVC pattern](https://github.com/bgrasmo/100daysofcode/blob/main/sections-31-37/Section-31.md#section-31-writing-good-code-refactoring-and-the-mvc-pattern)
 
-[Section 32: Milestone project: A complete online shop fra A to Z](https://github.com/bgrasmo/100daysofcode/blob/main/sections-31-37/Section-32.md#section-32-milestone-project-a-complete-online-shop-fra-a-to-z)
+[Section 32: Milestone project: A complete online shop from A to Z](https://github.com/bgrasmo/100daysofcode/blob/main/sections-31-37/Section-32.md#section-32-milestone-project-a-complete-online-shop-from-a-to-z)
 
+[Section 33: Working with services and APIs](https://github.com/bgrasmo/100daysofcode/blob/main/sections-31-37/Section-33.md#section-33-working-with-services-and-apis)
