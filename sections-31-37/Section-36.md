@@ -193,3 +193,17 @@ if (this.editedTodoId) {
 
   this.todos[todoIndex] = updatedtodoItem;
 }
+```
+
+#### <b>Deleting data</b>
+
+We will use 'filter' for this which returns a new array minus the elements that was filtered. It takes a function as an argument and filters items for which that function returns false.
+
+```JS
+deleteTodo(todoId) {
+  this.todos = this.todos.filter((todoItem) => {
+    return todoItem.id !== todoId;
+  });
+}
+```
+
