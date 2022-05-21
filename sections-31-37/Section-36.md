@@ -110,7 +110,7 @@ Then we can use this two-way binding to clearn the input field after submitting 
 
 ### Going through course content for day 99:
 
-#### <b>Outputting liste of data</b>
+#### <b>Outputting lists of data</b>
 
 Will have to go through the logic and order of what happens when again. Something about the empty array being defined in data because we wanted to use it elsewhere and thus it couldn't be defined in methods.
 
@@ -148,4 +148,14 @@ The 'flashing' of an item that happens when the page is reloaded is due to how w
 
 #### <b>Outputting content conditionally</b>
 
-Another useful directive is v-if.
+Another useful directive is v-if to check for some condition to device if we show the element/content or not. We can also use v-else, and that has to be added as a direct neighbour to the v-if:
+
+```HTML
+<p v-if="todos.length === 0">No todos added yet, want to add one?</p>
+<ul v-else id="todos-list">
+```
+
+For this simple example the v-else is not needed, asn the paragraph with v-if won't be shown if there are no elements in the todos array.
+
+#### <b>Updating data</b>
+
