@@ -159,3 +159,37 @@ For this simple example the v-else is not needed, asn the paragraph with v-if wo
 
 #### <b>Updating data</b>
 
+Instead of @sumbit used previously, we'll now use @click. I guess I missed that this is adding event listeners the first time around, but it sure looks like that is what this is. Normally in JavaScript with () after a function would indicate to execute the function immediately, without, not. But in Vue code in the HTML it doesn't matter. Also it seems like the () will be used to take input data sent to the function, and again, it won't be executed immediately by having it.
+
+Very convenient that we get the id in the edit function.
+
+JavaScript has a find() method which takes a function as input, and if this function returns true we've found the input we're looking for, if it returns false it means to continue looking.
+
+```JS
+const todo = this.todos.find((todoItem) => {
+  return todoItem.id === todoId;
+});
+```
+
+Connected to our edit button, this will now put the text into the input field for the button we clicked with the help of the two-way binding. If we change something though, we create a new todo which isn't what we want. Instead we can use the 'trick' we used in our backend code by checking if we have an id or not, and then update if we have an id.
+
+By creating a new object updatedTodoItem we make sure that Vue definately picks up that there is a change. I guess it could be something worth looking out for later in case items don't update as we expect.
+
+There is a gotcha with using 'this' which would be mapped to the data object, but if you use 'this' inside another function, Vue won't be able to do that for us. Instructor teaches a workaround for this, or we can just use arrow functions since they don't affect the 'this' keyword like regular functions does. (And so my code works without the workaround.)
+
+In case it's needed at some point though:
+
+```JS
+if (this.editedTodoId) {
+  const todoId = this.editedTodoId;
+  const todoIndex = this.todos.findIndex(function(todoItem) {
+    return todoItem.id === todoId; // instead of this.editedTodoId;
+  });
+
+  const updatedTodoItem = {
+    id: this.todos[todoIndex].id,
+    text: this.enteredtodoText
+  };
+
+  this.todos[todoIndex] = updatedtodoItem;
+}
