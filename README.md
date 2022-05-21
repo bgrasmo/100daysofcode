@@ -78,3 +78,6 @@ I've moved my notes to seperate files, one for each section of the course, as th
 
 [Section 35: Web services and building custom (REST) APIs](https://github.com/bgrasmo/100daysofcode/blob/main/sections-31-37/Section-35.md#section-35-web-services-and-building-custom-REST-apis)
 
+[Section 36: Working with frontend JavaScript frameworks and introducing Vue.js](https://github.com/bgrasmo/100daysofcode/blob/main/sections-31-37/Section-36.md#section-36-working-with-frontend-javascript-frameworks-and-introducing-vuejs)
+
+[Section 37: Course summary and where to go next](https://github.com/bgrasmo/100daysofcode/blob/main/sections-31-37/Section-37.md#section-37-course-summary-and-where-to-go-next)
