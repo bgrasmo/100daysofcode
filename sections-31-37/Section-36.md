@@ -104,3 +104,6 @@ With Vue we use the @ symbol to say we want to listen for an event, and the word
 
 #### <b>Introducing two-way binding</b>
 
+Add 'enteredTodoText' and v-model will connect any input, form elements, selects and check boxes with a piece of data in your data method in the Vue app object. V-model will listen for every keystroke for instance in that input and update the data stored in that variable. It's called two-way binding because if you had another place in the app that would update enteredTodoText, the latest value would be shown in the input. We can see this by setting a default value in app.js for enteredTodoText as that would show when we load the page, but immediately be updated when we start typing.
+
+Then we can use this two-way binding to clearn the input field after submitting by setting it back to an empty string.
