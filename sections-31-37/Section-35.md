@@ -1,4 +1,4 @@
-## Section 35: Web services and building custom (rest) APIs
+## Section 35: Web services and building custom (REST) APIs
 
 ## Day 41 - 2022-05-20
 
