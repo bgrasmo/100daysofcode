@@ -238,3 +238,5 @@ We currently get a little flickering when loading the page, because we first dow
 
 #### <b>Send patch and delete requests</b>
 
+Same as before, copy code from todos and paste it into the relevant functions. Though for edit, we paste it into the save function where we check for id to see if we update existing or create a new. Couldn't we also do it in the edit function itself, or is it because we don't make any fetch requests there?
+
