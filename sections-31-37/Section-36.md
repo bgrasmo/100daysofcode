@@ -211,3 +211,23 @@ deleteTodo(todoId) {
 
 Basically copy the code from the todos.js file and put it in the saveTodo method in app.js. Minor midifications, or reordering of what happens. See code for solution.
 
+#### <b>Loading data and managing loading states</b>
+
+Life cycle methods or life cycle hooks is the name of the methods we've used in Vue.js, as they will be executed at some point in time.
+
+We can now add a method, though it's not added to the methods object but after it, called created. This is a reserved name and something Vue will look for, and it will be called when our Vue app was created. This should happen right after Vue has loaded, executed and taken control of the page. another lifecycle hook that could be used is called 'mounted' and that would be called after Vue was created and it took control over the DOM, which means it added all the event listeners and so on. Created runs a little earlier, right before it took full control over the DOM.
+
+Again, copy the code from todos, specifically the 'loadTodos' code and add it in created. With one small change at the end Vue will update the DOM:
+
+```JS
+// Instead of
+const todos = responseData.todos;
+// Use
+this.todos = responseData.todos;  // This updates the todos array Vue is watching
+```
+
+One thing to note is that we have to add 'async' before created since we use 'await' in it, but Vue won't actually wait for that. This isn't a problem here, but it means there is a very brief period where Vue took over control, but the data isn't there yet
+
+To handle this, we can add a loading state. We do that by adding 'isLoading: false' at the top, and then setting 'this.isLoading = true' to right before we start loading data. Then we set it to false when data has loaded, or we got an error.
+
+Then we use that state in the HTML document to output a helpful message.
