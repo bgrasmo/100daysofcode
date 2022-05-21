@@ -107,3 +107,45 @@ With Vue we use the @ symbol to say we want to listen for an event, and the word
 Add 'enteredTodoText' and v-model will connect any input, form elements, selects and check boxes with a piece of data in your data method in the Vue app object. V-model will listen for every keystroke for instance in that input and update the data stored in that variable. It's called two-way binding because if you had another place in the app that would update enteredTodoText, the latest value would be shown in the input. We can see this by setting a default value in app.js for enteredTodoText as that would show when we load the page, but immediately be updated when we start typing.
 
 Then we can use this two-way binding to clearn the input field after submitting by setting it back to an empty string.
+
+### Going through course content for day 99:
+
+#### <b>Outputting liste of data</b>
+
+Will have to go through the logic and order of what happens when again. Something about the empty array being defined in data because we wanted to use it elsewhere and thus it couldn't be defined in methods.
+
+The desired end state is that we have many list items in the unordered list. In every list item we want a paragraph and a div for the edit and delete buttons.
+
+```HTML
+<ul id="todos-list">
+  <li>
+    <p>{{ }}</p>
+    <div>
+      <button>Edit</button>
+      <button>Delete</button>
+    </div>
+  </li>
+</ul>
+```
+
+We'll find out what to put in the paragraph content later. Since we should have many such list items, we want to tell Vue to create one list items per todo in the array. Vue has a special attributed for this called a directive. (Everything that starts with v- or @something is called directives.) Now we want to use the v-for directive:
+
+```HTML
+<li v-for="todo in todos">
+```
+
+The 'todos' is the name of our data property from app.js now:
+
+```JS
+data() {
+    return {
+      todos: [],
+```
+
+Look at how much simpler and cleaner the syntax is! I'll never write EJS again with the special opening and closing tags, having to add opening and closing curly braces and so on!
+
+The 'flashing' of an item that happens when the page is reloaded is due to how we load Vue and is something that can be prevented, but will be dealt with later. (In another course probably, diving deeper into Vue.)
+
+#### <b>Outputting content conditionally</b>
+
+Another useful directive is v-if.
