@@ -207,3 +207,7 @@ deleteTodo(todoId) {
 }
 ```
 
+#### <b>Sending a POST request</b>
+
+Basically copy the code from the todos.js file and put it in the saveTodo method in app.js. Minor midifications, or reordering of what happens. See code for solution.
+
