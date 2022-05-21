@@ -231,3 +231,10 @@ One thing to note is that we have to add 'async' before created since we use 'aw
 To handle this, we can add a loading state. We do that by adding 'isLoading: false' at the top, and then setting 'this.isLoading = true' to right before we start loading data. Then we set it to false when data has loaded, or we got an error.
 
 Then we use that state in the HTML document to output a helpful message.
+
+#### <b>Loading Vue differently</b>
+
+We currently get a little flickering when loading the page, because we first download all the Vue code, then run all the Vue framwork code, then load and run our own code after the DOM has been parsed. We use the defer keyword to ensure that it works like this. To remove the flickering, remove the defer keyword from the Vue script tag. This means all the Vue code will be loaded, then the DOM parsed and then our code is executed.
+
+#### <b>Send patch and delete requests</b>
+
