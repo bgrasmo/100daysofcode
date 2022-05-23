@@ -95,3 +95,11 @@ I finished the course a little quicker than planned, so will continue with more 
 
 # Part 2: JavaScript - the complete guide 2022 - from beginner to advanced
 
+[Section 1: Introduction](part-2-javascript/sections-01-10/Section-01.md#section-1-introduction)
+
+[Section 2: Basics: Variables, data types, operators and functions](part-2-javascript/sections-01-10/Section-02.md#section-2-basics-variables-data-types-operators-and-functions)
+
+[Section 3: Efficient development and debugging](part-2-javascript/sections-01-10/Section-03.md#section-3-efficient-development-and-debugging)
+
+[Section 4: Working with control structures](part-2-javascript/sections-01-10/Section-04.md#section-4-working-with-control-structures)
+
