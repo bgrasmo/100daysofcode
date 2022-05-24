@@ -65,3 +65,79 @@ Arrays and objects will be treated as true even if they are empty, while null, u
 
 #### <b>Setting up a bigger example project - the monster killer</b>
 
+Extract instructors example project. Add event listeners to the buttons, Add logic to to "fight" a monster in a turn based game against the computer. A pretty big exercise with lots of steps learning to structure logic with if statements, though I won't detail it here.
+
+Perhaps a better explanation of the or operator was given though: Since or looks for either the first or the second expression to be true (unless negated of course) it won't even look at the second expression if the first is true. Worth to remember!
+
+#### <b>Conditional expressions - the ternary operator</b>
+
+It's like "flattening" or straightening out an if statement:
+
+```JS
+if (something) {
+  // return something if true
+} else {
+  // return something if false
+}
+```
+
+The same expression can be written like this with the ternary operator:
+
+```JS
+const someResult = something ? returnIfTrue : returnIfFalse;
+```
+
+The expression can also checked can also contain a comparison:
+
+```JS
+const someResult = something === somethingElse ? returnIfTrue : returnIfFalse;
+```
+
+The difference from the if statement is that with the ternary operator you return something that will be stored in a variable, while the if statement doesn't do that.
+
+Ternary expressions can be nested, but don't do that, that quickly becomes unreadable.
+
+#### <b>Some theory - statements vs expressions</b>
+
+Basically in JavaScript an expression is something that returns a value you could store in a variable, like the ternary expression above. Aparently it is also a statement.
+
+An if statement on the other hand is only a statement and not also an expression. It can't be used on the right side of the equal side.
+
+This might not be an official standard, see this discussion on [stackoverflow](https://stackoverflow.com/questions/12703214/javascript-difference-between-a-statement-and-an-expression).
+
+#### <b>Logical operators "tricks" and shortcuts</b>
+
+Double-bang: !!
+
+This converts or coerces something into a proper boolean, instead of being truthy/falsy. The single exclamation mark converts a truthy value into a real false boolean. The second exclamation mark then negates this negation so it turns a truthy value into real true boolean. This can be used instead of letting JavaScript use its truthy / falsy comparison or coercion. Might be needed in some advanced cases. I certainly don't understand yet why you would need `if (!!'string')` rather than just `if(string)` given they both would enter the first part of the statement.
+
+I think [this article](https://javascript.plainenglish.io/what-is-double-bang-operator-in-javascript-90fc67ead5a4) explains it better.
+
+The or operator can be used to assign a default value. `const name = someInput || 'Joe';`. If someInput is falsy, 'Joe' will be set as name. 'Or' will here return the first truthy value without converting it to a boolean, or the last value if the first is falsy.
+
+The and operator can be used to give us the last value if the condition is true. `const isLoggedIn && 'Joe';`. If isLoggedIn is true, 'Joe' is returned, if isLoggedIn is an empty string, that empty string will be returned. This && operator does not generate boolean values and always returns the first value if it is falsy. If the first value is truthy, it will always return the second one.
+
+#### <b>The switch statement</b>
+
+The switch statement takes in an expression that returns or contains a value.
+
+```JS
+switch (event) {
+  case value1:
+    // Do something if event === value1
+    break; // Stop processing the rest of the cases
+  case value2:
+    // Do something if event === value2
+  case value3:
+    // Do something if event === value3
+    // This will also be executed if value2 case was executed.
+    // This can also be set like this, to execute the same code for two values:
+  case value4:
+  case value5:
+    // Will be executed if event === value4 or value5
+    break;
+  default:
+    // Do something if none of the other cases were met
+}
+```
+
