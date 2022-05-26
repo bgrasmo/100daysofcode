@@ -141,3 +141,91 @@ switch (event) {
 }
 ```
 
+## Day 46 - 2022-05-25
+
+#### <b>Loops</b>
+
+<b>for loops</b>: Execute code a certain number of times:
+
+```JS
+for (let i = 0, i < 10; i++) { 
+  doSomething;
+}
+```
+
+The last part can be omitted by leaving the part after the last semicolon empty, and you could instead do the increment inside the block if you want that.
+
+<b>for of loop</b>: Executes for every element of an array:
+
+```JS
+for (const element of array) { 
+  console.log(element);
+}
+```
+
+We don't have access to the index here, as we just get the element. To get the index we would have to add a counter on our own.
+
+<b>for in loop</b>: Executes for every key in an object:
+
+```JS
+for (const key in object) {
+  console.log(key);
+  console.log(object[key]);
+}
+```
+
+<b>while loop</b>: Execute code as long as a condition is true:
+
+```JS
+while (amount > 5) {
+  // Do something until amount is 5 or less
+}
+```
+
+Or it could be `while (isLoggedIn)` which will continue executing untill isLoggedIn is false.
+
+This checks the condition before executing the body. To execute the body and then check the condition use a do while loop:
+
+```JS
+do {
+  // Do something while amount is larger than 5
+} while (amount > 5);
+```
+
+Now loops can of course be combined. So in case you have an array that contains objects you'd want to use a for of loop first, and then a for in loop inside that in case you want to go through every key in the object in the array. Though I wonder how to handle nested objects, and how much you need to know about the data structure beforehand, or perhaps how many checks you have to do to iterate through that as well.
+
+#### <b>Controlling loops with 'break'</b>
+
+When JavaScript encounters the break keyword it will stop executing the loop it is in. It will 'break' out of it, no matter what the expression starting it says. If this is in a nested lopp, so a loop inside a loop, it means the outer loop will jump to the next iteration, and then it might mean the conditions for the break doesn't match any more in the inner loop, so it will continue as normal as well.
+
+#### <b>Controlling interations with 'continue'</b>
+
+The continue keyword doesn't break out of a loop, but skips over an interation in a loop. In other words, you can check if some condition is met, and if it is, call the continue word to continue the loop at the next iteration, but skip the code that was below the continue keyword.
+
+#### <b>Labelled statements</b>
+
+If you meet some condition in an inner loopp that should stop the execution of the outer loop, you can name your loops:
+
+```JS
+outerWhile: do {
+  // something
+  innerFor: for (let i = 0; i < 10; i++) {
+    // something else
+    break outerWhile
+  }
+}
+```
+
+Though not commonly used. Now if you use 'continue' instead of 'break' here you can create an infinite loop, as the continue keyword jumps to the outer loop without breaking out of it, and the outer loop is a 'do something first, then check result afterwards' loop so it will never end.
+
+#### <b>Error handling with try/catch</b>
+
+You can experiment with this by creating your own functions that throws an error with `throw { message: 'Some error occurred'};`
+
+Try / catch doesn't have to have the catch. You can also have 'finally' in addition to or instead of catch. Anything in this block will be executed regardless if there was an error or not. If you rethrow the error in the catch block, the rest of the code won't execute, except for the finally block. As mentioned, that will always execute.
+
+Would be helpful of a relevant example here, where something could go wrong in the catch block for instance and you want the finally block to clean up in such cases.
+
+[Controll structures](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Control_flow_and_error_handling) documentation on MDN.<br>
+[JavaScript loops](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Loops_and_iteration) documentation on MDN.
+
