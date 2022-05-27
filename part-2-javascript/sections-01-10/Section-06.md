@@ -102,3 +102,103 @@ This pretty much only handles the 'undefined' case though. Meaning if we send in
 
 Also parameters with default values will have to come last. If the function expects two arguments, we only send in one, and the default value is set on the first parameter, what to do? In JavaScript the first parameter will then have it's default value changed to whatever was sent in, while the second parameter will be undefined.
 
+#### <b>The rest operator</b>
+
+Golden comment from Max: "We can hope our function is not called with more arguments than this, but hope is not something you should rely on."
+
+The rest operator looks awefully similar to the spread operator using the three dots. However, used in the parameters definition, the three dots states that the remaining arguments should be added as an array there:
+
+```JS
+const sumUp = (number1, number2, ...theRest) => {
+  /// Do something
+}
+```
+
+In functions created with the function keyword we can use the 'arguments' keyword instead of using the rest operator. However it can only be used inside the function, and not in the list of parameters.
+
+#### <b>Creating functions inside of functions</b>
+
+This can obviously be done, but be aware that these functions will only be available inside the functions in which they were created.
+
+#### <b>Understanding callback functions</b>
+
+Not the most clearn explanation here. What I think I get from this is that a function can be sent as an argument to another function and that this function again can then use the function sent to it when needed.
+
+```JS
+const sumUp = (resultHandler, ...numbers) => {
+  let sum = 0;
+  for (const num of numbers) {
+    sum += numbers;
+  }
+  resultHandler(sum);
+};
+
+const showResult = result => console.log('The result after adding all the numbers: ' + result);
+
+sumUp(showResult, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+sumUp(showResult, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11);
+```
+
+#### <b>Working with bind()</b>
+
+As we have learned, functions are objects and they have special methods attached to them. One of the special methods is bind() which "will create a new function, a new reference at a function which it returns to you which will be preconfigured regarding the arguments it receives and that is the interesting part."
+
+The idea here is that we want to add more operations to the functions above, which needs different messages shown depending on the operator. 
+
+Example before. Extend showresult to take in a message to show as well:
+
+```JS
+const showResult = (messageText, result) => {
+  console.log(`${messageText} ${result}`);
+};
+```
+Then call it like this:
+
+```JS
+const combine = (resultHandler, operator, ...numbers) => {
+  // Do the maths
+  // If operator === add, do sum += number.
+  resultHandler('The result of adding all the numbers: ', sum);
+  // If operator === sub, do sum -= number
+  resultHandler('The result of subtracting all the numbers: ', sum);
+};
+combine(showResult, 'ADD', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+combine(showResult, 'SUB', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+```
+
+The more operations we support the more messy this gets.
+
+Instead bind() can be used to set up the message to be shown at the time of calling the function, instead of inside the function that finally calls the result handler. (showResult)
+
+But how does bind support that? What it does is it creates a new function that isn't immediately executed though it has () after it, but "prepares it for future execution where certain values for certain parameters which you already know at this point of time are already set."
+
+Bind takes at least two arguments, but we'll ignore the first one which is 'this' right now since this course hasn't taught us about it yet. The second parameter is the first parameter you want to preconfigure, but you can add as many as you want, depending on how many your function supports of course.
+
+By extending function sumUp to also taking in an operator, and changing its name to combine like this:
+
+```JS
+const combine = (resultHandler, operator, ...numbers) => {
+  // Do the maths
+  resultHandler(sum);
+};
+```
+
+We can then call the function with bind() like this:
+
+```JS
+combine(showResult.bind(this, 'The result after adding all the numbers: ', 'ADD', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10));
+combine(showResult.bind(this, 'The result after subtracting all the numbers: ', 'SUB', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10));
+```
+
+My take on this is that bind copies the showResult function and preconfigures it with the message we send in. Then that copied showResult function with the preconfigured message is called when we call resultHandler, instead of the original one. The sum will then be passed in as the second argument to the resultHandler function. So in other words, the arguments you set when binding the function will always come first, and the arguments you send in when actually calling the function will be appended and come after the preconfigured arguments.
+
+So the use case I guess is when you want to send in some arguments to a function, but you don't want to directly call that function yourself, you want something else in the code to do that.
+
+#### <b>Call and apply</b>
+
+Just be aware of these for now. They differ from bind in that they immediately execute the function and so aren't useful for us right now. Though they might come up when researching bind, that's why they were mentioned now.
+
+#### <b>Useful resources</b>
+
+[More on functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Functions) on MDN<br>
+[More on bind()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_objects/Function/bind) on MDN.
