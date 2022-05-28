@@ -136,9 +136,322 @@ const taxAdjustedPrices = [];
 // }
 
 prices.forEach((price, idx, prices) => {
-  const priceObj = { index: idx, taxAdjPrice: price * (1 + tax)}
+  const priceObj = { index: idx, taxAdjPrice: price * (1 + tax)};
   // taxAdjustedPrices.push(price * (1 + tax));
   taxAdjustedPrices.push(priceObj);
 })
 ```
+
+#### <b>Transforming data with map</b>
+
+Instead of what we did above we can use matp to achieve the same result. Map takes in an array, runs a function on every element in that array, and returns a new element for every element as a new array:
+
+```JS
+const prices = [5, 10, 15, 20, 25, 50, 100];
+const tax = 0.25;
+
+const taxAdjustedPrices = prices.map((price,idx, prices) => {
+  const priceObj = { index: idx, taxAdjPrice: price * (1 + tax)};
+  return priceObj;
+})
+```
+
+#### <b>Sorting and reversing</b>
+
+This should be as simple as `const sortedPrices = prices.sort();` right? Of course it isn't. Numbers are sorted as strings, giving unexpected values. "Fortunately" then the sort function takes a function as an argument, which takes in two arguments that are compared. Now you need to make a comparison to check if the first argument A is greater than the second argument B. If so, return 1 and nothing will happen. If they are equal, return 0, and then if a is less than b, return -1 and their order will be swapped:
+
+```JS
+const sortedPrices = prices.sort((a, b) => {
+  if (a > b) {
+    return 1;
+  } else if (a === b) {
+    return 0;
+  } else {
+    return -1;
+  }
+});
+```
+
+What we do in the anonymous function in sort is completely up to us. though.
+
+After an array is sorted, we can call reverse() on it, and that doesn't take any arguments as it just reverses the order of it. If that's what we want though, we could just reverse our logic in the sort function and return it in reversed order right there.
+
+#### <b>Filtering arrays with the filter() method</b>
+
+What if you want to reduce the amount of elements in an array based on some filter? Here let's say we only want prices larger than 25. Filter then takes in a function as a parameter and this is executed on every element of the array. Again we get the current value it's looking at, the index of that value and the entire array. This function has to return a value, and that should be true if the element should be kept, false otherwise:
+
+```JS
+const filteredArray = prices.filter((price, idx, prices) => {
+  return price > 25;
+});
+```
+
+#### <b>Where arrow functions shine</b>
+
+In the above filtering example where we only use the price parameter, and then only return the simple comparison, the function can be simplified to this:
+
+```JS
+const filteredArray = prices.filter(price => price > 25);
+```
+
+If that isn't short enough, the price parameter could be shortened to just 'p' and then it can't get any shorter and it should still be readable.
+
+```JS
+const filteredArray = prices.filter(p => p > 25);
+```
+
+P is the parameter and then the value of that parameter is compared to 25 and returns true if bigger, false if not.
+
+#### <b>The important reduce() method</b>
+
+To sum up our prices, we could do it like this:
+
+```JS
+const prices = [5, 10, 15, 20, 25, 50, 100];
+let sum = 0;
+prices.forEach((price) => {
+  sum += price;
+});
+console.log(sum);
+```
+
+Or we can use the reduce method which lets use simplyfy the above code to this:
+
+```JS
+const sum = prices.reduce((prevValue, curValue, curIndex, prices) => {
+  return prevValue + curValue;
+}, 0);
+```
+
+Now the last two parameters, the current index and the original array are not that often used. Perhaps the index could be used some times, but the original array not so much.
+
+So the first parameter to reduce is the function. The second parameter is optional, and is the initial value with which you want to start. If we want to work with numbers, sum something, we should start with 0.
+
+As is in the name, reduce takes an array and reduces it to a simpler value, a single number or a single string or whatever it is.
+
+As was mentioned, the function passed to reduce is called for every element, and for the first exectution the prevValue is the initial value we set. (The 0 as the optional second parameter.) Current value is the first element of the array.
+
+Again we have to return the updated value. Now in the second execution prevValue is the value we returned from the first execution (so 0 + something) and the curValue is the second value in the array.
+
+So given a starting value of 0, an array of 1, 2, 3, the prevValue will first be 0, then 0+1=1, then 1+2=3, then the function will return 3+3=6 in the last execution.
+
+Again we can really shorten this expression to this:
+
+```JS
+const sum = prices.reduce((prevValue, curValue) => prevValue + curValue, 0);
+```
+
+#### <b>Chaining methods in JavaScript</b>
+
+Now it gets interesting. I believe the web dev course briefly touched upon this subject by calling another function directly on map and that's what is taught here.
+
+Instead of first calling map to get a new array stored, and then call reduce on that new array, reduce can be appended directly to the map function. This way reduce will get the result from map directly without going through an extra variable.
+
+Old example:
+
+```JS
+const array = [{price: 10}, {price: 20}, {price: 30}, {price: 50}];
+// Get just the prices from the objects. (Each object is the input, then the price is just returned)
+const prices = array.map(object => object.price);
+// Sum up the prices
+const sum = prices.reduce((sumValue, currentValue) => sumValue + currentValue, 0);
+```
+
+We could write all the logic in the reduce function:
+
+```JS
+const sum = array.reduce((sumValue, currentValue) => sumvalue + currentValue.price, 0);
+```
+
+But we might not want to do that if we have more complex extraction logic and have a reusable map function we want to use.
+
+Skipping the part where the function to map is defined elsewhere as a callback function now, to focus on method chaining:
+
+```JS
+const sum = array
+  .map(object => object.price)
+  .reduce((sumValue, currentValue) => sumValue + currentValue, 0);
+```
+
+## Day 49 - 2022-05-28
+
+#### <b>Arrays and strings - split and join</b>
+
+Given a string we've perhaps read from file we perhaps want to split it by the delimited fields and store it in an array to work with later, we can do this:
+
+```JS
+const data = 'New York;Restaurant;10.99;2022';
+const transformedData = data.split(';');
+```
+
+The character to split on can be other things as well, like just a space, comma, exclamation mark or similar. The split method can take in a second, optional arguments to limit the number of elements created. To just get the first 2 elements split can be used like this: `data.split(';', 2);` and the rest of the elements will be ignored.
+
+Note that everything will be stored as string elements in the array, so if you want your numbers to be numbers you will have to parse them with parseInt for instance.
+
+The reverse operation can be performed with join. Given you have an array but you want the elements in a string:
+
+```JS
+const nameFragments = ['Joe', 'Schmoe'];
+const fullName = nameFragments.join(' ');
+```
+
+By default join uses comma as separator when creating the string but that can be changed to space for instance as shown above. Join takes no further arguments.
+
+#### <b>The spread operator</b>
+
+The three dots '...' are called 'the rest operator' when used in functions and 'the spread operator' when used to copying objects or arrays. When used as spread operator it can't be used on its own with the array you want to copy: `const newArray = ...array;` But it will have to have the square brackets around it: `const newArray = [...array];`. For objects you will need to use curly braces.
+
+This can also be used in a similar way to the rest operator where you want to send in a list of arguments to a function, and not an array of arguments. Math.min() which finds the smallest number in the list requires such a list: `const minimum = Math.min(...prices);`
+
+Fun fact: While the array is copied, if the array contains objects, these objects are not copied but their references are kept.
+
+```JS
+const array = [{price: 10}, {price: 20}, {price: 30}, {price: 50}];
+const newArray = [...array];
+array[0].price = 15;
+
+console.log(array, newArray);
+```
+
+The first price is now set to 15 in both arrays even though it was changed after copying.
+
+To actually copy the object values as well and not just their references, we again can use map:
+
+```JS
+const copiedPrices = [...array.map(priceObject => ({price: priceObject.price}))];
+```
+
+Remember when you return an object from an arrow function like this it has to be wrapped in parenthesis. This isn't the best example since we don't actually need the spread operator and the square brackets since map already returns a new array:
+
+```JS
+const copiedPrices = array.map(priceObject => ({
+  price: priceObject.price
+}));
+```
+
+If the original array contains another layer of object, we again would have the same problem that just the references to this nested layer would be copied. We can then again copy it with the spread operator, but you could end up duplicating a lot of code by doing this. Also it could be fine that some values are references, as you should aim to only copy what you want to change without it being changed both places.
+
+#### <b>Array destructuring</b>
+
+Again this was touched upon in the web dev course. Given the name fragments array, we could extract the elements to individual variables by using the index of the array. However we can instead use 'array destructuring' and set the variables we want in square brackets and JavaScript will populate them for us.
+
+```JS
+const nameFragments = ['Joe', 'Schmoe', 'Mr.', 35];
+// const firstName = nameFragments[0];
+// const lastName = nameFragments[1];
+const [ firstName, lastName ] = nameFragments;
+```
+
+If we have more elements in the array we are interested in, we can store the rest in an array using the rest operator so we can access it if we want, though not as conveniently as having it in separate variables.
+
+`const [ firstName, lastName, ...remains ] = nameFragments;`
+
+#### <b>Maps and sets overview</b>
+
+Javascript has three major iterable data structures, with array perhaps being the most important one.
+
+|Arrays|Sets|Maps|
+|------|----|----|
+|Store nested data of any kind and length|Store nested data of any kind and length|Store key-value data of any kind and length, any key values allowed (objects and arrays can be keys)|
+|Iterable, many special array methods available|Iterable, some special set methods available|Iterable, some special map methods available|
+|Order is guaranteed, duplicates are allowed, zero-based index|Order is not guaranteed, duplicates are not allowed, no index based access|Order is guaranteed, duplicate keys are not allowed, key-based access|
+
+#### <b>Working with sets</b>
+
+A set is created with `new Set();` and it takes in an iterable as input, so it can be a nodelist, an array or even another set. IDs could be useful to store in a set since that doesn't allow duplicates.
+
+Logging the set created shows and index so it would seem we can access by index but that is not allowed and returns 'undefined' if we try. Instead we can use one of the set methods made available to us. Now there is no get method, and that makes sense since every value can only be stored once. In other words, if you're looking for a given value, you know what value you are looking for and it doesn't make sense to get it from the set. You can however check if the set contains this value with the 'has' method.
+
+```JS
+const ids = new Set([3, 5, 7]);
+console.log(ids.has(5)); // Returns true or false
+```
+
+Values can be added to the set with .add and if you add a value that already exists, the set will be returned to you, but other than that nothing happens. 2 isn't now stored twice.
+
+If you want to go through all values in a set, that can be done with the 'entries' method. This method returns an iterable and so it can be used in a for of loop for instance.
+
+```JS
+for (const entry of ids.entries()) { 
+  console.log(entry);
+}
+```
+
+Now this will return an array of two identical values for each entry in the set. Aparently to be inline with the entries method available on maps which also returns two values, though there they are different. It is maybe useful if you'd want to switch from map to set or vice versa and you get the same data strcture returned.
+
+`
+[ 3, 3 ]
+[ 5, 5 ]
+[ 7, 7 ]
+`
+
+An alternative to entries is 'values' which only return the set values once. To only get the values once, accessing the first element of the array could also work.
+
+To manage the set, add as was shown before can be used to add values or delete can be used to remove values.
+
+And to finish, sets are for working with values that are / has to be unique.
+
+#### <b>Working with maps</b>
+
+What I think I got from the introduction here is that you can have some regular objects which you use various places in your code. Now for some situations you want more data in those objects, but to not clutter the objects or possibly create problems elsewhere you don't want to actually add this new data to the objects themselves. That is what map can help with.
+
+Map is created like set with the 'new' keyword, but map takes key-value as input and key-value here is quite flexible as it can be strings, numbers, arrays, objects or more.
+
+```JS
+const person1 = { name: 'Joe' };
+const person2 = { name: 'Jane' };
+
+const personData = new Map([[person1, [{ date: '2022-05-01', price: 10 }]]]);
+console.log(personData);
+```
+
+I did not get why map first needs an array, then it needs another array, and inside that again we can add our extra information.
+
+To get data from the map we use the get method, and we can send in our object as the thing we want to get:
+
+```JS
+console.log(personData.get(person1));
+```
+
+That will give us the extra information we set for this object. So I guess I understood the introduction correctly, now I just need to find out what's up with all that nesting.
+
+To add information to a map use the set method:
+
+```JS
+personData.set(person2, [{date: '2022-04-30', price: 15.99}])
+```
+
+To get all information from the map there are three different ways. First we can use the for of loop:
+
+```JS
+for (const entry of personData.entries()) {
+  console.log(entry);
+}
+```
+
+We could use array destructuring here since we get exactly two elements, a key and the value:
+
+```JS
+for (const [key, value] of personData.entries()) {
+  console.log(key, value);
+}
+```
+
+If you're just interested in the stored keys, the keys method can be used:
+
+```JS
+for (const key of personData.keys()) {
+  console.log(key);
+}
+```
+
+Then we can do the same for just the values:
+
+```JS
+for (const value of personData.values()) {
+  console.log(value);
+}
+```
+
+#### <b>Maps vs objects</b>
 
