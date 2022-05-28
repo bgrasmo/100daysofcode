@@ -103,3 +103,11 @@ I finished the course a little quicker than planned, so will continue with more 
 
 [Section 4: Working with control structures](part-2-javascript/sections-01-10/Section-04.md#section-4-working-with-control-structures)
 
+[Section 5: Behind the scenes, the weird past and the present of JavaScript](part-2-javascript/sections-01-10/Section-05.md#section-5-behind-the-scenes-the-weird-past-and-the-present-of-javascript)
+
+[Section 6: More on functions](part-2-javascript/sections-01-10/Section-06.md#section-6-more-on-functions)
+
+[Section 7: Working with the DOM](part-2-javascript/sections-01-10/Section-07.md#section-7-working-with-the-dom)
+
+[Section 8: More on arrays and iterables](part-2-javascript/sections-01-10/Section-08.md#section-8-more-on-arrays-and-iterables)
+
