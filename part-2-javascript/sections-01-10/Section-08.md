@@ -455,3 +455,23 @@ for (const value of personData.values()) {
 
 #### <b>Maps vs objects</b>
 
+|Maps |Objects |
+|-----|--------|
+|Can use any values and types as keys |May only use strings, numbers or symbols as keys |
+|Better performance for large quantities of data |Perfect for small to medium sized sets of data |
+|Better performance when adding + removing data frequently |Easier / quicker to create, typically also with better performance |
+
+#### <b>Understanding WeakSet</b>
+
+This sounds like it's about garbage collection. If we have an object and we 'clear' it by setting it to null, JavaScript will eventually free up that memory. However, if that object was part of a set, JavaScript will detect this and not clear it.
+
+With WeakSet JavaScript will clear the object when all other references to it are cleared, even though it's not cleared from the set.
+
+#### <b>Understanding WeakMap</b>
+
+Pretty much same as WeakSet, with limited methods available given we can't guarantee that the object exists anymore.
+
+#### <b>Section wrap up</b>
+
+[Array documentation](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array) on MDN.
+
