@@ -111,3 +111,6 @@ I finished the course a little quicker than planned, so will continue with more 
 
 [Section 8: More on arrays and iterables](part-2-javascript/sections-01-10/Section-08.md#section-8-more-on-arrays-and-iterables)
 
+[Section 9: More on objects](part-2-javascript/sections-01-10/Section-09.md#section-9-more-on-objects)
+
+[Section 10: Classes and object-oriented programming](https://github.com/bgrasmo/100daysofcode/blob/main/part-2-javascript/sections-01-10/Section-10.md#section-10-classes-and-object-oriented-programming)
