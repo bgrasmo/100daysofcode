@@ -105,5 +105,61 @@ class ProductItem {
 
 Move the render method here, and now a small issue. This method doesn't know what element to append the list to. There are two solutions, either take in the element in the render method and append to that, or return the created element so what called the method can append it.
 
+## Day 52 - 2022-05-31
+
 #### <b>Binding class methods and working with 'this'</b>
+
+In the render method we have some innerHTML we output, and there's a button in it. We can access that button with query selector, since this code will be run once for each product there won't be a problem that the final result is many products with many buttons. When the code runs we are local to one button, and so that will be selected.
+
+```JS
+const addCartbutton = prodEl.querySelector('button');
+addCartbutton.addEventListener('click', this.addToCart);
+```
+
+In the addToCart method we can now use an arrow function, otherwise 'this' would be bound to the button since that's what executed the function through the event listener, not us. So it's bound to the source of the event, which again is the button.
+
+```JS
+addToCart() {
+  console.log('Adding product to shopping cart');
+  console.log(this);
+}
+```
+
+Results in `<button>Add to cart</button>` being logged in the console.
+
+Or we can use bind with the existing 'this' like this:
+
+```JS
+addCartbutton.addEventListener('click', this.addToCart.bind(this));
+```
+
+#### <b>Adding a shopping cart and a shop class</b>
+
+Add a class for the shopping cart, similar logic to product item with render method containing some innerHTML. Though change both these classes to return the element instead. Then create a new shop class which sets up the render hook (attaches to 'app') calls the shopping cart and product item classes and stores what they return, then appends that to 'app'. Then create the shop object with `const shop = new Shop();` and call the render method on it to set up the entire page.
+
+#### <b>Communicating can be challenging</b>
+
+So far each class is kind of standalone and they don't really interact much with each other. Now the explanation of why this was hard is hard to write down so you'll have to trust me on it. The problem boils down to the shopping cart class, and how that can't update/re-render other things it's not aware of, that exist in other classes.
+
+#### <b>Static methods and properties</b>
+
+Static fields/properties/methods are defined with the 'static' keyword. It is (only) accessible directly on the class itself, without instantiation. (So not an instance created with the 'new' keyword.) This is typically used in helper classes, for global configuration and things like that.
+
+Instance fields/properties/methods are defined without the 'static' keyword and is only accessible on instances, in other words on objects based on a class. This is typically used for core re-usable logic.
+
+Create a new class called 'App' and move the logic for starting the app functionality by creating the shop in there, in a static method called init. Now instead of starting the app with new Shop() and then shop.render() we can just call `App.init();`
+
+To fix our shopping cart problem then, in the Shop class we store the new ShoppingCart() in a property instead of a field. Then we can create a cart property in the App class which refers to shop.cart.
+
+The reason for doing that is that we can now add a static method in App which indirectly can call the addProduct() method in the shoppingcart, since we have that reference as a property.
+
+Then finally we call App.addProductToCart(this.product); in addToCart method in ProductItem class. Phew. I think I'll have to draw that flow on paper to fully understand it.
+
+Good practice would also be to add `static cart;` to the App class to make it clear we have a static cart property there. We refer to it with 'this.cart' and if you use 'this' in a static method it always refers to the class itself and it's helpful to show that with the static property, or field I guess it should be.
+
+#### <b>When to use classes</b>
+
+Object literals are still useful and should be used for general data grouping, with objects you only create once. They are also quick and easy to create with little overhead performance wise.
+
+Classes are beneficial when you have some logic you want to reuse or if you need to create multiple instances of the same object. There is a little overhead initially in writing the class definition, but then it's easy to duplicate objects after that.
 
