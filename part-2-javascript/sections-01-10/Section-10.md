@@ -163,3 +163,46 @@ Object literals are still useful and should be used for general data grouping, w
 
 Classes are beneficial when you have some logic you want to reuse or if you need to create multiple instances of the same object. There is a little overhead initially in writing the class definition, but then it's easy to duplicate objects after that.
 
+#### <b>Getters and setters</b>
+
+Added to show how they can be utilized, by for instance adding a reduce function to get a total sum from the items in the cart.
+
+## Day 53 - 2022-06-01
+
+#### <b>Inheritance</b>
+
+We have a couple of classes now, and they actually have on ething in common: They all have a render method. While the method does a few different things in the various classes, some things are also always the same. For this we have inheritance, and the idea is that we have a base class that contains some properties and methods we need in other classes, that they can somehow use or inherit.
+
+Start by adding a new class called component and add the common render logic to it. Then to make that logic available in another class, add 'extends Component' after the name where the class is defined. In other words, this makes the logic we wrote in Component available in the class we extended, in addition to the logic already there of course. Now we can us logic from Component in the extended class, as if it was written there.
+
+Not sure I got all of this, but it seems if the shoppincart class doesn't have a constructor, the constructor in component will be called. And we want it to be called, though now it's called without arguments. If we add a constructor to shoppingcart, that will be called, and constructor in component won't be called. And that is not what we want. To make both be called, in the constructor in shoppincart, execute super(). That will execute the constructor in component as well.
+
+So the flow now is,<br>
+`App.init();`<br>
+-> `const shop = new Shop(); shop.render();`<br>
+-> `this.cart = new ShoppingCart('app');`<br>
+-> `constructor(renderHookId) { super(renderHookId); }`<br>
+-> `class Component { constructor(renderHookId) { this.hookId = renderHookId; }`
+
+When you add super to your constructor, make sure you don't rely on any field in that super constructor method. That will become important later. If you plan on adding fields in your constructor (you know with this.something = somethingElse;) then you have to do that after you call super. So before you use 'this' in your constructor, you have to call super first.
+
+#### <b>Using inheritance everywhere</b>
+
+Some render issue explained that I didn't follow. Somehow we try to append some items before they have been added to the DOM, but it was in no way, shape or form clear how that happened. Rushed explanation of something that probably feels trivial, I guess.
+
+#### <b>Overriding methods and the super constructor</b>
+
+We're first creating the new items and then calling render manually. That is a bit redundant, and render should be called as part of the creation process instead.
+
+Remove render from all the places where it's not needed, and then in the component class call this.render() in the constructor. Then add the empty method render() to that class as well, as a visual clue why we're calling it there. What will happen now is that render() will be called after everything is fully initialized, and so it's the render method in the sub-class that will be run. It's because of 'this' again, because it always refers to what called it. When we create a new object with 'new' here, 'this' inside that constructor is set to that object.
+
+#### <b>Super construction execution order and 'this'</b>
+
+The fields in product list gets created automatically when the constructor gets called, but only after the parent constructor called with super has executed. And as was mentioned before, you can't use 'this' before super has been executed. So there's a bit of a conondrum here. By initializing the prodcts as an empty array and adding the field definitions to the constructor after super, the order is still wrong. (We call render before we have any values.) If we move super to below the value initializion, it fails since we're not allowed to use this before super has executed.
+
+It's a common case that you want to do something, but the data you need for that is not there yet as they are likely not hardcoded as done here but fetched from a database. Or in other words, it's not loaded when we try to render.
+
+A way to solve that is to render the empty page first and then create a new renderProducts method that will render the products when they have loaded. A simulated example of course.
+
+Since we have this problem in product item as well, add a second argument 'shouldRender = true' to Component and send in false when it shouldn't try to render automatically or at this point in time. Then we call render ourselves when we know the products have been set.
+
