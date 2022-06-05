@@ -113,4 +113,13 @@ I finished the course a little quicker than planned, so will continue with more 
 
 [Section 9: More on objects](part-2-javascript/sections-01-10/Section-09.md#section-9-more-on-objects)
 
-[Section 10: Classes and object-oriented programming](https://github.com/bgrasmo/100daysofcode/blob/main/part-2-javascript/sections-01-10/Section-10.md#section-10-classes-and-object-oriented-programming)
+[Section 10: Classes and object-oriented programming](part-2-javascript/sections-01-10/Section-10.md#section-10-classes-and-object-oriented-programming)
+
+[Section 11: Deep dive: constructor functions and prototypes](part-2-javascript/sections-11-20/Section-11.md#section-11-deep-dive-constructor-functions-and-prototypes)
+
+[Section 12: Practice object oriented programming](part-2-javascript/sections-11-20/Section-12.md#section-12-practice-object-oriented-programming)
+
+[Section 13: Back to the DOM and more browser APIs](part-2-javascript/sections-11-20/Section-13.md#section-13-back-to-the-dom-and-more-browser-apis)
+
+[Section 14: Working with events](part-2-javascript/sections-11-20/Section-14.md#section-14-working-with-events)
+
