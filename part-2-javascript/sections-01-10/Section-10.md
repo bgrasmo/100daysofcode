@@ -206,3 +206,87 @@ A way to solve that is to render the empty page first and then create a new rend
 
 Since we have this problem in product item as well, add a second argument 'shouldRender = true' to Component and send in false when it shouldn't try to render automatically or at this point in time. Then we call render ourselves when we know the products have been set.
 
+## Day 54 - 2022-06-02
+
+#### <b>Different ways of adding methods</b>
+
+Adding an event listener which calls a function that uses 'this' gives us again a small challenge we need to fix. One way of doing it is actually to just define the function as before (no need to define it as an arrow function) but change the way it's called, though without using bind. Simply by changing the function argument to the event listener to an arrow function call to the pre-defined function works!
+
+```JS
+orderbutton.addEventListener('click', () => this.orderProducts());
+```
+
+If we were to define the function as an arrow function, because of super and render, we again have to tell super not to render and then define the arrow function in the constructor and then call render afterwards.
+
+Something about 'it' that will be called before a property is created based on that field, because of super. The fields are translated to properties after the constructor ran.
+
+And it seems to me we're back to having to call render manually a lot.
+
+#### <b>Private fields, properties and methods</b>
+
+Public: Accessible outside the class / object. What we've done so far really.
+
+Private: Only accessible inside the class / object. Logic we need to make the class or object work, which probably won't make much sense to expose to be used outside the object.
+
+To set that something should be private to the class / object, add a # symbol in front of it. On doing that, other's can't access this from elsewhere in the code, so they can't try to add values to an array in a class if that's only meant for internal use. You will then also have to set the # symbol when accessing it.
+
+Now of course our base class doesn't have access to products anymore, so yet again we have to say that super shouldn't render, but that we'll do it ourselves and I feel the entire point of the super is gone. Yes, finally instructor admits that as well.
+
+#### <b>Pseudo private properties</b>
+
+Actual private properties are quite new in JavaScript so we might come accross pseudo private properties in existing codebases. We actually have in this course in the 'objects' section, and the getters and setters. There we added a property with _ in front, to indicate that it should only be used internally in the object.
+
+#### <b>The instanceof operator</b>
+
+Create a new object, create a new object based on that. When you then type in the object name of the last object in dev tools, the object it is based on will be shown before the object content. There is also a built in operator, instanceof, that lets us check if some object is based on another object (blueprint):
+
+```JS
+class Person {
+  name = 'Joe';
+}
+
+const first = new Person();
+
+console.log(first instanceof Person);
+```
+
+This returns true if 'first' is based on 'Person'.
+
+Buttons in frontend JavaScript code is based on HTMLButtonElement as can be checked with instanceof when you've selected a button, and it's also based on HTMLElement.
+
+Not sure yet what value knowing this has.
+
+#### <b>The built-in object class</b>
+
+Object is a built in base class, and you can create a new, empty object built on it: `const obj = new Object();` Not too useful right now, we'll learn more about it later.
+
+#### <b>Understanding object descriptors</b>
+
+Every property or method you add to an object has a descriptor. It can be accessed using the build in Object, and calling the method getOwnPropertyDescriptor with the object and property you want to look at as input. An alternative is to call getOwnPropertyDescriptor<b>s</b> and just give the object as argument to see all descriptors. What you get back in both instances are objects containing the descriptors.
+
+```JS
+const person = {name: 'Joe', greet() { console.log('Hello ' + this.name)}}
+
+Object.getOwnPropertyDescriptor(person, 'name');
+
+Object.getOwnPropertyDescriptors(person);
+```
+
+Of interest are the properties 'configurable', 'enumerable' and 'writable' which are all set to true here. Configurable means we can for instance delete the property, writable means we can assign a new value to the property, and enumerable means it appears in a 'for in' loop. The 'value' property is also of interest, since it holds the current value of this property.
+
+In case you want to 'lock-down' some values so they can't be deleted/changed or appear in for in loops that can be done with 'Object.defineProperty();'. It needs the object, the property and then an object with the new configuration as input. Every value we don't set gets 'false' now, so we need to remember value as well, otherwise it would be set to false.
+
+```JS
+Object.defineProperty(person, 'name', {
+  configurable: true,
+  enumerable: true,
+  value: person.name,
+  writable: false
+});
+```
+
+This returns the person object. If we now try to change the name with `person.name = 'Schmoe';` for instance, 'Schmoe' will be returned, but looking at 'person.name' again, nothing has changed, without us receiving any errors.
+
+If we try to change the value again now with Object.defineProperty() however, that will actually fail and return an error.
+
+To finish up, MDN documentation on [classes](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes).
