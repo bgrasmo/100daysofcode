@@ -123,3 +123,14 @@ I finished the course a little quicker than planned, so will continue with more 
 
 [Section 14: Working with events](part-2-javascript/sections-11-20/Section-14.md#section-14-working-with-events)
 
+[Section 15: Advanced function concepts](part-2-javascript/sections-11-20/Section-15.md#section-15-advanced-function-concepts)
+
+[Section 16: More on numbers and strings](part-2-javascript/sections-11-20/Section-16.md#section-16-more-on-numbers-and-strings)
+
+[Section 17: Async JavaScript - promises and callbacks](part-2-javascript/sections-11-20/Section-17.md#section-17-async-javascript---promises-and-callbacks)
+
+[Section 18: Working with http requests](part-2-javascript/sections-11-20/Section-18.md#section-18-working-with-http-requests)
+
+[Section 19: Working with JavaScript libraries](part-2-javascript/sections-11-20/Section-19.md#section-19-working-with-javascript-libraries)
+
+[Section 20: Working with modules](part-2-javascript/sections-11-20/Section-20.md#section-20-working-with-modules)
