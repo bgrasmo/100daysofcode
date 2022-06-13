@@ -134,3 +134,27 @@ I finished the course a little quicker than planned, so will continue with more 
 [Section 19: Working with JavaScript libraries](part-2-javascript/sections-11-20/Section-19.md#section-19-working-with-javascript-libraries)
 
 [Section 20: Working with modules](part-2-javascript/sections-11-20/Section-20.md#section-20-working-with-modules)
+
+[Section 21: JavaScript tooling and workflows](part-2-javascript/sections-21-30/Section-21.md#section-21-javascript-tooling-and-workflows)
+
+[Section 22: Utilizing browser storage](part-2-javascript/sections-21-30/Section-22.md#section-22-utilizing-browser-storage)
+
+[Section 23: JavaScript and browser support](part-2-javascript/sections-21-30/Section-23.md#section-23-javascript-and-browser-support)
+
+[Section 24: Practice time - share my place app](part-2-javascript/sections-21-30/Section-24.md#section-24-practice-time---share-my-place-app)
+
+[Section 25: Working with JavaScript frameworks](part-2-javascript/sections-21-30/Section-25.md#section-25-working-with-javascript-frameworks)
+
+[Section 26: Meta-programming](part-2-javascript/sections-21-30/Section-26.md#section-26-meta-programming)
+
+[Section 27: An introduction to Node.js](part-2-javascript/sections-21-30/Section-27.md#section-27-an-introduction-to-nodejs)
+
+[Section 28: Security](part-2-javascript/sections-21-30/Section-28.md#section-28-security)
+
+[Section 29: Deploying JavaScript code](part-2-javascript/sections-21-30/Section-29.md#section-29-deploying-javascript-code)
+
+[Section 30: Performance and optimizations](part-2-javascript/sections-21-30/Section-30.md#section-30-performance-and-optimizations)
+
+[Section 31: Introduction to testing](https://github.com/bgrasmo/100daysofcode/blob/main/part-2-javascript/sections-31-36/Section-31.md#section-31-introduction-to-testing)
+
+[Section 32: Bonus - programming paradigms](part-2-javascript/sections-31-36/Section-32.md#section-32-bonus---programming-paradigms)
