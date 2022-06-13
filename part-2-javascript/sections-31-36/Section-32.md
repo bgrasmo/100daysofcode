@@ -1,4 +1,4 @@
-## Section 32:
+## Section 32: Bonus - programming paradigms
 
 ## Day 65 - 2022-06-13
 
