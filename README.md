@@ -95,6 +95,8 @@ I finished the course a little quicker than planned, so will continue with more 
 
 # Part 2: JavaScript - the complete guide 2022 - from beginner to advanced
 
+The course: [JavaScript - The Complete Guide 2022 (Beginner + Advanced)](https://www.udemy.com/course/javascript-the-complete-guide-2020-beginner-advanced/)
+
 [Section 1: Introduction](part-2-javascript/sections-01-10/Section-01.md#section-1-introduction)
 
 [Section 2: Basics: Variables, data types, operators and functions](part-2-javascript/sections-01-10/Section-02.md#section-2-basics-variables-data-types-operators-and-functions)
@@ -158,3 +160,16 @@ I finished the course a little quicker than planned, so will continue with more 
 [Section 31: Introduction to testing](https://github.com/bgrasmo/100daysofcode/blob/main/part-2-javascript/sections-31-36/Section-31.md#section-31-introduction-to-testing)
 
 [Section 32: Bonus - programming paradigms](part-2-javascript/sections-31-36/Section-32.md#section-32-bonus---programming-paradigms)
+
+[Section 33: Bonus - Data structures and algorithms introduction](part-2-javascript/sections-31-36/Section-33.md#section-33-bonus---data-structures-and-algorithms-introduction)
+
+[Section 34: Bonus - Typescript introduction](part-2-javascript/sections-31-36/Section-34.md#section-34-bonus---typescript-introduction)
+
+[Section 35: Bonus - Web components](part-2-javascript/sections-31-36/Section-35.md#section-35-bonus---web-components)
+
+[Section 36: Roundup and next steps](part-2-javascript/sections-31-36/Section-36.md#section-36-roundup-and-next-steps)
+
+# Part 3: Vue - the complete guide
+
+The course: [Vue - The Complete Guide (incl. Router & Composition API)](https://www.udemy.com/course/vuejs-2-the-complete-guide/)
+
