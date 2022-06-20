@@ -173,3 +173,10 @@ The course: [JavaScript - The Complete Guide 2022 (Beginner + Advanced)](https:/
 
 The course: [Vue - The Complete Guide (incl. Router & Composition API)](https://www.udemy.com/course/vuejs-2-the-complete-guide/)
 
+[Section 1: Introduction](part-3-vue/sections-01-10/Section-01.md#section-1-introduction)
+
+[Section 2: Basics and core concepts - DOM interaction with Vue](part-3-vue/sections-01-10/Section-02.md#section-2-basics-and-core-concepts---dom-interaction-with-vue)
+
+[Section 3: Rendering conditional content and lists](part-3-vue/sections-01-10/Section-03.md#section-3-rendering-conditional-content-and-lists)
+
+[Section 4: Project monster slayer game](part-3-vue/sections-01-10/Section-04.md#section-4-project-monster-slayer-game)
