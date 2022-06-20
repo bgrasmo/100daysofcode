@@ -5,7 +5,8 @@ This repository will contain my notes of what I learn with attempting to code ev
 ## Index
 
 [Part 1: 100 days of code - 2022 Web Development Bootcamp](#part-1-100-days-of-code---2022-web-development-bootcamp)<br>
-[Part 2: JavaScript - the complete guide 2022 - from beginner to advanced](#part-2-javascript---the-complete-guide-2022---from-beginner-to-advanced)
+[Part 2: JavaScript - the complete guide 2022 - from beginner to advanced](#part-2-javascript---the-complete-guide-2022---from-beginner-to-advanced)<br>
+[Part 3: Vue - the complete guide](#part-3-vue---the-complete-guide)
 
 # Part 1: 100 days of code - 2022 Web Development Bootcamp
 
