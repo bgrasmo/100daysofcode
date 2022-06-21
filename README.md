@@ -181,3 +181,5 @@ The course: [Vue - The Complete Guide (incl. Router & Composition API)](https://
 [Section 3: Rendering conditional content and lists](part-3-vue/sections-01-10/Section-03.md#section-3-rendering-conditional-content-and-lists)
 
 [Section 4: Project monster slayer game](part-3-vue/sections-01-10/Section-04.md#section-4-project-monster-slayer-game)
+
+[Section 5: Vue - behind the scenes](https://github.com/bgrasmo/100daysofcode/blob/main/part-3-vue/sections-01-10/Section-05.md#section-5-vue---behind-the-scenes)
