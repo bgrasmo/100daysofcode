@@ -182,4 +182,16 @@ The course: [Vue - The Complete Guide (incl. Router & Composition API)](https://
 
 [Section 4: Project monster slayer game](part-3-vue/sections-01-10/Section-04.md#section-4-project-monster-slayer-game)
 
-[Section 5: Vue - behind the scenes](https://github.com/bgrasmo/100daysofcode/blob/main/part-3-vue/sections-01-10/Section-05.md#section-5-vue---behind-the-scenes)
+[Section 5: Vue - behind the scenes](part-3-vue/sections-01-10/Section-05.md#section-5-vue---behind-the-scenes)
+
+[Section 6: Introducing Vue components](part-3-vue/sections-01-10/Section-06.md#section-6-introducing-vue-components)
+
+[Section 7: Moving to a better development setup and workflow with Vue CLI](part-3-vue/sections-01-10/Section-07.md#section-7-moving-to-a-better-development-setup-and-workflow-with-vue-cli)
+
+[Section 8: Component communication](part-3-vue/sections-01-10/Section-08.md#section-8-component-communication)
+
+[Section 9: Diving deeper into components](part-3-vue/sections-01-10/Section-09.md#section-9-diving-deeper-into-components)
+
+[Section 10: Practice project - learning resources app](part-3-vue/sections-01-10/Section-10.md#section-10-practice-project---learning-resources-app)
+
+[Section 11: Forms](part-3-vue/sections-11-20/Section-11.md#section-11-forms)
