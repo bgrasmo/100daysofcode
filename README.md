@@ -195,3 +195,5 @@ The course: [Vue - The Complete Guide (incl. Router & Composition API)](https://
 [Section 10: Practice project - learning resources app](part-3-vue/sections-01-10/Section-10.md#section-10-practice-project---learning-resources-app)
 
 [Section 11: Forms](part-3-vue/sections-11-20/Section-11.md#section-11-forms)
+
+[Section 12: Sending HTTP requests](part-3-vue/Sections-11-20/Section-12.md#section-12-sending-http-requests)
