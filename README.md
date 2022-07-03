@@ -197,3 +197,11 @@ The course: [Vue - The Complete Guide (incl. Router & Composition API)](https://
 [Section 11: Forms](part-3-vue/sections-11-20/Section-11.md#section-11-forms)
 
 [Section 12: Sending HTTP requests](part-3-vue/sections-11-20/Section-12.md#section-12-sending-http-requests)
+
+[Section 13: Routing - building multi-page single-page applications](part-3-vue/sections-11-20/Section-13.md#section-13-routing---building-multi-page-single-page-applications)
+
+[Section 14: Animations and transitions](part-3-vue/sections-11-20/Section-14.md#section-14-animations-and-transitions)
+
+[Section 15: Vuex](part-3-vue/sections-11-20/Section-15.md#section-15-vuex)
+
+[Section 16: Find a coach web app project](part-3-vue/sections-11-20/Section-16.md#section-16-find-a-coach-web-app-project)
