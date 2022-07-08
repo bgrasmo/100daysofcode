@@ -205,3 +205,9 @@ The course: [Vue - The Complete Guide (incl. Router & Composition API)](https://
 [Section 15: Vuex](part-3-vue/sections-11-20/Section-15.md#section-15-vuex)
 
 [Section 16: Find a coach web app project](part-3-vue/sections-11-20/Section-16.md#section-16-find-a-coach-web-app-project)
+
+[Section 17: Vue and authentication](part-3-vue/sections-11-20/Section-17.md#section-17-vue-and-authentication)
+
+[Section 18: Optimizing and deploying Vue apps](part-3-vue/sections-11-20/Section-18.md#section-18-optimizing-and-deploying-vue-apps)
+
+[Section 19: The composition API - replacing the options API](part-3-vue/sections-11-20/Section-19.md#section-19-the-composition-api---replacing-the-options-api)
