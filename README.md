@@ -211,3 +211,5 @@ The course: [Vue - The Complete Guide (incl. Router & Composition API)](https://
 [Section 18: Optimizing and deploying Vue apps](part-3-vue/sections-11-20/Section-18.md#section-18-optimizing-and-deploying-vue-apps)
 
 [Section 19: The composition API - replacing the options API](part-3-vue/sections-11-20/Section-19.md#section-19-the-composition-api---replacing-the-options-api)
+
+[Section 20: Reusing functionality - mixins and custom composition functions](part-3-vue/sections-11-20/Section-20.md#section-20-reusing-functionality---mixins-and-custom-composition-functions)
